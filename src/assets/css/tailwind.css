@@ -1,3 +1,15 @@
+/* purgecss start ignore */
+@import 'vuetify/dist/vuetify.min.css';
 @tailwind base;
 @tailwind components;
+/* purgecss end ignore */
 @tailwind utilities;
+
+@layer base {
+    html {
+        font-family: Verdana, Geneva, sans-serif;
+    }
+    ul, ol {
+        list-style: revert;
+    }
+}
