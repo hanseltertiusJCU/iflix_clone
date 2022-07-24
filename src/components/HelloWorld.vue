@@ -1,6 +1,7 @@
 <template>
   <!-- todo : header component -->
   <div>
+    <!-- we need to use class : navbar-fixed-top -->
     <header
       class="
         tw-flex
@@ -11,7 +12,6 @@
         tw-no-underline
       "
     >
-      <!-- todo : section 1 : logo, home, original, movies, chinese -->
       <!-- this is the white text -->
       <!-- <router-link to="/">
         <svg
@@ -264,40 +264,58 @@
           </svg>
         </router-link>
 
-        <!-- we need to use flex for that -->
-        <ul class="tw-flex tw-flex-row tw-items-center tw-gap-4 tw-list-none">
+        <ul
+          class="tw-flex tw-space-x-6 tw-flex-row tw-items-center tw-list-none"
+        >
           <li>
             <!-- todo : the router link class must use the custom class -->
-            <router-link
-              class="tw-text-blue-600 tw-no-underline visited:tw-text-blue-600"
-              to="/"
+            <!-- todo : we need to separate the concern between visiting page or not -->
+            <router-link class="navigation-menu-link-item" to="/"
               >Home</router-link
             >
           </li>
 
           <!-- todo : maybe we need to use the first three item for that matter -->
           <li>
-            <router-link to="/">Original</router-link>
+            <router-link class="navigation-menu-link-item" to="/"
+              >Original</router-link
+            >
           </li>
           <li>
-            <router-link to="/">Movies</router-link>
+            <router-link class="navigation-menu-link-item" to="/"
+              >Movies</router-link
+            >
           </li>
           <li>
-            <router-link to="/">Chinese</router-link>
+            <router-link class="navigation-menu-link-item" to="/"
+              >Chinese</router-link
+            >
           </li>
 
           <li>
             <v-menu open-on-hover bottom offset-y>
               <template v-slot:activator="{ on, attrs }">
-                <span v-bind="attrs" v-on="on">All</span>
+                <span v-bind="attrs" v-on="on" class="navigation-menu-link-item"
+                  >All</span
+                >
               </template>
 
               <v-list>
-                <v-list-item>Test 1</v-list-item>
-                <v-list-item>Test 2</v-list-item>
-                <v-list-item>Test 3</v-list-item>
-                <v-list-item>Test 4</v-list-item>
-                <v-list-item>Test 5</v-list-item>
+                <v-list-item class="navigation-menu-link-item"
+                  >Test 1</v-list-item
+                >
+                <v-list-item class="navigation-menu-link-item"
+                  >Test 2</v-list-item
+                >
+                <v-list-item class="navigation-menu-link-item"
+                  >Test 3</v-list-item
+                >
+                <v-list-item class="navigation-menu-link-item"
+                  >Test 4</v-list-item
+                >
+                <v-list-item class="navigation-menu-link-item"
+                  >Test 5</v-list-item
+                >
               </v-list>
             </v-menu>
           </li>
@@ -306,9 +324,7 @@
         <!-- todo : then we will use the all component, where floating the all component will showcase v-menu thing -->
       </div>
 
-      <!-- todo : need to use the flex thing -->
-      <div class="tw-flex tw-flex-row tw-items-center tw-gap-4">
-        <!-- v-text-field -->
+      <div class="tw-flex tw-flex-row tw-items-center tw-space-x-4">
         <div class="tw-flex-1">
           <v-text-field
             label=""
@@ -323,15 +339,96 @@
           </v-text-field>
         </div>
         <div class="tw-flex-none">
-          <v-icon color="#ff4a22" size="32"
-            >mdi-cellphone-arrow-down-variant</v-icon
-          >
+          <v-menu open-on-hover bottom offset-y :close-on-content-click="false">
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="#ff4a22" size="24" v-bind="attrs" v-on="on">
+                mdi-cellphone-arrow-down-variant
+              </v-icon>
+            </template>
+
+            <v-card width="150">
+              <v-card-text>
+                <span class="download-card-title">
+                  Scan QR code to download App Now !
+                </span>
+              </v-card-text>
+              <v-card-text>
+                <img
+                  src="@/assets/img/qr-code.png"
+                  alt=""
+                  class="qr-code-image"
+                />
+              </v-card-text>
+            </v-card>
+          </v-menu>
         </div>
         <div class="tw-flex-none">
-          <v-icon size="32">mdi-clock-time-three-outline</v-icon>
+          <!-- TODO : v-menu -->
+          <v-menu open-on-hover bottom offset-y :close-on-content-click="false">
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon size="24" v-bind="attrs" v-on="on">
+                mdi-clock-time-three-outline
+              </v-icon>
+            </template>
+
+            <v-card width="420">
+              <v-card-text>
+                <div class="tw-flex tw-flex-row tw-justify-center tw-space-x-2">
+                  <v-checkbox color="#ff4a22" :ripple="false">
+                    <template v-slot:label>
+                      <span class="checkbox-text-item"
+                        >Hide watched videos</span
+                      >
+                    </template>
+                  </v-checkbox>
+
+                  <v-checkbox color="#ff4a22" :ripple="false">
+                    <template v-slot:label>
+                      <span class="checkbox-text-item"
+                        >Filter short videos</span
+                      >
+                    </template>
+                  </v-checkbox>
+                </div>
+              </v-card-text>
+            </v-card>
+          </v-menu>
         </div>
         <div class="tw-flex-none">
-          <v-icon color="#ff4a22" size="48">mdi-account-circle</v-icon>
+          <v-menu open-on-hover bottom offset-y>
+            <template v-slot:activator="{ on, attrs }">
+              <div class="flex flex-row" v-bind="attrs" v-on="on">
+                <!-- TODO : selected language -->
+                <span>Bahasa</span>
+                <v-icon>mdi-chevron-down</v-icon>
+              </div>
+            </template>
+
+            <v-list>
+              <v-list-item class="navigation-menu-link-item"
+                >Test 1</v-list-item
+              >
+              <v-list-item class="navigation-menu-link-item"
+                >Test 2</v-list-item
+              >
+              <v-list-item class="navigation-menu-link-item"
+                >Test 3</v-list-item
+              >
+              <v-list-item class="navigation-menu-link-item"
+                >Test 4</v-list-item
+              >
+              <v-list-item class="navigation-menu-link-item"
+                >Test 5</v-list-item
+              >
+            </v-list>
+          </v-menu>
+        </div>
+        <div class="tw-flex-none">
+          <!-- TODO : when clicking on the profile picture, we need to display a dialog -->
+          <div class="profile-picture-container">
+            <v-icon color="#ff4a22" size="36">mdi-account-circle</v-icon>
+          </div>
+          <!-- todo : we need to use the cursor pointer thing and when i clicked -> it will show the dialog -->
         </div>
       </div>
 
@@ -352,3 +449,30 @@ export default {
   },
 };
 </script>
+
+<style lang="postcss" scoped>
+.navigation-menu-link-item {
+  @apply tw-text-black;
+  @apply tw-no-underline;
+}
+
+.checkbox-text-item:hover,
+.navigation-menu-link-item:hover {
+  color: #ff4a22 !important;
+  cursor: pointer;
+}
+
+.profile-picture-container:hover {
+  cursor: pointer;
+}
+
+.download-card-title {
+  display: block;
+  text-align: center;
+}
+
+.qr-code-image {
+  width: 120px;
+  height: 120px;
+}
+</style>
