@@ -1,11 +1,17 @@
 <template>
-  <div id="app">
-    <router-view/>
-  </div>
+  <v-app>
+    <router-view />
+  </v-app>
 </template>
 
 <script>
 export default {
-  name: 'App'
-}
+  name: "App",
+};
 </script>
+
+<style>
+.v-application {
+  font-family: Verdana, Geneva, sans-serif;
+}
+</style>

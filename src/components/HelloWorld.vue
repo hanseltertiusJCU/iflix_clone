@@ -265,16 +265,7 @@
         </router-link>
 
         <!-- we need to use flex for that -->
-        <ul
-          class="
-            tw-flex
-            tw-flex-row
-            tw-items-center
-            tw-align-middle
-            tw-gap-4
-            tw-list-none
-          "
-        >
+        <ul class="tw-flex tw-flex-row tw-items-center tw-gap-4 tw-list-none">
           <li>
             <!-- todo : the router link class must use the custom class -->
             <router-link
@@ -294,7 +285,54 @@
           <li>
             <router-link to="/">Chinese</router-link>
           </li>
+
+          <li>
+            <v-menu open-on-hover bottom offset-y>
+              <template v-slot:activator="{ on, attrs }">
+                <span v-bind="attrs" v-on="on">All</span>
+              </template>
+
+              <v-list>
+                <v-list-item>Test 1</v-list-item>
+                <v-list-item>Test 2</v-list-item>
+                <v-list-item>Test 3</v-list-item>
+                <v-list-item>Test 4</v-list-item>
+                <v-list-item>Test 5</v-list-item>
+              </v-list>
+            </v-menu>
+          </li>
         </ul>
+
+        <!-- todo : then we will use the all component, where floating the all component will showcase v-menu thing -->
+      </div>
+
+      <!-- todo : need to use the flex thing -->
+      <div class="tw-flex tw-flex-row tw-items-center tw-gap-4">
+        <!-- v-text-field -->
+        <div class="tw-flex-1">
+          <v-text-field
+            label=""
+            placeholder=""
+            filled
+            rounded
+            dense
+            hide-details
+            color="#ff4a22"
+          >
+            <v-icon slot="append" color="#ff4a22"> mdi-magnify </v-icon>
+          </v-text-field>
+        </div>
+        <div class="tw-flex-none">
+          <v-icon color="#ff4a22" size="32"
+            >mdi-cellphone-arrow-down-variant</v-icon
+          >
+        </div>
+        <div class="tw-flex-none">
+          <v-icon size="32">mdi-clock-time-three-outline</v-icon>
+        </div>
+        <div class="tw-flex-none">
+          <v-icon color="#ff4a22" size="48">mdi-account-circle</v-icon>
+        </div>
       </div>
 
       <!-- todo : section 2 : all, search bar, QR code to download app, language, profile picture -->

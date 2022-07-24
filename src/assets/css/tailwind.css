@@ -6,9 +6,6 @@
 @tailwind utilities;
 
 @layer base {
-    html {
-        font-family: Verdana, Geneva, sans-serif;
-    }
     ul, ol {
         list-style: revert;
     }
