@@ -7,11 +7,12 @@
         tw-flex
         tw-justify-between
         tw-items-center
-        tw-px-16
-        tw-py-8
+        tw-px-24
+        tw-py-4
         tw-no-underline
       "
     >
+      <!-- TODO : maybe we want to use the container for the flex instead of using the header -->
       <!-- this is the white text -->
       <!-- <router-link to="/">
         <svg
@@ -431,11 +432,69 @@
           <!-- todo : we need to use the cursor pointer thing and when i clicked -> it will show the dialog -->
         </div>
       </div>
-
-      <!-- todo : section 2 : all, search bar, QR code to download app, language, profile picture -->
     </header>
 
     Test
+
+    <footer class="tw-bg-[#f6f6f6] tw-text-[#999] tw-font-bold">
+      <!-- todo : we will use the flex box  -->
+      <div class="tw-flex tw-justify-between tw-items-center tw-mx-8 py-4">
+        <!-- TODO : copyright -->
+        <div>
+          <div>
+            Copyright © 2016-{{ new Date().getFullYear() }} Image Future
+            Investment (HK) Limited.
+          </div>
+          <div class="tw-flex tw-flex-row tw-space-x-2">
+            <a
+              class="footer-menu-link-item"
+              href="https://wetv.vip/static/terms-en.html"
+              >Term of Service</a
+            >
+            <span>|</span>
+            <a
+              class="footer-menu-link-item"
+              href="https://static.wetvinfo.com/static/policyview/web/viewer.html?t=privacy_iflix&a=en"
+            >
+              Privacy Policy
+            </a>
+            <span>|</span>
+            <a
+              class="footer-menu-link-item"
+              href="https://static.wetvinfo.com/static/policyview/web/viewer.html?t=cookie_iflix&a=en"
+              >Cookie Policy</a
+            >
+            <span>|</span>
+            <a
+              class="footer-menu-link-item"
+              href="https://www.facebook.com/iflixID/"
+              >Feedback</a
+            >
+            <span>|</span>
+            <a
+              class="footer-menu-link-item"
+              href="https://wetv.vip/static/help.html?language=en&areacode=153513"
+              >FAQs</a
+            >
+            <span>|</span>
+            <!-- TODO : div when hover, cursor pointer -->
+            <div class="facebook-icon-container">
+              <img
+                src="@/assets/img/facebook-icon.svg"
+                class="facebook-icon-image"
+                alt=""
+              />
+              <a
+                class="footer-menu-link-item"
+                href="https://www.facebook.com/iflixID/"
+                >@iflix</a
+              >
+            </div>
+            <!-- TODO : FB Page -->
+          </div>
+        </div>
+      </div>
+    </footer>
   </div>
 </template>
 
@@ -462,6 +521,15 @@ export default {
   cursor: pointer;
 }
 
+.footer-menu-link-item {
+  @apply tw-text-[#999];
+  @apply tw-no-underline;
+}
+
+.footer-menu-link-item:hover {
+  @apply tw-text-slate-500;
+}
+
 .profile-picture-container:hover {
   cursor: pointer;
 }
@@ -474,5 +542,20 @@ export default {
 .qr-code-image {
   width: 120px;
   height: 120px;
+}
+
+.facebook-icon-container {
+  @apply tw-flex;
+  @apply tw-flex-row;
+}
+
+.facebook-icon-container:hover {
+  cursor: pointer;
+}
+
+.facebook-icon-image {
+  width: 1rem;
+  height: 1rem;
+  @apply tw-self-center;
 }
 </style>
