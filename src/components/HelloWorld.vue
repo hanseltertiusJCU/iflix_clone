@@ -490,7 +490,18 @@
                 >@iflix</a
               >
             </div>
-            <!-- TODO : FB Page -->
+          </div>
+        </div>
+
+        <div class="qr-code-footer-container">
+          <img
+            src="@/assets/img/qr-code.png"
+            alt=""
+            class="qr-code-image-footer"
+          />
+          <div class="tw-pr-4">
+            <div>Scan QR code to</div>
+            <div>download App Now!</div>
           </div>
         </div>
       </div>
@@ -542,6 +553,19 @@ export default {
 .qr-code-image {
   width: 120px;
   height: 120px;
+}
+
+.qr-code-footer-container {
+  @apply tw-flex;
+  @apply tw-flex-row;
+  @apply tw-items-center;
+  @apply tw-bg-[#fff];
+  @apply tw-space-x-2;
+}
+
+.qr-code-image-footer {
+  width: 64px;
+  height: 64px;
 }
 
 .facebook-icon-container {
