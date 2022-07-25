@@ -10,6 +10,7 @@
       <div class="navigation-bar-container">
         <div class="navigation-link-container">
           <router-link to="/">
+            <!-- TODO : svg needs to be used in a v-if -->
             <svg
               data-theme="dark"
               width="220px"
@@ -231,7 +232,6 @@
             </v-menu>
           </div>
           <div class="tw-flex-none">
-            <!-- TODO : v-menu -->
             <v-menu
               open-on-hover
               bottom
@@ -297,10 +297,201 @@
             </v-menu>
           </div>
           <div class="tw-flex-none">
+            <v-dialog v-model="showProfileDialog" width="460" persistent>
+              <template v-slot:activator="{ on, attrs }">
+                <div class="profile-picture-container" v-bind="attrs" v-on="on">
+                  <v-icon color="#ff4a22" size="36">mdi-account-circle</v-icon>
+                </div>
+              </template>
+
+              <v-card>
+                <v-card-title>
+                  <v-spacer></v-spacer>
+                  <div
+                    class="close-dialog-button-icon"
+                    @click="onProfileDialogClosed"
+                  >
+                    <v-icon>mdi-close</v-icon>
+                  </div>
+                </v-card-title>
+
+                <!-- todo : we will use the card-text, which is the form, and we have a div -->
+                <v-card-text>
+                  <div v-if="showSignUpForm">
+                    <div class="sign-up-menu-container">
+                      <div class="back-button-sign-up-menu-container">
+                        <div
+                          class="back-button-icon"
+                          @click="onBackButtonClicked"
+                        >
+                          <v-icon> mdi-chevron-left </v-icon>
+                        </div>
+                      </div>
+                      <div class="title-sign-up-menu-container">
+                        <div class="tw-font-bold">Sign Up</div>
+                      </div>
+                    </div>
+
+                    <v-form v-model="signUpFormValid">
+                      <v-text-field
+                        v-model="signUpUsernameInput"
+                        label=""
+                        :rules="rules.username"
+                        counter="150"
+                        maxLength="150"
+                        placeholder="Please input username"
+                        filled
+                        flat
+                        solo
+                        dense
+                        background-color="#f6f6f6"
+                      />
+
+                      <v-text-field
+                        v-model="signUpPasswordInput"
+                        label=""
+                        :rules="[rules.required]"
+                        counter="128"
+                        maxLength="128"
+                        :type="showingSignInPassword ? 'text' : 'password'"
+                        :append-icon="
+                          showingSignInPassword ? 'mdi-eye' : 'mdi-eye-off'
+                        "
+                        @click:append="
+                          showingSignInPassword = !showingSignInPassword
+                        "
+                        placeholder="Please input password"
+                        filled
+                        flat
+                        solo
+                        dense
+                        color="#ff4a22"
+                        background-color="#f6f6f6"
+                      />
+
+                      <!-- todo : first name, last name, email -->
+                      <v-text-field
+                        v-model="signUpFirstNameInput"
+                        label=""
+                        counter="30"
+                        maxLength="30"
+                        placeholder="Please input first name"
+                        filled
+                        flat
+                        solo
+                        dense
+                        background-color="#f6f6f6"
+                      />
+
+                      <v-text-field
+                        v-model="signUpLastNameInput"
+                        label=""
+                        counter="150"
+                        maxLength="150"
+                        placeholder="Please input last name"
+                        filled
+                        flat
+                        solo
+                        dense
+                        background-color="#f6f6f6"
+                      />
+
+                      <v-text-field
+                        v-model="signUpEmailAddressInput"
+                        label=""
+                        :rules="[rules.email]"
+                        counter="255"
+                        maxLength="255"
+                        placeholder="Please input e-mail address"
+                        filled
+                        flat
+                        solo
+                        dense
+                        background-color="#f6f6f6"
+                      />
+                    </v-form>
+                  </div>
+
+                  <div v-else>
+                    <v-form v-model="signInFormValid">
+                      <v-text-field
+                        v-model="signInUsernameInput"
+                        label=""
+                        :rules="[rules.required]"
+                        counter="150"
+                        maxLength="150"
+                        placeholder="Please input username"
+                        filled
+                        flat
+                        solo
+                        dense
+                        background-color="#f6f6f6"
+                      />
+
+                      <v-text-field
+                        v-model="signInPasswordInput"
+                        label=""
+                        :rules="[rules.required]"
+                        counter="128"
+                        maxLength="128"
+                        :type="showingSignInPassword ? 'text' : 'password'"
+                        :append-icon="
+                          showingSignInPassword ? 'mdi-eye' : 'mdi-eye-off'
+                        "
+                        @click:append="
+                          showingSignInPassword = !showingSignInPassword
+                        "
+                        placeholder="Please input password"
+                        filled
+                        flat
+                        solo
+                        dense
+                        color="#ff4a22"
+                        background-color="#f6f6f6"
+                      />
+                    </v-form>
+
+                    <div class="tw-text-center">
+                      Don't have an account?
+                      <span class="sign-up-button" @click="onOpenSignUpInput">
+                        Sign up now
+                      </span>
+                    </div>
+                  </div>
+                </v-card-text>
+
+                <v-card-actions>
+                  <v-btn
+                    v-if="showSignUpForm"
+                    :disabled="!signUpFormValid"
+                    @click="onSignUpButtonClicked"
+                    block
+                    color="#ff4a22"
+                    :class="
+                      signUpFormValid
+                        ? 'dialog-account-btn'
+                        : 'dialog-account-btn-disabled'
+                    "
+                    >Register</v-btn
+                  >
+                  <v-btn
+                    v-else
+                    :disabled="!signInFormValid"
+                    @click="onSignInButtonClicked"
+                    block
+                    color="#ff4a22"
+                    :class="
+                      signInFormValid
+                        ? 'dialog-account-btn'
+                        : 'dialog-account-btn-disabled'
+                    "
+                    >Log in</v-btn
+                  >
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
             <!-- TODO : when clicking on the profile picture, we need to display a dialog -->
-            <div class="profile-picture-container">
-              <v-icon color="#ff4a22" size="36">mdi-account-circle</v-icon>
-            </div>
+
             <!-- todo : we need to use the cursor pointer thing and when i clicked -> it will show the dialog -->
           </div>
         </div>
@@ -441,7 +632,8 @@
       <!-- TODO : we need to use the div thing, it is the main navigation -->
     </header>
 
-    Test
+    <!-- todo : content container -->
+    <div class="content-container">Test</div>
 
     <footer class="footer-container">
       <div class="copyright-footer-section">
@@ -518,8 +710,112 @@ export default {
   name: "HelloWorld",
   data() {
     return {
-      msg: "Welcome to Your Vue.js App",
+      isScrollYInScrolledState: false,
+      rules: {
+        required: (value) => !!value || "Required",
+        email: (value) => {
+          const pattern = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+          const validEmailValue = !value || pattern.test(value);
+
+          return validEmailValue || "E-mail must be valid";
+        },
+        username: [
+          (value) => {
+            const pattern = /^[a-zA-Z0-9@.+-_]+$/g;
+            const validUserNameValue = pattern.test(value);
+            console.log("value : ", value);
+            console.log("valid user name value : ", validUserNameValue);
+
+            return validUserNameValue || "Username must be valid";
+          },
+          (value) => !!value || "Required",
+        ],
+      },
+      showProfileDialog: false,
+      showingSignInPassword: false,
+      showSignUpForm: false,
+      signInFormValid: false,
+      signUpFormValid: false,
+      signInUsernameInput: "",
+      signInPasswordInput: "",
+      signUpUsernameInput: "",
+      signUpPasswordInput: "",
+      signUpFirstNameInput: "",
+      signUpLastNameInput: "",
+      signUpEmailAddressInput: "",
     };
+  },
+  methods: {
+    onProfileDialogClosed() {
+      this.onResetSignInValue();
+      this.onResetSignUpValue();
+      this.showSignUpForm = false;
+      this.showProfileDialog = false;
+    },
+    onBackButtonClicked() {
+      this.onResetSignUpValue();
+      this.showSignUpForm = false;
+    },
+    onOpenSignUpInput() {
+      this.onResetSignInValue();
+      this.showSignUpForm = true;
+    },
+    // on reset sign in value
+    onResetSignInValue() {
+      this.signInUsernameInput = "";
+      this.signInPasswordInput = "";
+      this.signInFormValid = false;
+      this.showingSignInPassword = false;
+    },
+    // on reset sign up value
+    onResetSignUpValue() {
+      this.signUpUsernameInput = "";
+      this.signUpPasswordInput = "";
+      this.signUpFirstNameInput = "";
+      this.signUpLastNameInput = "";
+      this.signUpEmailAddressInput = "";
+      this.signUpFormValid = false;
+      this.showingSignUpPassword = false;
+    },
+    onSignInButtonClicked() {
+      console.log("sign in button clicked");
+      /**
+       * TODO :
+       * this one should use the calling function into the axios,
+       * we will use the JSON
+       *
+       * Method : POST
+       * Endpoint : https://movie-api-sample.herokuapp.com/api/v1/user/login
+       *
+       * input will be an object with the attribute of :
+       * "username"
+       * "password"
+       */
+      this.onResetSignInValue();
+      this.showProfileDialog = false;
+      this.showSignUpForm = false;
+    },
+    onSignUpButtonClicked() {
+      console.log("sign up button clicked");
+      /**
+       * TODO :
+       * this one should use the calling function into the axios,
+       * we will use the JSON
+       *
+       * Method : POST
+       * Endpoint : https://movie-api-sample.herokuapp.com/api/v1/user/register
+       *
+       * input will be an object with the attribute of :
+       * "username"
+       * "password"
+       * "first_name"
+       * "last_name"
+       * "email"
+       */
+      this.onResetSignUpValue();
+      this.showProfileDialog = false;
+      this.showSignUpForm = false;
+    },
   },
 };
 </script>
@@ -538,6 +834,20 @@ export default {
   @apply tw-w-full;
   @apply tw-h-[80px];
   @apply tw-shadow-md;
+  position: fixed;
+  top: 0;
+}
+
+.header-container-dark {
+  @apply tw-grid;
+  @apply tw-grid-cols-1;
+  @apply tw-place-content-center;
+  @apply tw-bg-[#000];
+  @apply tw-w-full;
+  @apply tw-h-[80px];
+  @apply tw-shadow-md;
+  position: fixed;
+  top: 0;
 }
 
 .navigation-bar-container {
@@ -585,12 +895,61 @@ export default {
   @apply tw-px-4;
 }
 
+.sign-up-menu-container {
+  @apply tw-flex;
+  @apply tw-flex-row;
+  @apply tw-items-center;
+  @apply tw-mb-6;
+}
+
+.back-button-sign-up-menu-container {
+  @apply tw-flex-none;
+}
+
+.title-sign-up-menu-container {
+  @apply tw-flex-1;
+  text-align: center;
+}
+
+.navigation-menu-link-item-dark {
+  @apply tw-text-white;
+  @apply tw-no-underline;
+  @apply tw-px-4;
+}
+
+.v-btn {
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.dialog-account-btn {
+  opacity: 1;
+  color: white;
+}
+
+.dialog-account-btn-disabled {
+  opacity: 0.2;
+}
+
+.theme--light.v-btn.v-btn--disabled.v-btn--has-bg {
+  background-color: #ff4a21 !important;
+  color: #fff !important;
+}
+
+.sign-up-button {
+  color: #ff4a22;
+}
+
+.sign-up-button:hover,
 .checkbox-text-item:hover,
-.navigation-menu-link-item-light:hover {
+.navigation-menu-link-item-light:hover,
+.navigation-menu-link-item-dark:hover {
   color: #ff4a22 !important;
   cursor: pointer;
 }
 
+.back-button-icon:hover,
+.close-dialog-button-icon:hover,
 .profile-picture-container:hover {
   cursor: pointer;
 }
@@ -603,6 +962,11 @@ export default {
 .qr-code-image {
   width: 120px;
   height: 120px;
+}
+
+.content-container {
+  @apply tw-min-h-screen;
+  padding-top: 80px;
 }
 
 .footer-container {
