@@ -244,7 +244,7 @@
                 </v-icon>
               </template>
 
-              <v-card width="420">
+              <v-card min-width="420">
                 <v-card-text>
                   <div class="history-checkbox-container">
                     <v-checkbox color="#ff4a22" :ripple="false">
@@ -720,6 +720,246 @@
           <span class="episode-tag-container-decoration"></span>
         </span>
       </div>
+
+      <!-- todo : need to have a video player component -->
+
+      <div class="video-detail-info-container">
+        <!-- TODO : title should be used from attribute "title" -->
+        <div class="video-detail-info-title">Test</div>
+
+        <div class="video-detail-info-tags-container">
+          <!-- TODO : the first item should be -> the horizontal thing should be from the attribute "imgtag_ver" -->
+          <div class="video-detail-info-tag-item">
+            <!-- todo : decoration -->
+            <div class="video-detail-info-tag-item-decoration"></div>
+            <!-- todo : we will use the attribute "text" for that -->
+            <span>Tag Item Test</span>
+          </div>
+
+          <!-- TODO : the second item should be share, basically we want to use the v-menu thing -->
+          <v-menu open-on-hover bottom offset-y :close-on-content-click="false">
+            <template v-slot:activator="{ on, attrs }">
+              <div
+                class="video-detail-share-container"
+                v-bind="attrs"
+                v-on="on"
+              >
+                <v-icon class="video-detail-share-icon"
+                  >mdi-export-variant</v-icon
+                >
+                <span>Share</span>
+              </div>
+            </template>
+
+            <v-card min-width="420">
+              <!-- todo : we will use the share url container, where we try to copy url thing -->
+              <v-card-text>
+                <div class="share-url-container">
+                  <div class="share-main-section-container">
+                    <div class="share-social-media-container">
+                      <div class="share-social-media-item">
+                        <a href="https://www.facebook.com/" target="_blank">
+                          <img
+                            class="share-social-media-item-image"
+                            src="@/assets/img/facebook-icon.png"
+                            alt=""
+                          />
+                        </a>
+                      </div>
+
+                      <div class="share-social-media-item">
+                        <a href="https://twitter.com/" target="_blank">
+                          <img
+                            class="share-social-media-item-image"
+                            src="@/assets/img/twitter-icon.png"
+                            alt=""
+                          />
+                        </a>
+                      </div>
+
+                      <div class="share-social-media-item">
+                        <a href="https://line.me/" target="_blank">
+                          <img
+                            class="share-social-media-item-image"
+                            src="@/assets/img/line-icon.png"
+                            alt=""
+                          />
+                        </a>
+                      </div>
+                    </div>
+
+                    <div class="share-by-copy-text-container">
+                      <div class="share-by-copy-text-item">
+                        <v-text-field
+                          ref="urlToCopyInput"
+                          @focus="$event.target.select()"
+                          v-model="urlToCopy"
+                          height="48px"
+                          label=""
+                          placeholder=""
+                          flat
+                          solo
+                          filled
+                          readonly
+                          hide-details
+                        ></v-text-field>
+                        <v-btn height="48px" outlined @click="copyLink"
+                          >Copy the link</v-btn
+                        >
+                      </div>
+                      <div class="share-by-copy-text-item">
+                        <v-text-field
+                          ref="codeToCopyInput"
+                          @focus="$event.target.select()"
+                          v-model="codeToCopy"
+                          height="48px"
+                          label=""
+                          placeholder=""
+                          flat
+                          solo
+                          filled
+                          readonly
+                          hide-details
+                        ></v-text-field>
+                        <v-btn height="60px" outlined @click="copyCode"
+                          >Copy the code</v-btn
+                        >
+                      </div>
+                    </div>
+                  </div>
+
+                  <v-divider vertical></v-divider>
+
+                  <div class="share-qr-code-container">
+                    <img
+                      src="@/assets/img/qr-code-in-video-detail.png"
+                      alt=""
+                    />
+                    <div>Scan the QR code to download the mobile app!</div>
+                  </div>
+                </div>
+              </v-card-text>
+            </v-card>
+          </v-menu>
+        </div>
+
+        <div class="video-detail-description-container">
+          <div v-if="isDescriptionExpanded">
+            <!-- todo : must use from attribute "description" -->
+            <div class="video-detail-description-content-expanded">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              Recusandae nemo alias consequuntur laborum rem, itaque ullam natus
+              quasi et velit incidunt, unde cupiditate veritatis quaerat neque
+              dolore aut! Et quo molestias ratione omnis corrupti cum non iure
+              cupiditate ipsum maxime deleniti commodi minus, veniam, quibusdam
+              temporibus? Possimus et esse eveniet maxime nemo. Alias sint ipsam
+              cupiditate fugiat iure quo vero quasi ipsum totam sunt enim fugit
+              tempora, dolorum harum nihil ad nostrum veniam quam dolores
+              architecto expedita similique quaerat distinctio. Non quisquam
+              fuga ut in aperiam consectetur inventore possimus vel, odit dicta
+              amet deserunt molestias dignissimos natus? Blanditiis eius
+              reprehenderit sequi et, voluptatum ducimus, cum aspernatur
+              consequatur nostrum consequuntur quidem accusamus corrupti.
+              Tenetur a doloremque nam reprehenderit magni molestiae aliquid.
+              Explicabo esse deserunt eum sint! Aut dignissimos, nemo eaque
+              fugiat animi nam hic dolores omnis deleniti dolor in laborum nisi
+              veniam consectetur harum nihil. Non corrupti quia porro placeat
+              eligendi, sint consequatur esse fuga hic? Ducimus veritatis
+              reprehenderit fuga ut atque ipsum unde? Id quas esse mollitia
+              eligendi deserunt ea dolore maxime error soluta facilis recusandae
+              tenetur asperiores debitis quo modi illo, vero, excepturi
+              molestiae dolores aliquid? Ad qui ratione laboriosam dignissimos
+              ducimus? Ad enim voluptas id officiis? Numquam odio saepe
+              voluptate ipsam sed, unde ratione magni et, harum officiis
+              asperiores impedit consequuntur, laudantium voluptatibus nisi nam
+              pariatur obcaecati nulla maxime quisquam eaque. Fugit, odit
+              voluptate incidunt eveniet magnam in neque vel minus delectus
+              harum dicta, temporibus reiciendis impedit laborum mollitia velit
+              dolore architecto quidem, nobis beatae laudantium. Odit, earum?
+              Autem vel facilis dolorum veritatis, culpa ratione, et voluptate
+              voluptatum eius non molestias tempora error laudantium facere
+              officia accusantium expedita. Reiciendis, aliquid. Porro veritatis
+              itaque voluptate hic possimus voluptatum saepe incidunt similique,
+              expedita error velit fugit nisi repudiandae sunt dicta fugiat et
+              magnam? Maiores, ratione quia. Iure doloremque ratione quisquam
+              obcaecati quos saepe provident tempore veniam quibusdam, nesciunt
+              exercitationem dolorem quia adipisci ipsum fuga consequuntur fugit
+              nam, ex deserunt quam numquam! Tempore blanditiis dolorem dolore
+              illum minus ad soluta incidunt omnis repudiandae mollitia deserunt
+              magni assumenda rem ratione amet sint dolores nulla, voluptatem
+              impedit unde velit adipisci qui consequuntur molestiae. Odio
+              similique laboriosam repudiandae quasi deserunt nulla optio veniam
+              consequatur ea voluptas corporis modi provident commodi enim,
+              sequi consectetur rerum, rem, ducimus perferendis. Expedita,
+              suscipit sunt minus dicta, atque dolorem accusantium, architecto
+              dignissimos reprehenderit unde labore necessitatibus placeat
+              accusamus vitae. Perferendis voluptatem cupiditate hic
+              accusantium. Et nobis molestiae inventore a?
+            </div>
+          </div>
+          <div v-else>
+            <!-- todo : must use from attribute "description" -->
+            <div class="video-detail-description-content">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              Recusandae nemo alias consequuntur laborum rem, itaque ullam natus
+              quasi et velit incidunt, unde cupiditate veritatis quaerat neque
+              dolore aut! Et quo molestias ratione omnis corrupti cum non iure
+              cupiditate ipsum maxime deleniti commodi minus, veniam, quibusdam
+              temporibus? Possimus et esse eveniet maxime nemo. Alias sint ipsam
+              cupiditate fugiat iure quo vero quasi ipsum totam sunt enim fugit
+              tempora, dolorum harum nihil ad nostrum veniam quam dolores
+              architecto expedita similique quaerat distinctio. Non quisquam
+              fuga ut in aperiam consectetur inventore possimus vel, odit dicta
+              amet deserunt molestias dignissimos natus? Blanditiis eius
+              reprehenderit sequi et, voluptatum ducimus, cum aspernatur
+              consequatur nostrum consequuntur quidem accusamus corrupti.
+              Tenetur a doloremque nam reprehenderit magni molestiae aliquid.
+              Explicabo esse deserunt eum sint! Aut dignissimos, nemo eaque
+              fugiat animi nam hic dolores omnis deleniti dolor in laborum nisi
+              veniam consectetur harum nihil. Non corrupti quia porro placeat
+              eligendi, sint consequatur esse fuga hic? Ducimus veritatis
+              reprehenderit fuga ut atque ipsum unde? Id quas esse mollitia
+              eligendi deserunt ea dolore maxime error soluta facilis recusandae
+              tenetur asperiores debitis quo modi illo, vero, excepturi
+              molestiae dolores aliquid? Ad qui ratione laboriosam dignissimos
+              ducimus? Ad enim voluptas id officiis? Numquam odio saepe
+              voluptate ipsam sed, unde ratione magni et, harum officiis
+              asperiores impedit consequuntur, laudantium voluptatibus nisi nam
+              pariatur obcaecati nulla maxime quisquam eaque. Fugit, odit
+              voluptate incidunt eveniet magnam in neque vel minus delectus
+              harum dicta, temporibus reiciendis impedit laborum mollitia velit
+              dolore architecto quidem, nobis beatae laudantium. Odit, earum?
+              Autem vel facilis dolorum veritatis, culpa ratione, et voluptate
+              voluptatum eius non molestias tempora error laudantium facere
+              officia accusantium expedita. Reiciendis, aliquid. Porro veritatis
+              itaque voluptate hic possimus voluptatum saepe incidunt similique,
+              expedita error velit fugit nisi repudiandae sunt dicta fugiat et
+              magnam? Maiores, ratione quia. Iure doloremque ratione quisquam
+              obcaecati quos saepe provident tempore veniam quibusdam, nesciunt
+              exercitationem dolorem quia adipisci ipsum fuga consequuntur fugit
+              nam, ex deserunt quam numquam! Tempore blanditiis dolorem dolore
+              illum minus ad soluta incidunt omnis repudiandae mollitia deserunt
+              magni assumenda rem ratione amet sint dolores nulla, voluptatem
+              impedit unde velit adipisci qui consequuntur molestiae. Odio
+              similique laboriosam repudiandae quasi deserunt nulla optio veniam
+              consequatur ea voluptas corporis modi provident commodi enim,
+              sequi consectetur rerum, rem, ducimus perferendis. Expedita,
+              suscipit sunt minus dicta, atque dolorem accusantium, architecto
+              dignissimos reprehenderit unde labore necessitatibus placeat
+              accusamus vitae. Perferendis voluptatem cupiditate hic
+              accusantium. Et nobis molestiae inventore a?
+            </div>
+            <div class="video-detail-description-content-shadow"></div>
+          </div>
+
+          <div
+            class="video-detail-description-toggle-text"
+            @click="onToggleDescription"
+          >
+            {{ isDescriptionExpanded ? "Collapse" : "Expand" }}
+          </div>
+        </div>
+      </div>
     </div>
 
     <footer class="footer-container">
@@ -797,6 +1037,11 @@ export default {
   name: "HelloWorld",
   data() {
     return {
+      urlToCopy:
+        "https://www.iflix.com/en/play/r6yht13srzu48mc-FULLMETAL-ALCHEMIST-2003/c0040l97su8-EP1-FULLMETAL-ALCHEMIST-2003",
+      codeToCopy:
+        '<iframe frameborder="0" src="https://www.iflix.com/en/play/r6yht13srzu48mc-FULLMETAL-ALCHEMIST-2003/c0040l97su8-EP1-FULLMETAL-ALCHEMIST-2003" allowFullScreen="true"></iframe>',
+      isDescriptionExpanded: false,
       isScrollYInScrolledState: false,
       rules: {
         required: (value) => !!value || "Required",
@@ -810,8 +1055,6 @@ export default {
           (value) => {
             const pattern = /^[a-zA-Z0-9@.+-_]+$/g;
             const validUserNameValue = pattern.test(value);
-            console.log("value : ", value);
-            console.log("valid user name value : ", validUserNameValue);
 
             return validUserNameValue || "Username must be valid";
           },
@@ -833,6 +1076,17 @@ export default {
     };
   },
   methods: {
+    copyLink() {
+      this.$refs.urlToCopyInput.focus();
+      document.execCommand("copy");
+    },
+    copyCode() {
+      this.$refs.codeToCopyInput.focus();
+      document.execCommand("copy");
+    },
+    onToggleDescription() {
+      this.isDescriptionExpanded = !this.isDescriptionExpanded;
+    },
     onProfileDialogClosed() {
       this.onResetSignInValue();
       this.onResetSignUpValue();
@@ -1287,6 +1541,125 @@ export default {
   @apply tw-bg-[#ff4a22];
   -webkit-clip-path: polygon(0 0, 100% 0, 100% 8px, 0 100%);
   clip-path: polygon(0 0, 100% 0, 100% 8px, 0 100%);
+}
+
+.video-detail-info-title {
+  @apply tw-text-[32px];
+  @apply tw-font-bold;
+}
+
+.video-detail-info-tags-container {
+  @apply tw-flex;
+  @apply tw-flex-row;
+  @apply tw-items-center;
+}
+
+.video-detail-share-container {
+  @apply tw-flex;
+  @apply tw-flex-row;
+  @apply tw-items-center;
+}
+
+.video-detail-share-icon {
+  @apply tw-mr-2;
+}
+
+.video-detail-info-tag-item {
+  @apply tw-relative;
+  @apply tw-px-2;
+  @apply tw-mr-2;
+}
+
+.video-detail-info-tag-item-decoration {
+  @apply tw-absolute;
+  @apply tw-left-0;
+  @apply tw-top-[3px];
+  @apply tw-bottom-[3px];
+  @apply tw-w-[4px];
+  @apply tw-bg-[#ff4a22];
+}
+
+.video-detail-description-container {
+  @apply tw-relative;
+}
+
+.video-detail-description-content {
+  @apply tw-h-[100px];
+  @apply tw-overflow-hidden;
+}
+
+.video-detail-description-content-shadow {
+  @apply tw-absolute;
+  @apply tw-left-0;
+  @apply tw-right-0;
+  @apply tw-bottom-0;
+  @apply tw-h-[80px];
+  background-image: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    from(hsla(0, 0%, 100%, 0.9)),
+    to(hsla(0, 0%, 100%, 0))
+  );
+  background-image: linear-gradient(
+    0deg,
+    hsla(0, 0%, 100%, 0.9),
+    hsla(0, 0%, 100%, 0)
+  );
+}
+
+.video-detail-description-content-expanded {
+  @apply tw-h-auto;
+}
+
+.video-detail-description-toggle-text {
+  @apply tw-opacity-40;
+  cursor: pointer;
+}
+
+.share-main-section-container {
+  @apply tw-mr-8;
+  @apply tw-w-[66%];
+}
+
+.share-url-container {
+  @apply tw-flex;
+  @apply tw-flex-row;
+  @apply tw-p-6;
+}
+
+.share-social-media-container {
+  @apply tw-flex;
+  @apply tw-flex-row;
+}
+
+.share-social-media-item {
+  @apply tw-mr-4;
+  @apply tw-w-[48px];
+  @apply tw-h-[48px];
+  @apply tw-rounded-lg;
+}
+
+.share-social-media-item-image {
+  @apply tw-w-[48px];
+  @apply tw-h-[48px];
+  @apply tw-rounded-lg;
+  @apply tw-object-cover;
+}
+
+.share-by-copy-text-container {
+  @apply tw-mt-4;
+}
+
+.share-by-copy-text-item {
+  @apply tw-flex;
+  @apply tw-flex-row;
+  @apply tw-items-center;
+}
+
+.share-qr-code-container {
+  @apply tw-h-[33%];
+  @apply tw-text-center;
 }
 
 .footer-container {
