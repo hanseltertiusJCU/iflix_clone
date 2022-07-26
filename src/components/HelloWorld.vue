@@ -697,6 +697,29 @@
           <div class="hot-item-subtitle-container">Test 2</div>
         </div>
       </div>
+
+      <!-- TODO : episodes container -->
+      <div class="episode-container">
+        <!-- todo : initially it is the text thing, with the episode value of "episode" -->
+        <span class="episode-text">1</span>
+        <!-- todo : the absolute item should be the one who is from the "imgtag_ver" attribute -->
+        <span class="episode-tag-container">
+          <!-- todo : integrate with JSON, let's find the specific attribute -->
+          <span class="episode-tag-container-text">Final</span>
+          <span class="episode-tag-container-decoration"></span>
+        </span>
+      </div>
+
+      <div class="selected-episode-container">
+        <!-- todo : initially it is the text thing, with the episode value of "episode" -->
+        <span class="episode-text">1</span>
+        <!-- todo : the absolute item should be the one who is from the "imgtag_ver" attribute -->
+        <span class="episode-tag-container">
+          <!-- todo : integrate with JSON, let's find the specific attribute -->
+          <span class="episode-tag-container-text">Final</span>
+          <span class="episode-tag-container-decoration"></span>
+        </span>
+      </div>
     </div>
 
     <footer class="footer-container">
@@ -1198,7 +1221,8 @@ export default {
   @apply tw-h-full;
   @apply tw-flex-col;
   @apply tw-justify-between;
-  @apply tw-px-[6px];
+  @apply tw-px-[16px];
+  @apply tw-py-[6px];
 }
 
 .hot-item-title-container {
@@ -1208,6 +1232,61 @@ export default {
 
 .hot-item-subtitle-container {
   @apply tw-text-[#999];
+}
+
+.episode-container {
+  @apply tw-inline-block;
+  @apply tw-relative;
+  @apply tw-px-6;
+  @apply tw-py-2;
+  @apply tw-bg-slate-600;
+}
+
+.selected-episode-container {
+  @apply tw-inline-block;
+  @apply tw-relative;
+  @apply tw-px-6;
+  @apply tw-py-2;
+  @apply tw-border-solid tw-border-2 tw-border-[#979797];
+  @apply tw-bg-zinc-500;
+}
+
+.episode-container:hover,
+.selected-episode-container:hover {
+  @apply tw-bg-zinc-400;
+  cursor: pointer;
+}
+
+.episode-container .episode-text {
+  @apply tw-text-[#ccc];
+}
+
+.selected-episode-container .episode-text {
+  @apply tw-text-[#ff4a22];
+}
+
+.episode-tag-container {
+  @apply tw-absolute;
+  @apply tw-bg-[#ff4a22];
+  @apply tw--top-5;
+  @apply tw--right-5;
+  @apply tw-pl-[2px];
+}
+
+.episode-tag-container-text {
+  @apply tw-text-white;
+}
+
+.episode-tag-container-decoration {
+  @apply tw-block;
+  @apply tw-absolute;
+  @apply tw--right-[8px];
+  @apply tw-w-[8px];
+  @apply tw-h-6;
+  @apply tw-top-0;
+  @apply tw-bg-[#ff4a22];
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 8px, 0 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 8px, 0 100%);
 }
 
 .footer-container {
