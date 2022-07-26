@@ -791,6 +791,7 @@
                     <div class="share-by-copy-text-container">
                       <div class="share-by-copy-text-item">
                         <v-text-field
+                          class="tw-rounded-none"
                           ref="urlToCopyInput"
                           @focus="$event.target.select()"
                           v-model="urlToCopy"
@@ -803,12 +804,18 @@
                           readonly
                           hide-details
                         ></v-text-field>
-                        <v-btn height="48px" outlined @click="copyLink"
+                        <v-btn
+                          class="tw-rounded-none"
+                          width="112px"
+                          height="56px"
+                          outlined
+                          @click="copyLink"
                           >Copy the link</v-btn
                         >
                       </div>
                       <div class="share-by-copy-text-item">
                         <v-text-field
+                          class="tw-rounded-none"
                           ref="codeToCopyInput"
                           @focus="$event.target.select()"
                           v-model="codeToCopy"
@@ -821,7 +828,12 @@
                           readonly
                           hide-details
                         ></v-text-field>
-                        <v-btn height="60px" outlined @click="copyCode"
+                        <v-btn
+                          class="tw-rounded-none"
+                          width="112px"
+                          height="56px"
+                          outlined
+                          @click="copyCode"
                           >Copy the code</v-btn
                         >
                       </div>
@@ -1655,9 +1667,11 @@ export default {
   @apply tw-flex;
   @apply tw-flex-row;
   @apply tw-items-center;
+  @apply tw-mb-2;
 }
 
 .share-qr-code-container {
+  @apply tw-ml-8;
   @apply tw-h-[33%];
   @apply tw-text-center;
 }
