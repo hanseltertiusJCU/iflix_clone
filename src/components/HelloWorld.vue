@@ -632,9 +632,9 @@
       <!-- TODO : we need to use the div thing, it is the main navigation -->
     </header>
 
-    <!-- todo : content container -->
+    <!-- todo : content container, the page implementation should be change, where the content should be the content as well as the footer -->
     <div class="content-container">
-      <!-- todo : this is the grid-item class -->
+      <!-- Grid Item Reusable Component -->
       <div class="grid-item-container">
         <!-- todo : this is the container, when clicked : we go to the hyperlink -->
         <div class="image-on-grid-item-container">
@@ -642,26 +642,60 @@
             class="image-grid-item"
             src="https://puui.wetvinfo.com/vcover_vt_pic/0/11b4velzrkiyett1643890656816/220"
           />
-          <!-- TODO : we need to use div, where it is the flex item and justify space between -->
           <div class="grid-item-image-info-container">
-            <!-- we can use the VIP thingy -->
             <div class="grid-item-image-label-info-container">
-              <!-- TODO : the first item should be the orange thing -->
               <div class="grid-item-image-label-info-decoration"></div>
-
-              <!-- TODO : the second item should be the text -->
+              <!-- TODO : we need to use the attribute text from the first item in "labels" attribute (only if available) -->
               <span>Test</span>
             </div>
 
-            <!-- we can use the description about the episode -->
+            <!-- TODO : we need to use the attribute text from the second item in "labels" attribute (only if available) -->
             <span>Test 2</span>
           </div>
         </div>
 
-        <!-- TODO : title -->
+        <!-- TODO : need to use the attribute "title" from item -->
         <div class="grid-item-title-container">Test</div>
-        <!-- TODO : subtitle -->
+        <!-- TODO : need to use the attribute "subtitle" from item -->
         <div class="grid-item-subtitle-container">Tist</div>
+      </div>
+
+      <!-- Hot Item Reusable Component, the container width should be 380 the height should be 80, need to retrieve from "hot" attribute in "pageProps" -->
+      <div class="hot-item-container">
+        <!-- todo : we will use the image from the attribute "new_pic_hz" in item -->
+        <div class="image-on-hot-item-container">
+          <img
+            class="image-hot-item"
+            src="https://puui.wetvinfo.com/vcover_hz_pic/0/dz9l5geq0gu14zm1652946798718/0"
+            alt=""
+          />
+
+          <!-- todo : the container will be transparent color -->
+          <div class="hot-item-rank-info-container">
+            <!-- todo : the decoration will be the white color -->
+            <div class="hot-item-rank-info-decoration"></div>
+            <!-- TODO : the text will be index + 1 of the item -->
+            <span class="hot-item-rank-info-text">1</span>
+          </div>
+
+          <div class="hot-item-image-info-container">
+            <div class="hot-item-image-label-info-container">
+              <div class="hot-item-image-label-info-decoration"></div>
+              <!-- TODO : we need to use the attribute text from the first item in "imgtag_ver" attribute (only if available) -->
+              <span>Test</span>
+            </div>
+
+            <!-- TODO : we need to use the attribute text from the second item in "imgtag_ver" attribute (only if available) -->
+            <span>Test 2</span>
+          </div>
+        </div>
+
+        <div class="text-on-hot-item-container">
+          <!-- todo : we will use the "title" atribute inside the item -->
+          <div class="hot-item-title-container">Test</div>
+          <!-- todo : we will use the formatted text from "episode_updated_country", `Updated to ${episode_updated_country} EP` : if "episode_updated_country" !== "episode_all", otherwise return full -->
+          <div class="hot-item-subtitle-container">Test 2</div>
+        </div>
       </div>
     </div>
 
@@ -997,6 +1031,8 @@ export default {
 .content-container {
   @apply tw-min-h-screen;
   padding-top: 80px;
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
 .grid-item-container {
@@ -1063,6 +1099,114 @@ export default {
 }
 
 .grid-item-subtitle-container {
+  @apply tw-text-[#999];
+}
+
+.hot-item-container {
+  @apply tw-flex;
+  @apply tw-flex-row;
+  @apply tw-relative;
+  @apply tw-w-[380px];
+  @apply tw-h-[80px];
+  @apply tw-rounded;
+}
+
+.hot-item-container:hover {
+  cursor: pointer;
+}
+
+.image-on-hot-item-container {
+  @apply tw-rounded;
+  @apply tw-w-max;
+  @apply tw-h-max;
+}
+
+.image-hot-item {
+  @apply tw-rounded;
+  @apply tw-w-[140px];
+  @apply tw-h-[80px];
+  @apply tw-object-cover;
+}
+
+.hot-item-rank-info-container {
+  @apply tw-bg-transparent;
+  @apply tw-w-[26px];
+  @apply tw-h-[46px];
+  @apply tw-absolute;
+  @apply tw-top-0;
+  @apply tw-left-0;
+  @apply tw-z-0;
+}
+
+.hot-item-rank-info-decoration {
+  @apply tw-bg-white;
+  @apply tw-px-[3px];
+  @apply tw-py-[2px];
+  @apply tw-w-full;
+  @apply tw-h-full;
+  @apply tw-absolute;
+  @apply tw-top-0;
+  @apply tw-bottom-0;
+  @apply tw-left-0;
+  @apply tw--z-10;
+  -webkit-clip-path: polygon(0 0, 100% 0, 0 100%);
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+
+.hot-item-rank-info-text {
+  @apply tw-text-black;
+  @apply tw-z-10;
+}
+
+.hot-item-image-info-container {
+  @apply tw-flex;
+  @apply tw-flex-row;
+  @apply tw-w-[140px];
+  @apply tw-justify-between;
+  @apply tw-items-center;
+  @apply tw-px-2;
+  @apply tw-pb-1;
+  @apply tw-text-white;
+  @apply tw-absolute;
+  @apply tw-bottom-0;
+  @apply tw-left-0;
+}
+
+.hot-item-image-label-info-container {
+  @apply tw-bg-[#071338];
+  @apply tw-py-1;
+  @apply tw-px-2;
+  @apply tw-relative;
+  @apply tw-rounded-tl;
+}
+
+.hot-item-image-label-info-decoration {
+  @apply tw-bg-[#ff4a22];
+  @apply tw-w-3;
+  @apply tw-absolute;
+  @apply tw-top-0;
+  @apply tw-bottom-0;
+  @apply tw-left-0;
+  @apply tw-rounded-tl;
+  -webkit-clip-path: polygon(0 0, 100% 0, 0 100%);
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+
+.text-on-hot-item-container {
+  @apply tw-flex;
+  @apply tw-w-[240px];
+  @apply tw-h-full;
+  @apply tw-flex-col;
+  @apply tw-justify-between;
+  @apply tw-px-[6px];
+}
+
+.hot-item-title-container {
+  @apply tw-font-bold;
+  @apply tw-text-black;
+}
+
+.hot-item-subtitle-container {
   @apply tw-text-[#999];
 }
 
