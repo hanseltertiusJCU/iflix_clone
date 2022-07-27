@@ -326,19 +326,19 @@
 
                 <v-list>
                   <v-list-item class="navigation-menu-link-item-light"
-                    >Test 1</v-list-item
+                    >Menu 1</v-list-item
                   >
                   <v-list-item class="navigation-menu-link-item-light"
-                    >Test 2</v-list-item
+                    >Menu 2</v-list-item
                   >
                   <v-list-item class="navigation-menu-link-item-light"
-                    >Test 3</v-list-item
+                    >Menu 3</v-list-item
                   >
                   <v-list-item class="navigation-menu-link-item-light"
-                    >Test 4</v-list-item
+                    >Menu 4</v-list-item
                   >
                   <v-list-item class="navigation-menu-link-item-light"
-                    >Test 5</v-list-item
+                    >Menu 5</v-list-item
                   >
                 </v-list>
               </v-menu>
@@ -452,19 +452,19 @@
 
               <v-list>
                 <v-list-item class="navigation-menu-link-item-light"
-                  >Test 1</v-list-item
+                  >Language 1</v-list-item
                 >
                 <v-list-item class="navigation-menu-link-item-light"
-                  >Test 2</v-list-item
+                  >Language 2</v-list-item
                 >
                 <v-list-item class="navigation-menu-link-item-light"
-                  >Test 3</v-list-item
+                  >Language 3</v-list-item
                 >
                 <v-list-item class="navigation-menu-link-item-light"
-                  >Test 4</v-list-item
+                  >Language 4</v-list-item
                 >
                 <v-list-item class="navigation-menu-link-item-light"
-                  >Test 5</v-list-item
+                  >Language 5</v-list-item
                 >
               </v-list>
             </v-menu>
@@ -690,18 +690,18 @@
             <div class="grid-item-image-label-info-container">
               <div class="grid-item-image-label-info-decoration"></div>
               <!-- TODO : we need to use the attribute text from the first item in "labels" attribute (only if available) -->
-              <span>Test</span>
+              <span>Album Tag 1</span>
             </div>
 
             <!-- TODO : we need to use the attribute text from the second item in "labels" attribute (only if available) -->
-            <span>Test 2</span>
+            <span>Album Tag 2</span>
           </div>
         </div>
 
         <!-- TODO : need to use the attribute "title" from item -->
-        <div class="grid-item-title-container">Test</div>
+        <div class="grid-item-title-container">Album Title</div>
         <!-- TODO : need to use the attribute "subtitle" from item -->
-        <div class="grid-item-subtitle-container">Tist</div>
+        <div class="grid-item-subtitle-container">Album Item Subtitle</div>
       </div>
 
       <!-- Hot Item Reusable Component, the container width should be 380 the height should be 80, need to retrieve from "hot" attribute in "pageProps" -->
@@ -726,19 +726,19 @@
             <div class="hot-item-image-label-info-container">
               <div class="hot-item-image-label-info-decoration"></div>
               <!-- TODO : we need to use the attribute text from the first item in "imgtag_ver" attribute (only if available) -->
-              <span>Test</span>
+              <span>Hot Item Tag 1</span>
             </div>
 
             <!-- TODO : we need to use the attribute text from the second item in "imgtag_ver" attribute (only if available) -->
-            <span>Test 2</span>
+            <span>Hot Item Tag 2</span>
           </div>
         </div>
 
         <div class="text-on-hot-item-container">
           <!-- todo : we will use the "title" atribute inside the item -->
-          <div class="hot-item-title-container">Test</div>
+          <div class="hot-item-title-container">Hot Item Title</div>
           <!-- todo : we will use the formatted text from "episode_updated_country", `Updated to ${episode_updated_country} EP` : if "episode_updated_country" !== "episode_all", otherwise return full -->
-          <div class="hot-item-subtitle-container">Test 2</div>
+          <div class="hot-item-subtitle-container">Hot Item Subtitle</div>
         </div>
       </div>
 
@@ -767,9 +767,53 @@
 
       <!-- todo : need to have a video player component -->
 
+      <!-- todo : need to have a navigation for album list -->
+      <div class="album-list-navigation-container">
+        <!-- todo : album list title -->
+        <div class="album-list-title-text">Album List Title Text</div>
+
+        <!-- todo : album list navigation page -->
+        <div class="album-list-navigation-page-container">
+          <!-- TODO : we will make the prev page button, disabled when currentPage === 1 -->
+          <div
+            class="change-page-navigation-button-container"
+            @click="goToPreviousPage"
+          >
+            <!-- todo : the icon color will be differ when the button is enabled / disabled -->
+            <v-icon
+              :color="
+                isPreviousPageNavigationDisabled
+                  ? 'rgb(204, 204, 204)'
+                  : 'rgb(106, 110, 126)'
+              "
+              >mdi-chevron-left</v-icon
+            >
+          </div>
+          <!-- TODO : we will make the dynamic string with currentPage / lastPage -->
+          <div class="album-list-page-number-text">
+            {{ currentPage }}/{{ lastPage }}
+          </div>
+          <!-- TODO : we will make the next page button, disabled when currentPage === lastPage -->
+          <div
+            class="change-page-navigation-button-container"
+            @click="goToNextPage"
+          >
+            <!-- todo : the icon color will be differ when the button is enabled / disabled -->
+            <v-icon
+              :color="
+                isNextPageNavigationDisabled
+                  ? 'rgb(204, 204, 204)'
+                  : 'rgb(106, 110, 126)'
+              "
+              >mdi-chevron-right</v-icon
+            >
+          </div>
+        </div>
+      </div>
+
       <div class="video-detail-info-container">
         <!-- TODO : title should be used from attribute "title" -->
-        <div class="video-detail-info-title">Test</div>
+        <div class="video-detail-info-title">Video Detail Item Title Test</div>
 
         <div class="video-detail-info-tags-container">
           <!-- TODO : the first item should be -> the horizontal thing should be from the attribute "imgtag_ver", will use for loop for that -->
@@ -1090,6 +1134,8 @@ export default {
   name: "HelloWorld",
   data() {
     return {
+      currentPage: 1,
+      lastPage: 2,
       urlToCopy:
         "https://www.iflix.com/en/play/r6yht13srzu48mc-FULLMETAL-ALCHEMIST-2003/c0040l97su8-EP1-FULLMETAL-ALCHEMIST-2003",
       codeToCopy:
@@ -1129,10 +1175,34 @@ export default {
       signUpEmailAddressInput: "",
     };
   },
+  computed: {
+    isPreviousPageNavigationDisabled() {
+      return this.currentPage === 1;
+    },
+    isNextPageNavigationDisabled() {
+      return this.currentPage === this.lastPage;
+    },
+  },
   mounted() {
     window.addEventListener("scroll", this.updateScroll);
   },
   methods: {
+    goToPreviousPage() {
+
+      if(this.currentPage === 1) {
+        return;
+      }
+
+      this.currentPage--;
+    },
+    goToNextPage() {
+
+      if(this.currentPage === this.lastPage) {
+        return;
+      }
+
+      this.currentPage++;
+    },
     updateScroll() {
       this.scrollYPosition = window.scrollY;
       this.isScrollYInScrolledState = this.scrollYPosition > 80;
@@ -1381,6 +1451,34 @@ export default {
   @apply tw-px-[16px];
 }
 
+/** todo : we will use the album-list-navigation */
+.album-list-navigation-container {
+  @apply tw-flex;
+  @apply tw-flex-row;
+  @apply tw-justify-between;
+  @apply tw-items-center;
+}
+
+.album-list-title-text {
+  @apply tw-text-[32px];
+  @apply tw-font-bold;
+}
+
+.album-list-navigation-page-container {
+  @apply tw-flex;
+  @apply tw-flex-row;
+}
+
+.album-list-page-number-text {
+  @apply tw-mx-[15px];
+  @apply tw-text-[#6A6E7E];
+}
+
+.change-page-navigation-button-container:hover {
+  cursor: pointer;
+}
+
+/** Todo : grid-item changed to be album-item */
 .grid-item-container {
   @apply tw-rounded;
 }
@@ -1605,7 +1703,7 @@ export default {
   @apply tw-absolute;
   @apply tw--right-[8px];
   @apply tw-w-[8px];
-  @apply tw-h-6;
+  @apply tw-h-full;
   @apply tw-top-0;
   @apply tw-bg-[#ff4a22];
   -webkit-clip-path: polygon(0 0, 100% 0, 100% 8px, 0 100%);
