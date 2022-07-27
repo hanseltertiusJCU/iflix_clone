@@ -678,19 +678,19 @@
 
     <!-- todo : content container, the page implementation should be change, where the content should be the content as well as the footer -->
     <div class="content-container">
-      <!-- Grid Item Reusable Component -->
-      <div class="grid-item-container">
+      <!-- Album Item Reusable Component -->
+      <div class="album-item-container">
         <!-- todo : this is the container, when clicked : we go to the hyperlink -->
-        <div class="image-on-grid-item-container">
+        <div class="image-on-album-item-container">
           <img
-            class="image-grid-item"
+            class="image-album-item"
             src="https://puui.wetvinfo.com/vcover_vt_pic/0/11b4velzrkiyett1643890656816/220"
           />
-          <div class="grid-item-image-info-container">
-            <div class="grid-item-image-label-info-container">
-              <div class="grid-item-image-label-info-decoration"></div>
+          <div class="album-item-image-info-container">
+            <div class="album-item-image-label-info-container">
+              <div class="album-item-image-label-info-decoration"></div>
               <!-- TODO : we need to use the attribute text from the first item in "labels" attribute (only if available) -->
-              <span>Album Tag 1</span>
+              <span>VIP</span>
             </div>
 
             <!-- TODO : we need to use the attribute text from the second item in "labels" attribute (only if available) -->
@@ -699,10 +699,17 @@
         </div>
 
         <!-- TODO : need to use the attribute "title" from item -->
-        <div class="grid-item-title-container">Album Title</div>
+        <div class="album-item-title-container">Album Title</div>
         <!-- TODO : need to use the attribute "subtitle" from item -->
-        <div class="grid-item-subtitle-container">Album Item Subtitle</div>
+        <div class="album-item-subtitle-container">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime fugit
+          sunt accusantium quo sapiente ipsa, voluptas laborum ab quam tempora
+          corporis fuga a optio rem mollitia provident hic assumenda voluptatum?
+        </div>
       </div>
+
+      <!-- temporary code -->
+      <div class="tw-mb-16"></div>
 
       <!-- Hot Item Reusable Component, the container width should be 380 the height should be 80, need to retrieve from "hot" attribute in "pageProps" -->
       <div class="hot-item-container">
@@ -726,11 +733,11 @@
             <div class="hot-item-image-label-info-container">
               <div class="hot-item-image-label-info-decoration"></div>
               <!-- TODO : we need to use the attribute text from the first item in "imgtag_ver" attribute (only if available) -->
-              <span>Hot Item Tag 1</span>
+              <span>VIP</span>
             </div>
 
             <!-- TODO : we need to use the attribute text from the second item in "imgtag_ver" attribute (only if available) -->
-            <span>Hot Item Tag 2</span>
+            <span>Hot Tag 2</span>
           </div>
         </div>
 
@@ -741,6 +748,9 @@
           <div class="hot-item-subtitle-container">Hot Item Subtitle</div>
         </div>
       </div>
+
+      <!-- temporary code -->
+      <div class="tw-mb-8"></div>
 
       <!-- TODO : episodes container -->
       <div class="episode-container">
@@ -1130,6 +1140,8 @@
 </template>
 
 <script>
+import { FIRST_PAGE, HEADER_HEIGHT } from '@/constants';
+
 export default {
   name: "HelloWorld",
   data() {
@@ -1177,7 +1189,7 @@ export default {
   },
   computed: {
     isPreviousPageNavigationDisabled() {
-      return this.currentPage === 1;
+      return this.currentPage === FIRST_PAGE;
     },
     isNextPageNavigationDisabled() {
       return this.currentPage === this.lastPage;
@@ -1188,24 +1200,64 @@ export default {
   },
   methods: {
     goToPreviousPage() {
-
-      if(this.currentPage === 1) {
+      if (this.currentPage === FIRST_PAGE) {
         return;
       }
 
       this.currentPage--;
+
+      /**
+       * initial page = this.currentPage
+       *
+       * After subtracting the current page by 1, we will use the calculation
+       *
+       * maximum item per page : number of rows in a grid * 2
+       *
+       * start item number based on page : maximum item per page * current page
+       *
+       * end item number based on page : maximum item per page * initial page
+       *
+       * end item number based on array : array.length()
+       *
+       * end item number to be displayed : Math.min(end item number based on page, end item number based on array)
+       *
+       * end item number to be displayed index : end item number to be displayed - 1
+       *
+       * we will do the start and end item number to slice the array of albums by using slice() -> start item number based on page, end item number to be displayed index
+       *
+       */
     },
     goToNextPage() {
-
-      if(this.currentPage === this.lastPage) {
+      if (this.currentPage === this.lastPage) {
         return;
       }
 
       this.currentPage++;
+
+      /**
+       * initial page = this.currentPage
+       *
+       * After adding the current page by 1, we will use the calculation
+       *
+       * maximum item per page : number of rows in a grid * 2
+       *
+       * start item number based on page : maximum item per page * initial page
+       *
+       * end item number based on page : maximum item per page * current page
+       *
+       * end item number based on array : array.length()
+       *
+       * end item number to be displayed : Math.min(end item number based on page, end item number based on array)
+       *
+       * end item number to be displayed index : end item number to be displayed - 1
+       *
+       * we will do the start and end item number to slice the array of albums by using slice() -> start item number based on page, end item number to be displayed index
+       *
+       */
     },
     updateScroll() {
       this.scrollYPosition = window.scrollY;
-      this.isScrollYInScrolledState = this.scrollYPosition > 80;
+      this.isScrollYInScrolledState = this.scrollYPosition > HEADER_HEIGHT;
     },
     copyLink() {
       navigator.clipboard.writeText(this.urlToCopy);
@@ -1478,28 +1530,34 @@ export default {
   cursor: pointer;
 }
 
-/** Todo : grid-item changed to be album-item */
-.grid-item-container {
+/** Todo : album-item changed to be album-item */
+.album-item-container {
+  @apply tw-w-[184px];
+  @apply tw-h-[300px];
   @apply tw-rounded;
 }
 
-.image-on-grid-item-container {
+.image-on-album-item-container {
   @apply tw-rounded;
   @apply tw-mb-1;
   @apply tw-relative;
   @apply tw-w-max;
+  @apply tw-h-max;
 }
 
-.image-grid-item {
+.image-album-item {
   @apply tw-rounded;
+  @apply tw-w-[184px];
+  @apply tw-h-[300px];
+  @apply tw-object-cover;
 }
 
-.image-grid-item:hover {
+.image-album-item:hover {
   @apply tw-shadow-md;
   cursor: pointer;
 }
 
-.grid-item-image-info-container {
+.album-item-image-info-container {
   @apply tw-flex;
   @apply tw-flex-row;
   @apply tw-w-full;
@@ -1513,7 +1571,7 @@ export default {
   @apply tw-left-0;
 }
 
-.grid-item-image-label-info-container {
+.album-item-image-label-info-container {
   @apply tw-bg-[#071338];
   @apply tw-py-1;
   @apply tw-px-2;
@@ -1521,7 +1579,7 @@ export default {
   @apply tw-rounded-tl;
 }
 
-.grid-item-image-label-info-decoration {
+.album-item-image-label-info-decoration {
   @apply tw-bg-[#ff4a22];
   @apply tw-w-3;
   @apply tw-absolute;
@@ -1533,17 +1591,19 @@ export default {
   clip-path: polygon(0 0, 100% 0, 0 100%);
 }
 
-.grid-item-title-container {
+.album-item-title-container {
   @apply tw-text-black;
   @apply tw-font-bold;
+  @apply tw-truncate;
 }
 
-.grid-item-title-container:hover {
+.album-item-title-container:hover {
   cursor: pointer;
 }
 
-.grid-item-subtitle-container {
+.album-item-subtitle-container {
   @apply tw-text-[#999];
+  @apply tw-truncate;
 }
 
 .hot-item-container {
