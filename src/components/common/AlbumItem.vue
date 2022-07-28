@@ -1,24 +1,30 @@
 <template>
   <div class="album-item-container">
-    <div class="image-on-album-item-container">
-      <img class="image-album-item" :src="albumDataItem.pic" />
-      <div class="album-item-image-info-container">
-        <ImageTag
-          :text="albumDataItem.labels[0] ? albumDataItem.labels[0].text : ''"
-          :color="
-            albumDataItem.labels[0]
-              ? albumDataItem.labels[0].color
-              : 'transparent'
-          "
-        />
+    <div
+      class="album-item-hyperlink-container"
+      @click="onOpenAlbumItem(albumDataItem)"
+    >
+      <div class="image-on-album-item-container">
+        <img class="image-album-item" :src="albumDataItem.pic" />
+        <div class="album-item-image-info-container">
+          <ImageTag
+            :text="albumDataItem.labels[0] ? albumDataItem.labels[0].text : ''"
+            :color="
+              albumDataItem.labels[0]
+                ? albumDataItem.labels[0].color
+                : 'transparent'
+            "
+          />
 
-        <span class="tw-text-right" v-if="albumDataItem.labels[1]">{{
-          albumDataItem.labels[1].text
-        }}</span>
+          <span class="tw-text-right" v-if="albumDataItem.labels[1]">{{
+            albumDataItem.labels[1].text
+          }}</span>
+        </div>
       </div>
+
+      <div class="album-item-title-container">{{ albumTitle }}</div>
     </div>
 
-    <div class="album-item-title-container">{{ albumTitle }}</div>
     <div class="album-item-subtitle-container">
       {{ albumSubtitle }}
     </div>
@@ -74,9 +80,12 @@ export default {
   @apply tw-object-cover;
 }
 
+.album-item-hyperlink-container:hover {
+  cursor: pointer;
+}
+
 .image-album-item:hover {
   @apply tw-shadow-md;
-  cursor: pointer;
 }
 
 .album-item-image-info-container {
@@ -97,10 +106,6 @@ export default {
   @apply tw-text-black;
   @apply tw-font-bold;
   @apply tw-truncate;
-}
-
-.album-item-title-container:hover {
-  cursor: pointer;
 }
 
 .album-item-subtitle-container {

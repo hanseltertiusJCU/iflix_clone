@@ -48,7 +48,7 @@ export default {
   props: ["hotItemData", "rankItemIndex"],
   methods: {
     onHotItemClick(item) {
-      this.$emit("on-load-episode", item);
+      this.$emit("on-hot-item-open", item);
     },
     getHotItemRankNumber(index) {
       return index + 1;

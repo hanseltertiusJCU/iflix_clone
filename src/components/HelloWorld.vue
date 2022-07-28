@@ -673,8 +673,12 @@
             v-for="(item, index) in carouselItems.items"
             :key="index"
           >
-            <img class="swiper-gallery-top-image" :src="item.pic" alt="" />
-            <!-- <img class="swiper-gallery-top-image" src="https://images.adsttc.com/media/images/5e66/5e5e/b357/65bd/db00/0025/large_jpg/10.jpg?1583767123" alt="" /> -->
+            <div
+              class="swiper-gallery-top-image-container"
+              @click="onOpenCarouselItem(item)"
+            >
+              <img class="swiper-gallery-top-image" :src="item.pic" alt="" />
+            </div>
           </swiper-slide>
           <div
             class="swiper-button-next swiper-button-white"
@@ -784,68 +788,30 @@
         </div>
       </div>
 
-      <!-- Album Item Reusable Component -->
-      <div class="album-master-item-container">
-        <div class="album-navigation-bar-container">
-          <!-- todo : album list title -->
-          <div class="album-navigation-bar-title-text">
-            {{ albumItem.name }}
-          </div>
-
-          <!-- todo : album list navigation page -->
-          <div class="album-navigation-bar-navigation-page-container">
-            <div
-              class="change-page-navigation-button-container"
-              @click="goToPreviousPage"
-            >
-              <v-icon
-                :color="
-                  isPreviousPageNavigationDisabled
-                    ? 'rgb(204, 204, 204)'
-                    : 'rgb(106, 110, 126)'
-                "
-                >mdi-chevron-left</v-icon
-              >
-            </div>
-            <div class="album-navigation-bar-page-number-text">
-              {{ currentPage }}/{{ lastPage }}
-            </div>
-            <div
-              class="change-page-navigation-button-container"
-              @click="goToNextPage"
-            >
-              <v-icon
-                :color="
-                  isNextPageNavigationDisabled
-                    ? 'rgb(204, 204, 204)'
-                    : 'rgb(106, 110, 126)'
-                "
-                >mdi-chevron-right</v-icon
-              >
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="album-item-list-container">
-        <div v-for="item in albumItem.items" :key="item.id">
-          <AlbumItem
-            :albumDataItem="item"
-            :albumTitle="item.title"
-            :albumSubtitle="item.subtitle"
-          />
-        </div>
-      </div>
+      <AlbumMasterItem
+        :gridColumnsPerItem="6"
+        :gridRowsPerItem="2"
+        :isRecommendedItem="false"
+        :albumTitleText="albumItem.name"
+        :albumDataItems="albumItem.items"
+        @on-open-album-item="onOpenAlbumItem"
+      />
 
       <!-- temporary code -->
       <div class="tw-mb-16"></div>
 
       <!-- TODO : implement based on hot item list -->
-      <div v-for="(item, index) in hotItems" :key="index">
-        <HotItem
-          :hotItemData="item"
-          :rankItemIndex="index"
-          @on-load-episode="onLoadEpisodeItem"
-        />
+      <div class="hot-item-master-container">
+        <div class="hot-item-title-text-container">
+          <div class="hot-item-title-text">Today's Hot Videos</div>
+        </div>
+        <div v-for="(item, index) in hotItems" :key="index">
+          <HotItem
+            :hotItemData="item"
+            :rankItemIndex="index"
+            @on-hot-item-open="onOpenHotItem"
+          />
+        </div>
       </div>
 
       <!-- todo : need to have a video player component -->
@@ -1185,6 +1151,7 @@ import VideoTag from "@/components/common/VideoTag.vue";
 import EpisodeItem from "@/components/common/EpisodeItem.vue";
 import HotItem from "@/components/common/HotItem.vue";
 import AlbumItem from "@/components/common/AlbumItem.vue";
+import AlbumMasterItem from "@/components/common/AlbumMasterItem.vue";
 
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import "swiper/css/swiper.css";
@@ -1197,6 +1164,7 @@ export default {
     EpisodeItem,
     HotItem,
     AlbumItem,
+    AlbumMasterItem,
     Swiper,
     SwiperSlide,
   },
@@ -1300,11 +1268,17 @@ export default {
     isSelectedEpisodeItem(item) {
       return item.vid === this.selectedVideoId;
     },
+    onOpenCarouselItem(item) {
+      console.log("open carousel item : ", item);
+    },
+    onOpenAlbumItem(item) {
+      console.log("open album item : ", item);
+    },
     onSelectEpisodeItem(item) {
       console.log("select episode item : ", item);
     },
-    onLoadEpisodeItem(item) {
-      console.log("load episode item : ", item);
+    onOpenHotItem(item) {
+      console.log("open hot item : ", item);
     },
     goToPreviousPage() {
       if (this.currentPage === FIRST_PAGE) {
@@ -1638,7 +1612,7 @@ export default {
   @apply tw-object-cover;
 }
 
-.swiper.gallery-top .swiper-gallery-top-image:hover,
+.swiper.gallery-top .swiper-gallery-top-image-container:hover,
 .swiper-gallery-thumbs-text-container:hover {
   cursor: pointer;
 }
@@ -1803,44 +1777,18 @@ button.video-player-button {
   @apply tw-gap-4;
 }
 
-/** todo : we will use the album-navigation-bar-navigation */
-.album-master-item-container {
+.hot-item-master-container {
   @apply tw-flex;
   @apply tw-flex-col;
 }
 
-.album-navigation-bar-container {
-  @apply tw-flex;
-  @apply tw-flex-row;
-  @apply tw-justify-between;
-  @apply tw-items-center;
-  @apply tw-mb-5;
+.hot-item-title-text-container {
+  @apply tw-mb-4;
 }
 
-.album-navigation-bar-title-text {
+.hot-item-title-text {
   @apply tw-text-[32px];
   @apply tw-font-bold;
-}
-
-.album-navigation-bar-navigation-page-container {
-  @apply tw-flex;
-  @apply tw-flex-row;
-}
-
-.album-navigation-bar-page-number-text {
-  @apply tw-mx-[15px];
-  @apply tw-text-[#6A6E7E];
-}
-
-.change-page-navigation-button-container:hover {
-  cursor: pointer;
-}
-
-.album-item-list-container {
-  @apply tw-grid;
-  @apply tw-gap-4;
-  @apply tw-grid-cols-6;
-  @apply tw-grid-rows-2;
 }
 
 .video-detail-info-title {
