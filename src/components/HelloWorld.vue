@@ -1,9 +1,6 @@
 <template>
   <!-- todo : header component -->
   <div>
-    <!-- we need to use class : navbar-fixed-top -->
-    <!-- TODO : we need to use class : header container, which is actually setting up background color -->
-    <!-- TODO : will use v-if -->
     <header
       :class="
         isScrollYInScrolledState
@@ -11,7 +8,6 @@
           : 'header-container-light'
       "
     >
-      <!-- TODO : create a div -->
       <div class="navigation-bar-container">
         <div class="navigation-link-container">
           <router-link to="/">
@@ -669,15 +665,91 @@
           </div>
         </div>
       </div>
-
-      <!-- TODO : must use div for that matter -->
-      <!-- this is the black text, we need to use v-if for the svg part -->
-
-      <!-- TODO : we need to use the div thing, it is the main navigation -->
     </header>
 
     <!-- todo : content container, the page implementation should be change, where the content should be the content as well as the footer -->
     <div class="content-container">
+      <!-- todo : the video player component -->
+      <div class="video-player-component-container">
+        <div class="video-player-content-container">
+          <div class="video-player-main-container">
+            <div class="video-player-video-container"></div>
+            <div class="video-player-bottom-container">
+              <div class="video-player-bottom-content">
+                <div class="tw-flex-none">
+                  <v-switch
+                    v-model="enableBubbleComments"
+                    color="#ff4a22"
+                  ></v-switch>
+                </div>
+
+                <!-- todo : after the switch, we need to provide a text input field, disabled when logged out, enabled when logged in -->
+                <div class="video-player-input-field-container">
+                  <v-text-field
+                    :disabled="isNotLoggedIn"
+                    class="video-player-input-field"
+                    label=""
+                    placeholder=""
+                    filled
+                    dense
+                    flat
+                    solo
+                    dark
+                    hide-details
+                    background-color="#000"
+                  ></v-text-field>
+                  <div class="video-player-login-prompt-input">
+                    <span class="video-player-login-button">Log in</span>
+                    &nbsp;to join the comments
+                  </div>
+                </div>
+
+                <div class="tw-flex-none">
+                  <v-btn
+                    class="video-player-button"
+                    color="rgba(41,42,60,0.6)"
+                    tile
+                    >Test</v-btn
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="video-player-list-container">
+            <div class="video-player-title-text">
+              {{ detailedVideoItemInfo.title }}
+            </div>
+
+            <div class="video-player-tags-list">
+              <!-- todo : image tag list -->
+              <div
+                v-if="Object.keys(detailedVideoItemInfo.imgtag_ver).length > 0"
+              >
+                <div
+                  v-for="(item, index) in detailedVideoItemInfo.imgtag_ver"
+                  :key="index"
+                >
+                  <ImageTag :text="item.text" :color="item.color" />
+                </div>
+              </div>
+              <!-- todo : if default_pay_status is available -->
+            </div>
+
+            <!-- todo : grid item, where each item is an episode, grid col template 5, grid row template free -->
+            <div class="video-player-episodes-list">
+              <div v-for="(item, index) in videosList" :key="index">
+                <EpisodeItem
+                  :episodeItem="item"
+                  :episodeText="item.episode"
+                  :isSelected="isSelectedEpisodeItem(item)"
+                  @on-load-episode="onSelectEpisodeItem"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Album Item Reusable Component -->
       <div class="album-item-container">
         <!-- todo : this is the container, when clicked : we go to the hyperlink -->
@@ -687,11 +759,7 @@
             src="https://puui.wetvinfo.com/vcover_vt_pic/0/11b4velzrkiyett1643890656816/220"
           />
           <div class="album-item-image-info-container">
-            <div class="album-item-image-label-info-container">
-              <div class="album-item-image-label-info-decoration"></div>
-              <!-- TODO : we need to use the attribute text from the first item in "labels" attribute (only if available) -->
-              <span>VIP</span>
-            </div>
+            <ImageTag text="VIP" color="#ff4a22" />
 
             <!-- TODO : we need to use the attribute text from the second item in "labels" attribute (only if available) -->
             <span>Album Tag 2</span>
@@ -730,11 +798,7 @@
           </div>
 
           <div class="hot-item-image-info-container">
-            <div class="hot-item-image-label-info-container">
-              <div class="hot-item-image-label-info-decoration"></div>
-              <!-- TODO : we need to use the attribute text from the first item in "imgtag_ver" attribute (only if available) -->
-              <span>VIP</span>
-            </div>
+            <ImageTag text="VIP" color="#ff4a22" />
 
             <!-- TODO : we need to use the attribute text from the second item in "imgtag_ver" attribute (only if available) -->
             <span>Hot Tag 2</span>
@@ -757,22 +821,14 @@
         <!-- todo : initially it is the text thing, with the episode value of "episode" -->
         <span class="episode-text">1</span>
         <!-- todo : the absolute item should be the one who is from the "imgtag_ver" attribute -->
-        <span class="episode-tag-container">
-          <!-- todo : integrate with JSON, let's find the specific attribute -->
-          <span class="episode-tag-container-text">Final</span>
-          <span class="episode-tag-container-decoration"></span>
-        </span>
+        <VideoTag text="Final" />
       </div>
 
       <div class="selected-episode-container">
         <!-- todo : initially it is the text thing, with the episode value of "episode" -->
         <span class="episode-text">1</span>
         <!-- todo : the absolute item should be the one who is from the "imgtag_ver" attribute -->
-        <span class="episode-tag-container">
-          <!-- todo : integrate with JSON, let's find the specific attribute -->
-          <span class="episode-tag-container-text">Final</span>
-          <span class="episode-tag-container-decoration"></span>
-        </span>
+        <VideoTag text="Final" />
       </div>
 
       <!-- todo : need to have a video player component -->
@@ -1140,12 +1196,31 @@
 </template>
 
 <script>
-import { FIRST_PAGE, HEADER_HEIGHT } from '@/constants';
+import {
+  FIRST_PAGE,
+  HEADER_HEIGHT,
+  DETAILED_VIDEO_ITEM_INFO,
+  VIDEOS_LIST,
+} from "@/constants";
+import ImageTag from "@/components/common/ImageTag.vue";
+import VideoTag from "@/components/common/VideoTag.vue";
+import EpisodeItem from "@/components/common/EpisodeItem.vue";
 
 export default {
   name: "HelloWorld",
+  components: {
+    ImageTag,
+    VideoTag,
+    EpisodeItem,
+  },
   data() {
     return {
+      selectedVideoId: "c0040l97su8",
+      enableBubbleComments: false,
+      // we will use the data
+      detailedVideoItemInfo: DETAILED_VIDEO_ITEM_INFO,
+      videosList: VIDEOS_LIST,
+      isNotLoggedIn: true,
       currentPage: 1,
       lastPage: 2,
       urlToCopy:
@@ -1199,6 +1274,12 @@ export default {
     window.addEventListener("scroll", this.updateScroll);
   },
   methods: {
+    isSelectedEpisodeItem(item) {
+      return item.vid === this.selectedVideoId;
+    },
+    onSelectEpisodeItem(item) {
+      console.log("select episode item : ", item);
+    },
     goToPreviousPage() {
       if (this.currentPage === FIRST_PAGE) {
         return;
@@ -1500,7 +1581,110 @@ export default {
   @apply tw-min-h-screen;
   @apply tw-z-0;
   @apply tw-pt-[80px];
-  @apply tw-px-[16px];
+}
+
+.video-player-component-container {
+  @apply tw-h-[75vh];
+  @apply tw-bg-[#171a27];
+}
+
+.video-player-content-container {
+  @apply tw-h-full;
+  @apply tw-flex;
+  @apply tw-flex-row;
+  @apply tw-text-white;
+}
+
+.video-player-main-container {
+  @apply tw-flex;
+  @apply tw-flex-col;
+  @apply tw-w-3/5;
+  @apply tw-h-full;
+  @apply tw-bg-[#151625];
+}
+
+.video-player-video-container {
+  @apply tw-flex-1;
+  @apply tw-bg-black;
+}
+
+.video-player-bottom-container {
+  @apply tw-flex;
+  @apply tw-justify-end;
+  @apply tw-items-center;
+  @apply tw-flex-none;
+  @apply tw-h-[80px];
+}
+
+.video-player-bottom-content {
+  @apply tw-flex;
+  @apply tw-flex-row;
+  @apply tw-w-3/5;
+  @apply tw-mr-4;
+  @apply tw-items-center;
+}
+
+.video-player-input-field-container {
+  @apply tw-flex-1;
+  @apply tw-relative;
+  @apply tw-ml-4;
+}
+
+.video-player-input-field {
+  @apply tw-rounded-tl-[18px];
+  @apply tw-rounded-bl-[18px];
+}
+
+.video-player-login-prompt-input {
+  @apply tw-absolute;
+  @apply tw-h-full;
+  @apply tw-bottom-0;
+  @apply tw-left-5;
+  @apply tw-flex;
+  @apply tw-flex-row;
+  @apply tw-items-center;
+  @apply tw-text-[#85868a];
+}
+
+.video-player-login-button {
+  @apply tw-text-[#ff4a22];
+}
+
+.video-player-login-button:hover {
+  cursor: pointer;
+}
+
+button.video-player-button {
+  @apply tw-text-white;
+  @apply tw-rounded-tr-[18px];
+  @apply tw-rounded-br-[18px];
+}
+
+.video-player-list-container {
+  @apply tw-w-2/5;
+  @apply tw-h-full;
+  @apply tw-bg-[hsla(0,0%,100%,.1)];
+  @apply tw-overflow-y-auto;
+  @apply tw-text-white;
+  @apply tw-pl-[20px];
+  @apply tw-pt-[20px];
+}
+
+.video-player-title-text {
+  @apply tw-text-[32px];
+  @apply tw-truncate;
+  @apply tw-mb-4;
+}
+
+.video-player-tags-list {
+  @apply tw-flex;
+  @apply tw-flex-row;
+  @apply tw-mb-2;
+}
+.video-player-episodes-list {
+  @apply tw-grid;
+  @apply tw-grid-cols-5;
+  @apply tw-gap-4;
 }
 
 /** todo : we will use the album-list-navigation */
@@ -1569,26 +1753,6 @@ export default {
   @apply tw-absolute;
   @apply tw-bottom-2;
   @apply tw-left-0;
-}
-
-.album-item-image-label-info-container {
-  @apply tw-bg-[#071338];
-  @apply tw-py-1;
-  @apply tw-px-2;
-  @apply tw-relative;
-  @apply tw-rounded-tl;
-}
-
-.album-item-image-label-info-decoration {
-  @apply tw-bg-[#ff4a22];
-  @apply tw-w-3;
-  @apply tw-absolute;
-  @apply tw-top-0;
-  @apply tw-bottom-0;
-  @apply tw-left-0;
-  @apply tw-rounded-tl;
-  -webkit-clip-path: polygon(0 0, 100% 0, 0 100%);
-  clip-path: polygon(0 0, 100% 0, 0 100%);
 }
 
 .album-item-title-container {
@@ -1676,26 +1840,6 @@ export default {
   @apply tw-left-0;
 }
 
-.hot-item-image-label-info-container {
-  @apply tw-bg-[#071338];
-  @apply tw-py-1;
-  @apply tw-px-2;
-  @apply tw-relative;
-  @apply tw-rounded-tl;
-}
-
-.hot-item-image-label-info-decoration {
-  @apply tw-bg-[#ff4a22];
-  @apply tw-w-3;
-  @apply tw-absolute;
-  @apply tw-top-0;
-  @apply tw-bottom-0;
-  @apply tw-left-0;
-  @apply tw-rounded-tl;
-  -webkit-clip-path: polygon(0 0, 100% 0, 0 100%);
-  clip-path: polygon(0 0, 100% 0, 0 100%);
-}
-
 .text-on-hot-item-container {
   @apply tw-flex;
   @apply tw-w-[240px];
@@ -1744,30 +1888,6 @@ export default {
 
 .selected-episode-container .episode-text {
   @apply tw-text-[#ff4a22];
-}
-
-.episode-tag-container {
-  @apply tw-absolute;
-  @apply tw-bg-[#ff4a22];
-  @apply tw--top-5;
-  @apply tw--right-5;
-  @apply tw-pl-[2px];
-}
-
-.episode-tag-container-text {
-  @apply tw-text-white;
-}
-
-.episode-tag-container-decoration {
-  @apply tw-block;
-  @apply tw-absolute;
-  @apply tw--right-[8px];
-  @apply tw-w-[8px];
-  @apply tw-h-full;
-  @apply tw-top-0;
-  @apply tw-bg-[#ff4a22];
-  -webkit-clip-path: polygon(0 0, 100% 0, 100% 8px, 0 100%);
-  clip-path: polygon(0 0, 100% 0, 100% 8px, 0 100%);
 }
 
 .video-detail-info-title {
