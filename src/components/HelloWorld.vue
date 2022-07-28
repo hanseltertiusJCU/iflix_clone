@@ -675,12 +675,12 @@
           :options="swiperOptionTop"
           ref="swiperTop"
         >
-          <swiper-slide v-for="index in 8" :key="index">
-            <img
-              class="swiper-gallery-top-image"
-              src="https://images.adsttc.com/media/images/5e66/5e5e/b357/65bd/db00/0025/large_jpg/10.jpg?1583767123"
-              alt=""
-            />
+          <swiper-slide
+            v-for="(item, index) in carouselItems.items"
+            :key="index"
+          >
+            <img class="swiper-gallery-top-image" :src="item.pic" alt="" />
+            <!-- <img class="swiper-gallery-top-image" src="https://images.adsttc.com/media/images/5e66/5e5e/b357/65bd/db00/0025/large_jpg/10.jpg?1583767123" alt="" /> -->
           </swiper-slide>
           <div
             class="swiper-button-next swiper-button-white"
@@ -691,17 +691,19 @@
             slot="button-prev"
           ></div>
         </swiper>
+
         <swiper
           class="swiper gallery-thumbs"
           :options="swiperOptionThumbs"
           ref="swiperThumbs"
         >
-          <swiper-slide v-for="index in 8" :key="index">
-            <img
-              class="swiper-gallery-thumbs-image"
-              src="https://www.masiarosas.com/sites/default/files/styles/image_1200px/public/content/nodes/imatge/image/190/1324-evento-masiarosas-dianasegurafotografia.jpg?itok=domblugh"
-              alt=""
-            />
+          <swiper-slide
+            v-for="(item, index) in carouselItems.items"
+            :key="index"
+          >
+            <div class="swiper-gallery-thumbs-container">
+              <span class="swiper-gallery-thumbs-text">{{ item.title }}</span>
+            </div>
           </swiper-slide>
         </swiper>
       </div>
@@ -1212,12 +1214,12 @@
 </template>
 
 <script>
-import { ref } from "vue";
 import {
   FIRST_PAGE,
   HEADER_HEIGHT,
   DETAILED_VIDEO_ITEM_INFO,
   VIDEOS_LIST,
+  CAROUSEL_ITEMS,
 } from "@/constants";
 import ImageTag from "@/components/common/ImageTag.vue";
 import VideoTag from "@/components/common/VideoTag.vue";
@@ -1239,8 +1241,12 @@ export default {
     return {
       swiperOptionTop: {
         loop: true,
+        // autoplay: {
+        //   delay: 2500,
+        //   disableOnInteraction: false,
+        // },
         // loopedSlides is actually the items, need to be update when loading the array
-        loopedSlides: 8,
+        loopedSlides: 1,
         spaceBetween: 10,
         navigation: {
           nextEl: ".swiper-button-next",
@@ -1250,7 +1256,7 @@ export default {
       swiperOptionThumbs: {
         loop: true,
         // loopedSlides is actually the items, need to be update when loading the array, should be the same
-        loopedSlides: 8,
+        loopedSlides: 1,
         spaceBetween: 10,
         centeredSlides: true,
         slidesPerView: "auto",
@@ -1260,6 +1266,7 @@ export default {
       selectedVideoId: "c0040l97su8",
       enableBubbleComments: false,
       // we will use the data
+      carouselItems: CAROUSEL_ITEMS,
       detailedVideoItemInfo: DETAILED_VIDEO_ITEM_INFO,
       videosList: VIDEOS_LIST,
       isNotLoggedIn: true,
@@ -1314,7 +1321,11 @@ export default {
   },
   mounted() {
     window.addEventListener("scroll", this.updateScroll);
+
+    // change the looped slides into the length of the carousel if there are any data
     this.$nextTick(() => {
+      this.swiperOptionTop.loopedSlides = this.carouselItems.items.length;
+      this.swiperOptionThumbs.loopedSlides = this.carouselItems.items.length;
       const swiperTop = this.$refs.swiperTop.$swiper;
       const swiperThumbs = this.$refs.swiperThumbs.$swiper;
       swiperTop.controller.control = swiperThumbs;
@@ -1653,6 +1664,25 @@ export default {
   @apply tw-object-cover;
 }
 
+.swiper.gallery-top .swiper-gallery-top-image:hover,
+.swiper-gallery-thumbs-container:hover {
+  cursor: pointer;
+}
+
+.swiper-gallery-thumbs-container {
+  @apply tw-flex;
+  @apply tw-flex-row;
+  @apply tw-items-center;
+  @apply tw-relative;
+  @apply tw-h-full;
+  @apply tw-text-white;
+}
+
+.swiper-gallery-thumbs-text {
+  @apply tw-text-[20px];
+  @apply tw-font-bold;
+}
+
 .swiper.gallery-thumbs {
   @apply tw-h-1/5;
   @apply tw-box-border;
@@ -1668,9 +1698,22 @@ export default {
 }
 
 .swiper.gallery-thumbs .swiper-slide {
-  @apply tw-w-1/4;
+  @apply tw-w-1/3;
   @apply tw-h-full;
   @apply tw-opacity-40;
+}
+
+.swiper.gallery-thumbs .swiper-slide-active::before {
+  @apply tw-absolute;
+  @apply tw--left-[4px];
+  @apply tw-top-[5px];
+  @apply tw-w-[3px];
+  @apply tw-h-full;
+  @apply tw-bg-[#ff4a22];
+  @apply tw-rounded-sm;
+  @apply tw--skew-x-[15deg];
+  @apply tw--skew-y-[15deg];
+  content: "";
 }
 
 .swiper.gallery-thumbs .swiper-slide-active {
