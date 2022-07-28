@@ -669,6 +669,43 @@
 
     <!-- todo : content container, the page implementation should be change, where the content should be the content as well as the footer -->
     <div class="content-container">
+      <div class="swiper-component-container">
+        <swiper
+          class="swiper gallery-top"
+          :options="swiperOptionTop"
+          ref="swiperTop"
+        >
+          <swiper-slide v-for="index in 8" :key="index">
+            <img
+              class="swiper-gallery-top-image"
+              src="https://images.adsttc.com/media/images/5e66/5e5e/b357/65bd/db00/0025/large_jpg/10.jpg?1583767123"
+              alt=""
+            />
+          </swiper-slide>
+          <div
+            class="swiper-button-next swiper-button-white"
+            slot="button-next"
+          ></div>
+          <div
+            class="swiper-button-prev swiper-button-white"
+            slot="button-prev"
+          ></div>
+        </swiper>
+        <swiper
+          class="swiper gallery-thumbs"
+          :options="swiperOptionThumbs"
+          ref="swiperThumbs"
+        >
+          <swiper-slide v-for="index in 8" :key="index">
+            <img
+              class="swiper-gallery-thumbs-image"
+              src="https://www.masiarosas.com/sites/default/files/styles/image_1200px/public/content/nodes/imatge/image/190/1324-evento-masiarosas-dianasegurafotografia.jpg?itok=domblugh"
+              alt=""
+            />
+          </swiper-slide>
+        </swiper>
+      </div>
+
       <!-- todo : the video player component -->
       <div class="video-player-component-container">
         <div class="video-player-content-container">
@@ -808,24 +845,6 @@
           <!-- todo : we will use the formatted text from "episode_updated_country", `Updated to ${episode_updated_country} EP` : if "episode_updated_country" !== "episode_all", otherwise return full -->
           <div class="hot-item-subtitle-container">Hot Item Subtitle</div>
         </div>
-      </div>
-
-      <!-- temporary code -->
-      <div class="tw-mb-8"></div>
-
-      <!-- TODO : episodes container -->
-      <div class="episode-container">
-        <!-- todo : initially it is the text thing, with the episode value of "episode" -->
-        <span class="episode-text">1</span>
-        <!-- todo : the absolute item should be the one who is from the "imgtag_ver" attribute -->
-        <VideoTag text="Final" />
-      </div>
-
-      <div class="selected-episode-container">
-        <!-- todo : initially it is the text thing, with the episode value of "episode" -->
-        <span class="episode-text">1</span>
-        <!-- todo : the absolute item should be the one who is from the "imgtag_ver" attribute -->
-        <VideoTag text="Final" />
       </div>
 
       <!-- todo : need to have a video player component -->
@@ -1193,6 +1212,7 @@
 </template>
 
 <script>
+import { ref } from "vue";
 import {
   FIRST_PAGE,
   HEADER_HEIGHT,
@@ -1203,15 +1223,40 @@ import ImageTag from "@/components/common/ImageTag.vue";
 import VideoTag from "@/components/common/VideoTag.vue";
 import EpisodeItem from "@/components/common/EpisodeItem.vue";
 
+import { Swiper, SwiperSlide } from "vue-awesome-swiper";
+import "swiper/css/swiper.css";
+
 export default {
   name: "HelloWorld",
   components: {
     ImageTag,
     VideoTag,
     EpisodeItem,
+    Swiper,
+    SwiperSlide,
   },
   data() {
     return {
+      swiperOptionTop: {
+        loop: true,
+        // loopedSlides is actually the items, need to be update when loading the array
+        loopedSlides: 8,
+        spaceBetween: 10,
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      },
+      swiperOptionThumbs: {
+        loop: true,
+        // loopedSlides is actually the items, need to be update when loading the array, should be the same
+        loopedSlides: 8,
+        spaceBetween: 10,
+        centeredSlides: true,
+        slidesPerView: "auto",
+        touchRatio: 0.2,
+        slideToClickedSlide: true,
+      },
       selectedVideoId: "c0040l97su8",
       enableBubbleComments: false,
       // we will use the data
@@ -1269,6 +1314,12 @@ export default {
   },
   mounted() {
     window.addEventListener("scroll", this.updateScroll);
+    this.$nextTick(() => {
+      const swiperTop = this.$refs.swiperTop.$swiper;
+      const swiperThumbs = this.$refs.swiperThumbs.$swiper;
+      swiperTop.controller.control = swiperThumbs;
+      swiperThumbs.controller.control = swiperTop;
+    });
   },
   methods: {
     isSelectedEpisodeItem(item) {
@@ -1580,6 +1631,52 @@ export default {
   @apply tw-pt-[80px];
 }
 
+.swiper-component-container {
+  @apply tw-h-[75vh];
+  @apply tw-bg-black;
+}
+
+.swiper .swiper-slide {
+  @apply tw-bg-cover;
+  @apply tw-bg-center;
+}
+
+.swiper.gallery-top {
+  @apply tw-h-4/5;
+  @apply tw-text-white;
+  @apply tw-w-full;
+}
+
+.swiper.gallery-top .swiper-gallery-top-image {
+  @apply tw-w-full;
+  @apply tw-h-full;
+  @apply tw-object-cover;
+}
+
+.swiper.gallery-thumbs {
+  @apply tw-h-1/5;
+  @apply tw-box-border;
+  @apply tw-py-[20px];
+  @apply tw-px-[5px];
+}
+
+.swiper.gallery-thumbs .swiper-gallery-thumbs-image {
+  @apply tw-w-full;
+  @apply tw-h-full;
+  @apply tw-object-cover;
+  @apply tw-mx-[10px];
+}
+
+.swiper.gallery-thumbs .swiper-slide {
+  @apply tw-w-1/4;
+  @apply tw-h-full;
+  @apply tw-opacity-40;
+}
+
+.swiper.gallery-thumbs .swiper-slide-active {
+  @apply tw-opacity-100;
+}
+
 .video-player-component-container {
   @apply tw-h-[75vh];
   @apply tw-bg-[#171a27];
@@ -1590,8 +1687,8 @@ export default {
   @apply tw-flex;
   @apply tw-flex-row;
   @apply tw-text-white;
-  @apply tw-mx-[5%];
-  @apply tw-pb-[5%];
+  @apply tw-mx-[2.5%];
+  @apply tw-py-[2.5%];
 }
 
 .video-player-main-container {
@@ -1856,37 +1953,6 @@ button.video-player-button {
 
 .hot-item-subtitle-container {
   @apply tw-text-[#999];
-}
-
-.episode-container {
-  @apply tw-inline-block;
-  @apply tw-relative;
-  @apply tw-px-6;
-  @apply tw-py-2;
-  @apply tw-bg-slate-600;
-}
-
-.selected-episode-container {
-  @apply tw-inline-block;
-  @apply tw-relative;
-  @apply tw-px-6;
-  @apply tw-py-2;
-  @apply tw-border-solid tw-border-2 tw-border-[#979797];
-  @apply tw-bg-zinc-500;
-}
-
-.episode-container:hover,
-.selected-episode-container:hover {
-  @apply tw-bg-zinc-400;
-  cursor: pointer;
-}
-
-.episode-container .episode-text {
-  @apply tw-text-[#ccc];
-}
-
-.selected-episode-container .episode-text {
-  @apply tw-text-[#ff4a22];
 }
 
 .video-detail-info-title {
