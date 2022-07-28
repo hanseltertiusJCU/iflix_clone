@@ -1,8 +1,9 @@
 <template>
-  <span :class="`video-tag-container ${getBackgroundColorStyle()}`">
+  <span class="video-tag-container" :style="{ 'background-color': `${color}` }">
     <span class="video-tag-container-text">{{ text }}</span>
     <span
-      :class="`video-tag-container-decoration ${getBackgroundColorStyle()}`"
+      class="video-tag-container-decoration"
+      :style="{ 'background-color': `${color}` }"
     ></span>
   </span>
 </template>
@@ -21,7 +22,6 @@ export default {
 
 <style lang="postcss">
 .video-tag-container {
-  @apply tw-bg-[#ff4a22];
   @apply tw-absolute;
   @apply tw--top-5;
   @apply tw--right-5;
@@ -33,7 +33,6 @@ export default {
 }
 
 .video-tag-container-decoration {
-  @apply tw-bg-[#ff4a22];
   @apply tw-block;
   @apply tw-absolute;
   @apply tw--right-[8px];

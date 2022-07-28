@@ -1,7 +1,8 @@
 <template>
   <div class="image-tag-label-info-container">
     <div
-      :class="`image-tag-label-info-decoration ${getDecorationColorStyle()}`"
+      class="image-tag-label-info-decoration"
+      :style="{ 'background-color': `${color}` }"
     ></div>
     <!-- TODO : we need to use the attribute text from the first item in "labels" attribute (only if available) -->
     <span>{{ text }}</span>
@@ -12,11 +13,6 @@
 export default {
   name: "ImageTag",
   props: ["text", "color"],
-  methods: {
-    getDecorationColorStyle() {
-      return `tw-bg-[${this.color}]`;
-    },
-  },
 };
 </script>
 

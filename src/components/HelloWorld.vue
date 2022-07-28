@@ -709,7 +709,7 @@
                     class="video-player-button"
                     color="rgba(41,42,60,0.6)"
                     tile
-                    >Test</v-btn
+                    >Send</v-btn
                   >
                 </div>
               </div>
@@ -721,7 +721,6 @@
             </div>
 
             <div class="video-player-tags-list">
-              <!-- todo : image tag list -->
               <div
                 v-if="Object.keys(detailedVideoItemInfo.imgtag_ver).length > 0"
               >
@@ -732,10 +731,8 @@
                   <ImageTag :text="item.text" :color="item.color" />
                 </div>
               </div>
-              <!-- todo : if default_pay_status is available -->
             </div>
 
-            <!-- todo : grid item, where each item is an episode, grid col template 5, grid row template free -->
             <div class="video-player-episodes-list">
               <div v-for="(item, index) in videosList" :key="index">
                 <EpisodeItem
@@ -1593,6 +1590,8 @@ export default {
   @apply tw-flex;
   @apply tw-flex-row;
   @apply tw-text-white;
+  @apply tw-mx-[5%];
+  @apply tw-pb-[5%];
 }
 
 .video-player-main-container {
@@ -1673,13 +1672,13 @@ button.video-player-button {
 .video-player-title-text {
   @apply tw-text-[32px];
   @apply tw-truncate;
-  @apply tw-mb-4;
+  @apply tw-mb-3;
 }
 
 .video-player-tags-list {
   @apply tw-flex;
   @apply tw-flex-row;
-  @apply tw-mb-2;
+  @apply tw-mb-3;
 }
 .video-player-episodes-list {
   @apply tw-grid;
