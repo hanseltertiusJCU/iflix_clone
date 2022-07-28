@@ -701,9 +701,11 @@
             v-for="(item, index) in carouselItems.items"
             :key="index"
           >
-            <div class="swiper-gallery-thumbs-container">
+            <!-- todo : container -->
+            <div class="swiper-gallery-thumbs-text-container">
               <span class="swiper-gallery-thumbs-text">{{ item.title }}</span>
             </div>
+            <!-- todo : text-container -->
           </swiper-slide>
         </swiper>
       </div>
@@ -1241,11 +1243,10 @@ export default {
     return {
       swiperOptionTop: {
         loop: true,
-        // autoplay: {
-        //   delay: 2500,
-        //   disableOnInteraction: false,
-        // },
-        // loopedSlides is actually the items, need to be update when loading the array
+        autoplay: {
+          delay: 2500,
+          disableOnInteraction: false,
+        },
         loopedSlides: 1,
         spaceBetween: 10,
         navigation: {
@@ -1255,7 +1256,6 @@ export default {
       },
       swiperOptionThumbs: {
         loop: true,
-        // loopedSlides is actually the items, need to be update when loading the array, should be the same
         loopedSlides: 1,
         spaceBetween: 10,
         centeredSlides: true,
@@ -1665,17 +1665,15 @@ export default {
 }
 
 .swiper.gallery-top .swiper-gallery-top-image:hover,
-.swiper-gallery-thumbs-container:hover {
+.swiper-gallery-thumbs-text-container:hover {
   cursor: pointer;
 }
 
-.swiper-gallery-thumbs-container {
-  @apply tw-flex;
-  @apply tw-flex-row;
-  @apply tw-items-center;
+.swiper-gallery-thumbs-text-container {
   @apply tw-relative;
-  @apply tw-h-full;
+  @apply tw-h-max;
   @apply tw-text-white;
+  @apply tw-mx-[15px];
 }
 
 .swiper-gallery-thumbs-text {
@@ -1698,15 +1696,20 @@ export default {
 }
 
 .swiper.gallery-thumbs .swiper-slide {
-  @apply tw-w-1/3;
+  @apply tw-w-max;
   @apply tw-h-full;
+  @apply tw-flex;
+  @apply tw-flex-row;
+  @apply tw-items-center;
   @apply tw-opacity-40;
 }
 
-.swiper.gallery-thumbs .swiper-slide-active::before {
+.swiper.gallery-thumbs
+  .swiper-slide-active
+  .swiper-gallery-thumbs-text-container::before {
   @apply tw-absolute;
-  @apply tw--left-[4px];
-  @apply tw-top-[5px];
+  @apply tw--left-[6px];
+  @apply tw-top-[2px];
   @apply tw-w-[3px];
   @apply tw-h-full;
   @apply tw-bg-[#ff4a22];
