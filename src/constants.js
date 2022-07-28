@@ -302,7 +302,7 @@ export const CAROUSEL_ITEMS = {
  * the subtitle will be the "subtitle" attribute
  * the picture will be the "pic" attribute
  */
-export const ALBUMS_LIST = {
+export const ALBUM_ITEM = {
   "type": "MODULE_TYPE_MODULE_ITEMS",
   "name": "New",
   "item_pic_aspect_ratio": 0.7129629629629629,

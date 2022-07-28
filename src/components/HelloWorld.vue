@@ -785,13 +785,55 @@
       </div>
 
       <!-- Album Item Reusable Component -->
-      <!-- todo : container for grid items -->
-      <div v-for="item in albumsList.items" :key="item.id">
-        <AlbumItem
-          :albumDataItem="item"
-          :albumTitle="item.title"
-          :albumSubtitle="item.subtitle"
-        />
+      <div class="album-master-item-container">
+        <div class="album-navigation-bar-container">
+          <!-- todo : album list title -->
+          <div class="album-navigation-bar-title-text">
+            {{ albumItem.name }}
+          </div>
+
+          <!-- todo : album list navigation page -->
+          <div class="album-navigation-bar-navigation-page-container">
+            <div
+              class="change-page-navigation-button-container"
+              @click="goToPreviousPage"
+            >
+              <v-icon
+                :color="
+                  isPreviousPageNavigationDisabled
+                    ? 'rgb(204, 204, 204)'
+                    : 'rgb(106, 110, 126)'
+                "
+                >mdi-chevron-left</v-icon
+              >
+            </div>
+            <div class="album-navigation-bar-page-number-text">
+              {{ currentPage }}/{{ lastPage }}
+            </div>
+            <div
+              class="change-page-navigation-button-container"
+              @click="goToNextPage"
+            >
+              <v-icon
+                :color="
+                  isNextPageNavigationDisabled
+                    ? 'rgb(204, 204, 204)'
+                    : 'rgb(106, 110, 126)'
+                "
+                >mdi-chevron-right</v-icon
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="album-item-list-container">
+        <div v-for="item in albumItem.items" :key="item.id">
+          <AlbumItem
+            :albumDataItem="item"
+            :albumTitle="item.title"
+            :albumSubtitle="item.subtitle"
+          />
+        </div>
       </div>
 
       <!-- temporary code -->
@@ -809,48 +851,6 @@
       <!-- todo : need to have a video player component -->
 
       <!-- todo : need to have a navigation for album list -->
-      <div class="album-list-navigation-container">
-        <!-- todo : album list title -->
-        <div class="album-list-title-text">Album List Title Text</div>
-
-        <!-- todo : album list navigation page -->
-        <div class="album-list-navigation-page-container">
-          <!-- TODO : we will make the prev page button, disabled when currentPage === 1 -->
-          <div
-            class="change-page-navigation-button-container"
-            @click="goToPreviousPage"
-          >
-            <!-- todo : the icon color will be differ when the button is enabled / disabled -->
-            <v-icon
-              :color="
-                isPreviousPageNavigationDisabled
-                  ? 'rgb(204, 204, 204)'
-                  : 'rgb(106, 110, 126)'
-              "
-              >mdi-chevron-left</v-icon
-            >
-          </div>
-          <!-- TODO : we will make the dynamic string with currentPage / lastPage -->
-          <div class="album-list-page-number-text">
-            {{ currentPage }}/{{ lastPage }}
-          </div>
-          <!-- TODO : we will make the next page button, disabled when currentPage === lastPage -->
-          <div
-            class="change-page-navigation-button-container"
-            @click="goToNextPage"
-          >
-            <!-- todo : the icon color will be differ when the button is enabled / disabled -->
-            <v-icon
-              :color="
-                isNextPageNavigationDisabled
-                  ? 'rgb(204, 204, 204)'
-                  : 'rgb(106, 110, 126)'
-              "
-              >mdi-chevron-right</v-icon
-            >
-          </div>
-        </div>
-      </div>
 
       <div class="video-detail-info-container">
         <!-- TODO : title should be used from attribute "title" -->
@@ -880,7 +880,6 @@
             </template>
 
             <v-card min-width="420">
-              <!-- todo : we will use the share url container, where we try to copy url thing -->
               <v-card-text>
                 <div class="share-url-container">
                   <div class="share-main-section-container">
@@ -1178,7 +1177,7 @@ import {
   VIDEOS_LIST,
   CAROUSEL_ITEMS,
   HOT_ITEMS,
-  ALBUMS_LIST,
+  ALBUM_ITEM,
   RECOMMENDATION_LIST,
 } from "@/constants";
 import ImageTag from "@/components/common/ImageTag.vue";
@@ -1228,7 +1227,7 @@ export default {
       selectedVideoId: "c0040l97su8",
       enableBubbleComments: false,
       // we will use the data
-      albumsList: ALBUMS_LIST,
+      albumItem: ALBUM_ITEM,
       recommendationList: RECOMMENDATION_LIST,
       hotItems: HOT_ITEMS,
       carouselItems: CAROUSEL_ITEMS,
@@ -1804,31 +1803,44 @@ button.video-player-button {
   @apply tw-gap-4;
 }
 
-/** todo : we will use the album-list-navigation */
-.album-list-navigation-container {
+/** todo : we will use the album-navigation-bar-navigation */
+.album-master-item-container {
+  @apply tw-flex;
+  @apply tw-flex-col;
+}
+
+.album-navigation-bar-container {
   @apply tw-flex;
   @apply tw-flex-row;
   @apply tw-justify-between;
   @apply tw-items-center;
+  @apply tw-mb-5;
 }
 
-.album-list-title-text {
+.album-navigation-bar-title-text {
   @apply tw-text-[32px];
   @apply tw-font-bold;
 }
 
-.album-list-navigation-page-container {
+.album-navigation-bar-navigation-page-container {
   @apply tw-flex;
   @apply tw-flex-row;
 }
 
-.album-list-page-number-text {
+.album-navigation-bar-page-number-text {
   @apply tw-mx-[15px];
   @apply tw-text-[#6A6E7E];
 }
 
 .change-page-navigation-button-container:hover {
   cursor: pointer;
+}
+
+.album-item-list-container {
+  @apply tw-grid;
+  @apply tw-gap-4;
+  @apply tw-grid-cols-6;
+  @apply tw-grid-rows-2;
 }
 
 .video-detail-info-title {

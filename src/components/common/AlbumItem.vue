@@ -58,8 +58,6 @@ export default {
 
 <style lang="postcss">
 .album-item-container {
-  @apply tw-w-[184px];
-  @apply tw-h-[300px];
   @apply tw-rounded;
 }
 
@@ -67,14 +65,12 @@ export default {
   @apply tw-rounded;
   @apply tw-mb-1;
   @apply tw-relative;
-  @apply tw-w-max;
-  @apply tw-h-max;
 }
 
 .image-album-item {
   @apply tw-rounded;
-  @apply tw-w-[184px];
-  @apply tw-h-[300px];
+  @apply tw-w-full;
+  @apply tw-h-[85%];
   @apply tw-object-cover;
 }
 
