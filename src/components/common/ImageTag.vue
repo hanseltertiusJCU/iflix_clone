@@ -1,5 +1,11 @@
 <template>
-  <div class="image-tag-label-info-container">
+  <div
+    :class="
+      text !== ''
+        ? 'image-tag-label-info-container'
+        : 'image-tag-label-info-container-transparent'
+    "
+  >
     <div
       class="image-tag-label-info-decoration"
       :style="{ 'background-color': `${color}` }"
@@ -24,6 +30,10 @@ export default {
   @apply tw-px-2;
   @apply tw-relative;
   @apply tw-rounded-tl;
+}
+
+.image-tag-label-info-container-transparent {
+  @apply tw-bg-transparent;
 }
 
 .image-tag-label-info-decoration {

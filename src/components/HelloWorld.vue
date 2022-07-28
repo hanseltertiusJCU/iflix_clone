@@ -259,13 +259,7 @@
             <li>
               <!-- todo : the router link class must use the custom class -->
               <!-- todo : we need to separate the concern between visiting page or not -->
-              <router-link
-                :class="
-                  isScrollYInScrolledState
-                    ? 'navigation-menu-link-item-dark'
-                    : 'navigation-menu-link-item-light'
-                "
-                to="/"
+              <router-link class="navigation-menu-link-item-selected" to="/"
                 >Home</router-link
               >
             </li>
@@ -710,7 +704,9 @@
         </swiper>
       </div>
 
-      <!-- todo : the video player component -->
+      <!-- TODO : we will do the layout for the video upload data -->
+
+      <!-- Video Player Component -->
       <div class="video-player-component-container">
         <div class="video-player-content-container">
           <div class="video-player-main-container">
@@ -817,38 +813,13 @@
       <!-- temporary code -->
       <div class="tw-mb-16"></div>
 
-      <!-- Hot Item Reusable Component, the container width should be 380 the height should be 80, need to retrieve from "hot" attribute in "pageProps" -->
-      <div class="hot-item-container">
-        <!-- todo : we will use the image from the attribute "new_pic_hz" in item -->
-        <div class="image-on-hot-item-container">
-          <img
-            class="image-hot-item"
-            src="https://puui.wetvinfo.com/vcover_hz_pic/0/dz9l5geq0gu14zm1652946798718/0"
-            alt=""
-          />
-
-          <!-- todo : the container will be transparent color -->
-          <div class="hot-item-rank-info-container">
-            <!-- todo : the decoration will be the white color -->
-            <div class="hot-item-rank-info-decoration"></div>
-            <!-- TODO : the text will be index + 1 of the item -->
-            <span class="hot-item-rank-info-text">1</span>
-          </div>
-
-          <div class="hot-item-image-info-container">
-            <ImageTag text="VIP" color="#ff4a22" />
-
-            <!-- TODO : we need to use the attribute text from the second item in "imgtag_ver" attribute (only if available) -->
-            <span>Hot Tag 2</span>
-          </div>
-        </div>
-
-        <div class="text-on-hot-item-container">
-          <!-- todo : we will use the "title" atribute inside the item -->
-          <div class="hot-item-title-container">Hot Item Title</div>
-          <!-- todo : we will use the formatted text from "episode_updated_country", `Updated to ${episode_updated_country} EP` : if "episode_updated_country" !== "episode_all", otherwise return full -->
-          <div class="hot-item-subtitle-container">Hot Item Subtitle</div>
-        </div>
+      <!-- TODO : implement based on hot item list -->
+      <div v-for="(item, index) in hotItems" :key="index">
+        <HotItem
+          :hotItemData="item"
+          :rankItemIndex="index"
+          @on-load-episode="onLoadEpisodeItem"
+        />
       </div>
 
       <!-- todo : need to have a video player component -->
@@ -1222,10 +1193,12 @@ import {
   DETAILED_VIDEO_ITEM_INFO,
   VIDEOS_LIST,
   CAROUSEL_ITEMS,
+  HOT_ITEMS,
 } from "@/constants";
 import ImageTag from "@/components/common/ImageTag.vue";
 import VideoTag from "@/components/common/VideoTag.vue";
 import EpisodeItem from "@/components/common/EpisodeItem.vue";
+import HotItem from "@/components/common/HotItem.vue";
 
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import "swiper/css/swiper.css";
@@ -1236,6 +1209,7 @@ export default {
     ImageTag,
     VideoTag,
     EpisodeItem,
+    HotItem,
     Swiper,
     SwiperSlide,
   },
@@ -1266,6 +1240,7 @@ export default {
       selectedVideoId: "c0040l97su8",
       enableBubbleComments: false,
       // we will use the data
+      hotItems: HOT_ITEMS,
       carouselItems: CAROUSEL_ITEMS,
       detailedVideoItemInfo: DETAILED_VIDEO_ITEM_INFO,
       videosList: VIDEOS_LIST,
@@ -1338,6 +1313,9 @@ export default {
     },
     onSelectEpisodeItem(item) {
       console.log("select episode item : ", item);
+    },
+    onLoadEpisodeItem(item) {
+      console.log("load episode item : ", item);
     },
     goToPreviousPage() {
       if (this.currentPage === FIRST_PAGE) {
@@ -1585,6 +1563,13 @@ export default {
 
 .navigation-menu-link-item-dark {
   @apply tw-text-white;
+  @apply tw-no-underline;
+  @apply tw-px-4;
+}
+
+.navigation-menu-link-item-selected {
+  @apply tw-text-[#ff4a22];
+  @apply tw-font-bold;
   @apply tw-no-underline;
   @apply tw-px-4;
 }
@@ -1910,95 +1895,6 @@ button.video-player-button {
 .album-item-subtitle-container {
   @apply tw-text-[#999];
   @apply tw-truncate;
-}
-
-.hot-item-container {
-  @apply tw-flex;
-  @apply tw-flex-row;
-  @apply tw-relative;
-  @apply tw-w-[380px];
-  @apply tw-h-[80px];
-  @apply tw-rounded;
-}
-
-.hot-item-container:hover {
-  cursor: pointer;
-}
-
-.image-on-hot-item-container {
-  @apply tw-rounded;
-  @apply tw-w-max;
-  @apply tw-h-max;
-}
-
-.image-hot-item {
-  @apply tw-rounded;
-  @apply tw-w-[140px];
-  @apply tw-h-[80px];
-  @apply tw-object-cover;
-}
-
-.hot-item-rank-info-container {
-  @apply tw-bg-transparent;
-  @apply tw-w-[26px];
-  @apply tw-h-[46px];
-  @apply tw-absolute;
-  @apply tw-top-0;
-  @apply tw-left-0;
-  @apply tw-z-0;
-}
-
-.hot-item-rank-info-decoration {
-  @apply tw-bg-white;
-  @apply tw-px-[3px];
-  @apply tw-py-[2px];
-  @apply tw-w-full;
-  @apply tw-h-full;
-  @apply tw-absolute;
-  @apply tw-top-0;
-  @apply tw-bottom-0;
-  @apply tw-left-0;
-  @apply tw--z-10;
-  -webkit-clip-path: polygon(0 0, 100% 0, 0 100%);
-  clip-path: polygon(0 0, 100% 0, 0 100%);
-}
-
-.hot-item-rank-info-text {
-  @apply tw-text-black;
-  @apply tw-z-10;
-}
-
-.hot-item-image-info-container {
-  @apply tw-flex;
-  @apply tw-flex-row;
-  @apply tw-w-[140px];
-  @apply tw-justify-between;
-  @apply tw-items-center;
-  @apply tw-px-2;
-  @apply tw-pb-1;
-  @apply tw-text-white;
-  @apply tw-absolute;
-  @apply tw-bottom-0;
-  @apply tw-left-0;
-}
-
-.text-on-hot-item-container {
-  @apply tw-flex;
-  @apply tw-w-[240px];
-  @apply tw-h-full;
-  @apply tw-flex-col;
-  @apply tw-justify-between;
-  @apply tw-px-[16px];
-  @apply tw-py-[6px];
-}
-
-.hot-item-title-container {
-  @apply tw-font-bold;
-  @apply tw-text-black;
-}
-
-.hot-item-subtitle-container {
-  @apply tw-text-[#999];
 }
 
 .video-detail-info-title {
