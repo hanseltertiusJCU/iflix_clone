@@ -785,29 +785,13 @@
       </div>
 
       <!-- Album Item Reusable Component -->
-      <div class="album-item-container">
-        <!-- todo : this is the container, when clicked : we go to the hyperlink -->
-        <div class="image-on-album-item-container">
-          <img
-            class="image-album-item"
-            src="https://puui.wetvinfo.com/vcover_vt_pic/0/11b4velzrkiyett1643890656816/220"
-          />
-          <div class="album-item-image-info-container">
-            <ImageTag text="VIP" color="#ff4a22" />
-
-            <!-- TODO : we need to use the attribute text from the second item in "labels" attribute (only if available) -->
-            <span>Album Tag 2</span>
-          </div>
-        </div>
-
-        <!-- TODO : need to use the attribute "title" from item -->
-        <div class="album-item-title-container">Album Title</div>
-        <!-- TODO : need to use the attribute "subtitle" from item -->
-        <div class="album-item-subtitle-container">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime fugit
-          sunt accusantium quo sapiente ipsa, voluptas laborum ab quam tempora
-          corporis fuga a optio rem mollitia provident hic assumenda voluptatum?
-        </div>
+      <!-- todo : container for grid items -->
+      <div v-for="item in albumsList.items" :key="item.id">
+        <AlbumItem
+          :albumDataItem="item"
+          :albumTitle="item.title"
+          :albumSubtitle="item.subtitle"
+        />
       </div>
 
       <!-- temporary code -->
@@ -1194,11 +1178,14 @@ import {
   VIDEOS_LIST,
   CAROUSEL_ITEMS,
   HOT_ITEMS,
+  ALBUMS_LIST,
+  RECOMMENDATION_LIST,
 } from "@/constants";
 import ImageTag from "@/components/common/ImageTag.vue";
 import VideoTag from "@/components/common/VideoTag.vue";
 import EpisodeItem from "@/components/common/EpisodeItem.vue";
 import HotItem from "@/components/common/HotItem.vue";
+import AlbumItem from "@/components/common/AlbumItem.vue";
 
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import "swiper/css/swiper.css";
@@ -1210,6 +1197,7 @@ export default {
     VideoTag,
     EpisodeItem,
     HotItem,
+    AlbumItem,
     Swiper,
     SwiperSlide,
   },
@@ -1240,6 +1228,8 @@ export default {
       selectedVideoId: "c0040l97su8",
       enableBubbleComments: false,
       // we will use the data
+      albumsList: ALBUMS_LIST,
+      recommendationList: RECOMMENDATION_LIST,
       hotItems: HOT_ITEMS,
       carouselItems: CAROUSEL_ITEMS,
       detailedVideoItemInfo: DETAILED_VIDEO_ITEM_INFO,
@@ -1839,62 +1829,6 @@ button.video-player-button {
 
 .change-page-navigation-button-container:hover {
   cursor: pointer;
-}
-
-/** Todo : album-item changed to be album-item */
-.album-item-container {
-  @apply tw-w-[184px];
-  @apply tw-h-[300px];
-  @apply tw-rounded;
-}
-
-.image-on-album-item-container {
-  @apply tw-rounded;
-  @apply tw-mb-1;
-  @apply tw-relative;
-  @apply tw-w-max;
-  @apply tw-h-max;
-}
-
-.image-album-item {
-  @apply tw-rounded;
-  @apply tw-w-[184px];
-  @apply tw-h-[300px];
-  @apply tw-object-cover;
-}
-
-.image-album-item:hover {
-  @apply tw-shadow-md;
-  cursor: pointer;
-}
-
-.album-item-image-info-container {
-  @apply tw-flex;
-  @apply tw-flex-row;
-  @apply tw-w-full;
-  @apply tw-justify-between;
-  @apply tw-items-center;
-  @apply tw-px-2;
-  @apply tw-pb-1;
-  @apply tw-text-white;
-  @apply tw-absolute;
-  @apply tw-bottom-2;
-  @apply tw-left-0;
-}
-
-.album-item-title-container {
-  @apply tw-text-black;
-  @apply tw-font-bold;
-  @apply tw-truncate;
-}
-
-.album-item-title-container:hover {
-  cursor: pointer;
-}
-
-.album-item-subtitle-container {
-  @apply tw-text-[#999];
-  @apply tw-truncate;
 }
 
 .video-detail-info-title {

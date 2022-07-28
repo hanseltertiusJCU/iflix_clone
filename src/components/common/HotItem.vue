@@ -1,5 +1,5 @@
 <template>
-  <div class="hot-item-container">
+  <div class="hot-item-container" @click="onHotItemClick(hotItemData)">
     <div class="image-on-hot-item-container">
       <img class="image-hot-item" :src="hotItemData.new_pic_hz" alt="" />
 

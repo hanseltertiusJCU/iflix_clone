@@ -466,6 +466,1869 @@ export const ALBUMS_LIST = {
  * https://www.iflix.com/_next/data/tuvqPK5nDW3xVsPlEE7AG/play/r6yht13srzu48mc-FULLMETAL-ALCHEMIST-2003.json?ids=r6yht13srzu48mc-FULLMETAL-ALCHEMIST-2003
  * 
  * Where we get from : 
+ * pageProps -> "rec" attribute
+ * 
+ * title should be from "title"
+ * subtitle should be from "second_title"
+ * 
+ * the text in the image should be : 
+ * "imgtag_ver" :
+ * first item -> the one on left, using the "text" attribute, the "color" should be in the decoration bg color
+ * second item -> the one on right, using the "text attribute"
+ * 
+ * the picture should be : 
+ * "new_pic_hz"
+ */
+export const RECOMMENDATION_LIST = [{
+    "new_pic_vt": "http://puui.wetvinfo.com/vcover_vt_pic/0/r5bz0z7exrsektz1619607645861/0",
+    "new_pic_hz": "http://puui.wetvinfo.com/vcover_hz_pic/0/r5bz0z7exrsektz1619607657787/0",
+    "online_language": [
+      "1491937",
+      "1491963",
+      "1491988",
+      "8229847"
+    ],
+    "update_desc_country": "{}",
+    "default_pay_status": null,
+    "areaName": "",
+    "holly_online_time": null,
+    "head_time": null,
+    "episode_updated_country": "1",
+    "main_genres": [
+      "Perang",
+      "Fantasi"
+    ],
+    "video_ids_country": [
+      "g0036hx09p4"
+    ],
+    "update_desc": null,
+    "is_trailer": 0,
+    "cover_id": "r5bz0z7exrsektz",
+    "leading_actorX": null,
+    "leading_actor_id": null,
+    "second_title": null,
+    "clips_ids_country": [],
+    "category_map": [
+      10994,
+      "Film/Sinetron",
+      1204,
+      "animasi",
+      3,
+      "animasi"
+    ],
+    "director": [
+      ""
+    ],
+    "operation_type_country": "{\"8227797\":\"\"}",
+    "pay_status": null,
+    "year_name": [
+      "2019"
+    ],
+    "episode_all": "1",
+    "description": "Film ini merangkum lima episode pertama serial anime Demon Slayer: Kimetsu no Yaiba. Alkisah, ada rumor iblis-iblis pemangsa manusia berkeliaran di hutan. Tanjiro muda mendapati keluarganya dibantai iblis. Hanya adiknya Nezuko Kamado yang selamat. Namun, sang adik juga berubah jadi iblis pemangsa. Kendati begitu, ternyata masih ada tanda-tanda manusiawi pada Nezuko. Dari situ perjalanan Tanjiro dan Nezuko dimulai. Tanjiro bergabung dengan kelompok pembasmi iblis demi mencari siapa yang membantai keluarganya.",
+    "imgtag_ver": {
+      "1": {
+        "text": "Full",
+        "color": "#FF4A22"
+      }
+    },
+    "type": 3,
+    "is_area_limit": 0,
+    "cover_checkup_grade": 4,
+    "title": "Demon Slayer: Ikatan Kakak dan Adik",
+    "protagonist_name": null,
+    "new_pic_hz_country_calc": "http://puui.wetvinfo.com/vcover_hz_pic/0/r5bz0z7exrsektz1619268069285/0",
+    "new_pic_vt_country_calc": "http://puui.wetvinfo.com/vcover_vt_pic/0/r5bz0z7exrsektz1619268034230/0",
+    "tail_time": null
+  },
+  {
+    "episode_updated_country": "23",
+    "main_genres": [
+      "Sci-Fi"
+    ],
+    "update_desc": null,
+    "video_ids_country": [
+      "v0036xxb8vg",
+      "i0036ttjao5",
+      "t0036xeciju",
+      "g0036v8oc5z",
+      "x00367q38f5",
+      "y003659wcho",
+      "l0036js8kn1",
+      "w0036jc0sfj",
+      "b0036fxubxv",
+      "g003651udt5",
+      "m0036gjuevo",
+      "t00364jupej",
+      "a0036fetufs",
+      "x00361jywl8",
+      "z0036y2rw8u",
+      "x0036nid07d",
+      "l00369mrp9q",
+      "s0036kbawow",
+      "s0036xexzh0",
+      "t00367dsip7",
+      "q0036jjkvp7",
+      "a00364ddeuq",
+      "r0036bxpa71"
+    ],
+    "is_trailer": 0,
+    "cover_id": "pep2dyloiapz8h2",
+    "leading_actor_id": null,
+    "leading_actorX": null,
+    "second_title": "Sword Art Online 3: Alicization War of Underworld",
+    "clips_ids_country": [],
+    "category_map": [
+      10994,
+      "Film/Sinetron",
+      1204,
+      "animasi",
+      3,
+      "animasi"
+    ],
+    "director": [
+      ""
+    ],
+    "operation_type_country": "{\"153548\":1518001,\"8227797\":\"\"}",
+    "pay_status": null,
+    "episode_all": "23",
+    "year_name": [
+      "2019"
+    ],
+    "description": "Meski Quinella telah dikalahkan, keadaan masih belum tenang. Ketika terhubung dengan dunia nyata, Kazuto \"Kirito\" Kirigaya mendapati kalau Ocean Turtle yang dikendalikan Rath dirusak penjarah. Karena korsleting mendadak oleh para penyerbu, fluctlight Kirito rusak dan menyebabkannya koma. Merasa tak aman atas orang-orang di Axiom Church, Alice membawa Kirito yang tak sadarkan diri ke Rulid Village, kampung halamannya. Di sana, Alice menunggu Kirito terbangun. Di saat bersamaan, Alice mendapati Dark Territory merangsek masuk Human Empire. Syahdan, Alice bersumpah melindungi dunia manusia yang dijaga sekuat tenaga oleh Kirito dan Eugeo.",
+    "imgtag_ver": {
+      "1": {
+        "text": "Full",
+        "color": "#FF4A22"
+      }
+    },
+    "type": 3,
+    "is_area_limit": 0,
+    "cover_checkup_grade": 4,
+    "title": "Sword Art Online 3: Alicization War of Underworld",
+    "protagonist_name": null,
+    "new_pic_vt_country_calc": "http://puui.wetvinfo.com/vcover_vt_pic/0/pep2dyloiapz8h21615444192024/0",
+    "new_pic_hz_country_calc": "http://puui.wetvinfo.com/vcover_hz_pic/0/pep2dyloiapz8h21615444221684/0",
+    "new_pic_vt": "http://puui.wetvinfo.com/vcover_vt_pic/0/pep2dyloiapz8h21615444192024/0",
+    "new_pic_hz": "http://puui.wetvinfo.com/vcover_hz_pic/0/pep2dyloiapz8h21615444221684/0",
+    "update_desc_country": "{}",
+    "online_language": [
+      "1491937",
+      "1491963",
+      "1491973",
+      "1491988",
+      "1491994",
+      "8229847"
+    ],
+    "default_pay_status": null,
+    "holly_online_time": null,
+    "areaName": "",
+    "head_time": null,
+    "tail_time": null
+  },
+  {
+    "default_pay_status": null,
+    "areaName": "",
+    "holly_online_time": null,
+    "head_time": null,
+    "episode_updated_country": "24",
+    "main_genres": [
+      "Perang"
+    ],
+    "update_desc": null,
+    "video_ids_country": [
+      "v0036y5xqsv",
+      "x0036ze6en9",
+      "s00365ztz9n",
+      "q0036m4iqsi",
+      "p0036qw696t",
+      "t0036c7e7nu",
+      "t00367bn1v6",
+      "r0036zm7qet",
+      "v0036t7i22d",
+      "q0036ixd7qr",
+      "y0036mb4tfh",
+      "o0036shoey9",
+      "o00367y0i0m",
+      "j00363xyn5h",
+      "b0036ii15or",
+      "f00364uzc38",
+      "q0036oviqe5",
+      "s0036dwjc21",
+      "v0036qccxzq",
+      "z0036jaod0j",
+      "b0036ixr7hv",
+      "o003691afke",
+      "e0036wv8p5i",
+      "w00362c6dkf"
+    ],
+    "is_trailer": 0,
+    "cover_id": "01om5ixrys0nob0",
+    "leading_actorX": null,
+    "leading_actor_id": null,
+    "second_title": null,
+    "clips_ids_country": [],
+    "category_map": [
+      10994,
+      "Film/Sinetron",
+      1204,
+      "animasi",
+      3,
+      "animasi"
+    ],
+    "director": [
+      ""
+    ],
+    "operation_type_country": "{\"153513\":1518001,\"8227797\":\"\"}",
+    "pay_status": null,
+    "year_name": [
+      "2018"
+    ],
+    "episode_all": "24",
+    "description": "Pertempuran sengit antara Meliodas, kapten Seven Deadly Sins, dan  Great Holy Knight Hendrickson menyebabkan kehancuran. Dipersenjatai dengan fragmen yang diperlukan untuk kebangkitan Klan Iblis, Hendrickson membuka segel, memungkinkan 10 Commandments melarikan diri, yang semuanya adalah pasukan perkasa yang bekerja langsung di bawah Raja Iblis sendiri. Melalui koneksi misterius, Meliodas langsung mengidentifikasi mereka; demikian pula, 10 Commandments, juga, tampaknya merasakan kehadirannya. Saat iblis meninggalkan jalur kehancuran di belakang mereka, Seven Deadly Sins harus menemukan cara untuk menghentikan mereka sebelum Klan Iblis menenggelamkan Britannia dalam darah dan teror.",
+    "imgtag_ver": {
+      "1": {
+        "text": "Full",
+        "color": "#FF4A22"
+      }
+    },
+    "is_area_limit": 0,
+    "type": 3,
+    "cover_checkup_grade": 4,
+    "protagonist_name": null,
+    "title": "The Seven Deadly Sins– Kebangkitan Commandment",
+    "new_pic_hz_country_calc": "http://puui.wetvinfo.com/vcover_hz_pic/0/01om5ixrys0nob01620406083088/0",
+    "new_pic_vt_country_calc": "http://puui.wetvinfo.com/vcover_vt_pic/0/01om5ixrys0nob01620406070638/0",
+    "new_pic_hz": "http://puui.wetvinfo.com/vcover_hz_pic/0/01om5ixrys0nob01618819345981/0",
+    "new_pic_vt": "http://puui.wetvinfo.com/vcover_vt_pic/0/01om5ixrys0nob01618819338395/0",
+    "update_desc_country": "{}",
+    "online_language": [
+      "1491937",
+      "1491963",
+      "1491988"
+    ],
+    "tail_time": null
+  },
+  {
+    "description": "Di kota pesisir Napoli, kejahatan merajalela. Polisi terang-terangan bersekongkol dengan penjahat, narkoba meracuni kaum muda, dan mafia mengatur jalan-jalan dengan tangan besi. Syahdan, datang Giorno Giovanna, seorang bocah lelaki berusia 15 tahun dengan koneksi eksentrik dengan keluarga Joestar. Ia mencari nafkah dari pekerjaan paruh waktu dan pencopetan. Lebih jauh lagi, dia dikaruniai kemampuan Stand yang tidak dapat dijelaskan. Terpesona pada gangster lokal, Giorno bermimpi menjadi \"Gang-Star\", suatu prestasi yang dimungkinkan usai bertemu Bruno Buccellati, seorang anggota geng Passione.",
+    "imgtag_ver": {
+      "1": {
+        "text": "Full",
+        "color": "#FF4A22"
+      }
+    },
+    "type": 3,
+    "is_area_limit": 0,
+    "cover_checkup_grade": 4,
+    "title": "Petualangan Aneh JOJO S4",
+    "protagonist_name": null,
+    "new_pic_vt_country_calc": "http://puui.wetvinfo.com/vcover_vt_pic/0/wbmuwy8sby7b7kw1629771952275/0",
+    "new_pic_hz_country_calc": "http://puui.wetvinfo.com/vcover_hz_pic/0/wbmuwy8sby7b7kw1629771962823/0",
+    "new_pic_hz": "http://puui.wetvinfo.com/vcover_hz_pic/0/wbmuwy8sby7b7kw1626057306863/0",
+    "new_pic_vt": "http://puui.wetvinfo.com/vcover_vt_pic/0/wbmuwy8sby7b7kw1626057289525/0",
+    "update_desc_country": "{}",
+    "online_language": [
+      "1491937",
+      "1491963",
+      "1491973",
+      "1491988",
+      "1491994",
+      "40",
+      "8229847"
+    ],
+    "default_pay_status": null,
+    "areaName": "",
+    "holly_online_time": null,
+    "head_time": null,
+    "episode_updated_country": "39",
+    "main_genres": [
+      "Petualangan",
+      "Perang"
+    ],
+    "update_desc": null,
+    "video_ids_country": [
+      "b00392jijzt",
+      "h00399tbvbl",
+      "t0039u6kn3w",
+      "e0039aq9ykz",
+      "v0039h0uj6v",
+      "n0039x0uwr8",
+      "j0039yau2ky",
+      "w0039ur9es4",
+      "d0039yrtk0s",
+      "u00396tvrw4",
+      "f0039gioedi",
+      "w0039togpqo",
+      "h0039k1vsqp",
+      "r00399y86dx",
+      "m0039v2igpd",
+      "y00393shhne",
+      "t0039ieeh0y",
+      "q0039pl6l02",
+      "q00399sveg1",
+      "w0039495tg5",
+      "d0039j77ks3",
+      "g0039omsdvf",
+      "v0039euxtis",
+      "a00396ieg23",
+      "g00391lw81l",
+      "q0039aqfxo3",
+      "l0039i6zmlv",
+      "f0039hfpmdw",
+      "z0039wzg69w",
+      "l0039p70uml",
+      "w00395t6dbf",
+      "t0039rrwfd8",
+      "q0039f7vuqu",
+      "f0039ysqnh5",
+      "y0039q3atkr",
+      "z00392qv5l5",
+      "n00395ordfv",
+      "z0039uuzvsj",
+      "l0039j643nu"
+    ],
+    "is_trailer": 0,
+    "cover_id": "wbmuwy8sby7b7kw",
+    "leading_actorX": null,
+    "leading_actor_id": null,
+    "second_title": "Petualangan Aneh JOJO S4",
+    "clips_ids_country": [],
+    "category_map": [
+      10994,
+      "Film/Sinetron",
+      1204,
+      "animasi",
+      3,
+      "animasi"
+    ],
+    "director": [],
+    "operation_type_country": "{\"153513\":1518001,\"153548\":1518001,\"8227797\":\"\"}",
+    "pay_status": null,
+    "year_name": [
+      "2016"
+    ],
+    "episode_all": "39",
+    "tail_time": null
+  },
+  {
+    "cover_id": "gu8xnp9494amf21",
+    "leading_actorX": null,
+    "leading_actor_id": null,
+    "second_title": "Extraordinary adventure, a teenager reborn from adversity.",
+    "clips_ids_country": [],
+    "category_map": [
+      10994,
+      "Film/Sinetron",
+      1204,
+      "animasi",
+      3,
+      "animasi"
+    ],
+    "director": [],
+    "operation_type_country": "{\"153548\":\"\",\"153566\":\"\",\"153576\":\"\",\"8227797\":\"\"}",
+    "pay_status": 6,
+    "episode_all": "78",
+    "year_name": [
+      "2018"
+    ],
+    "description": "Anime ini menceritakan kisah legendaris Dongbo Xueying, istrinya Yu Jingqiu dan lain-lain yang mengatasi kesulitan, mengalami hal luar biasa dan diuji demi mencapai prestasi tertinggi di tanah asing.",
+    "imgtag_ver": {
+      "0": {
+        "text": "VIP",
+        "color": "#FF4A22"
+      },
+      "1": {
+        "text": "Full",
+        "color": "#FF4A22"
+      }
+    },
+    "type": 3,
+    "is_area_limit": 0,
+    "cover_checkup_grade": 4,
+    "protagonist_name": null,
+    "title": "Legendary Overlord",
+    "new_pic_hz_country_calc": "http://puui.wetvinfo.com/vcover_hz_pic/0/gu8xnp9494amf211651222840102/0",
+    "new_pic_vt_country_calc": "http://puui.wetvinfo.com/vcover_vt_pic/0/gu8xnp9494amf211651222823011/0",
+    "new_pic_hz": "http://puui.wetvinfo.com/vcover_hz_pic/0/gu8xnp9494amf211651222840102/0",
+    "new_pic_vt": "http://puui.wetvinfo.com/vcover_vt_pic/0/gu8xnp9494amf211651222823011/0",
+    "online_language": [
+      "1491937",
+      "1491963",
+      "1491973",
+      "1491988",
+      "1491994",
+      "40",
+      "8229847"
+    ],
+    "update_desc_country": "{\"153548\":\"\",\"153576\":\"\",\"8227797\":\"\"}",
+    "default_pay_status": 8,
+    "areaName": "Daratan/Tiongkok",
+    "holly_online_time": null,
+    "head_time": null,
+    "episode_updated_country": "78",
+    "main_genres": [
+      "Memproduksi",
+      "Perang",
+      "Fantasi Misterius"
+    ],
+    "update_desc": null,
+    "video_ids_country": [
+      "z0039q6iilu",
+      "d0039oxcmo6",
+      "l0039y6587n",
+      "h003987x5h5",
+      "r0039l2ejth",
+      "e0039ubby0f",
+      "j0039t54mzl",
+      "v0039wr1de2",
+      "b00399ucw8g",
+      "o00392syana",
+      "a0039b5mw6k",
+      "n0039qd5snq",
+      "z0039nhl11t",
+      "w0039wv4d2j",
+      "m0039jh6b3p",
+      "f0039xccxoz",
+      "t00392iyrbi",
+      "a00390e0jm9",
+      "d0039jsssyj",
+      "j0039ixn193",
+      "z00396cczub",
+      "a0039dutomh",
+      "d0039ydkvni",
+      "c00392wp5qi",
+      "a00392yuvc9",
+      "c0039clwtfp",
+      "c0039wr4oax",
+      "h003998q4xa",
+      "d0039rn06e0",
+      "z0039c7a028",
+      "z00358y57xq",
+      "f0035cik3lq",
+      "o0035ksorzi",
+      "o0035ck1bj4",
+      "m0035h52g0u",
+      "w0035aqg0b4",
+      "p0035y1xjy7",
+      "c0035gmxq1v",
+      "l0035m770e1",
+      "h0036sthonv",
+      "t0036fg7qnx",
+      "b00367cbm7r",
+      "d00362szo97",
+      "m0036mdze3p",
+      "m003622gdfv",
+      "a0036o68wmp",
+      "d00362pfs7s",
+      "n0036w2kgcs",
+      "z0036o51wnx",
+      "a00368skqw7",
+      "e0036hk3jho",
+      "r0036wdli3s",
+      "h00411uq3qt",
+      "q00414oi9qu",
+      "l0041xfohtq",
+      "t0041gxjyo1",
+      "b0041qwr8co",
+      "h00414oob6j",
+      "c0042lbk71w",
+      "k0042ihmkon",
+      "w0042a2ydzp",
+      "q0042wm4k2w",
+      "s0042kl8ymd",
+      "j0042izuo3x",
+      "n0042w4t90v",
+      "e00423ijqfc",
+      "t0042d9yxej",
+      "e0042goppad",
+      "l00429l1d9m",
+      "r00427on9gi",
+      "c0042fsz1ws",
+      "z0042wfbqux",
+      "q00425xi1ts",
+      "n004259aix4",
+      "c00422aneb2",
+      "v0042a8ibbc",
+      "u0043bp1m64",
+      "n0043iapcel"
+    ],
+    "is_trailer": 0,
+    "tail_time": null
+  },
+  {
+    "episode_updated_country": "26",
+    "main_genres": [
+      "Petualangan",
+      "Perang"
+    ],
+    "video_ids_country": [
+      "t00397utccf",
+      "b0039g2x7yi",
+      "t0039g0b4uv",
+      "c0039y6h7m6",
+      "d003902ffl0",
+      "z00393l31q7",
+      "t0039v9rx06",
+      "c0039g4rg4u",
+      "u003998ksj1",
+      "j0039kr7l27",
+      "m00395ebi19",
+      "q0039a9b1p9",
+      "q0039ivhw7a",
+      "y0039lbzzr1",
+      "c0039qv4hrr",
+      "z0039zp2ycd",
+      "w00394qte29",
+      "p0039w52731",
+      "y0039qg69yy",
+      "h0039ly883w",
+      "y0039unveay",
+      "t00396ddt87",
+      "h003994fksa",
+      "n0039uf222x",
+      "q0039djbgic",
+      "p00393j1wyz"
+    ],
+    "update_desc": null,
+    "is_trailer": 0,
+    "cover_id": "im5abh8540ohzmo",
+    "leading_actor_id": null,
+    "leading_actorX": null,
+    "second_title": "Petualangan Aneh JOJO S1",
+    "clips_ids_country": [],
+    "category_map": [
+      10994,
+      "Film/Sinetron",
+      1204,
+      "animasi",
+      3,
+      "animasi"
+    ],
+    "director": [],
+    "pay_status": null,
+    "operation_type_country": "{\"153513\":1518001,\"153548\":1518001,\"8227797\":\"\"}",
+    "episode_all": "26",
+    "year_name": [
+      "2012"
+    ],
+    "description": "Alkisah, George Joester mengadopsi Dio Brando yang yatim demi membalas kebaikan mendiang ayah Dio, Dario. Upaya Dio untuk menjadi satu-satunya pewaris kekayaan Joestar digagalkan. Lalu dia menggunakan Topeng Batu kuno yang mengubahnya menjadi vampir dengan misi menguasai dunia.",
+    "imgtag_ver": {
+      "1": {
+        "text": "Full",
+        "color": "#FF4A22"
+      }
+    },
+    "is_area_limit": 0,
+    "type": 3,
+    "cover_checkup_grade": 4,
+    "protagonist_name": null,
+    "title": "Petualangan Aneh JOJO S1",
+    "new_pic_vt_country_calc": "http://puui.wetvinfo.com/vcover_vt_pic/0/im5abh8540ohzmo1629772131254/0",
+    "new_pic_hz_country_calc": "http://puui.wetvinfo.com/vcover_hz_pic/0/im5abh8540ohzmo1629772144447/0",
+    "new_pic_hz": "http://puui.wetvinfo.com/vcover_hz_pic/0/im5abh8540ohzmo1626176269283/0",
+    "new_pic_vt": "http://puui.wetvinfo.com/vcover_vt_pic/0/im5abh8540ohzmo1626176260724/0",
+    "online_language": [
+      "1491937",
+      "1491963",
+      "1491973",
+      "1491988",
+      "1491994",
+      "40",
+      "8229847"
+    ],
+    "update_desc_country": "{}",
+    "default_pay_status": null,
+    "areaName": "",
+    "holly_online_time": null,
+    "head_time": null,
+    "tail_time": null
+  },
+  {
+    "new_pic_vt_country_calc": "http://puui.wetvinfo.com/vcover_vt_pic/0/andc1zd7cjfxrc51571398161/0",
+    "new_pic_hz_country_calc": "http://puui.wetvinfo.com/vcover_hz_pic/0/andc1zd7cjfxrc51571398170/0",
+    "new_pic_hz": "http://puui.wetvinfo.com/vcover_hz_pic/0/andc1zd7cjfxrc51562642198/0",
+    "new_pic_vt": "http://puui.wetvinfo.com/vcover_vt_pic/0/andc1zd7cjfxrc51562642188/0",
+    "online_language": [
+      "1491937",
+      "1491963",
+      "1491973",
+      "1491988",
+      "8229847"
+    ],
+    "update_desc_country": "{\"153513\":\"Sab-Min, 19.00WIB (1EP/Hari) | VIP nonton 2EP lebih awal\"}",
+    "default_pay_status": null,
+    "areaName": "",
+    "holly_online_time": null,
+    "head_time": null,
+    "episode_updated_country": "24",
+    "main_genres": [
+      "Sci-Fi",
+      "Perang",
+      "Petualangan",
+      "Lucu"
+    ],
+    "video_ids_country": [
+      "k00313b7wyf",
+      "b0031u55c7q",
+      "e0031dxc71o",
+      "g0031cqhvol",
+      "n0031zws7sb",
+      "d0031gto2ny",
+      "d00312uvpeq",
+      "x003246kfvo",
+      "z0032g58cgc",
+      "a0032449o4j",
+      "q0032xwgc3g",
+      "f0032u8nvu6",
+      "j00329aem3q",
+      "j0032nyoe9l",
+      "t00324kqo4s",
+      "f00323jzqqq",
+      "n0032o9b2hz",
+      "c0032z3sjn4",
+      "r0032wjgjui",
+      "k0032e1ob8t",
+      "j0032e6rq15",
+      "l00328znpic",
+      "c0033dah4o1",
+      "x0033dabwvz"
+    ],
+    "update_desc": null,
+    "is_trailer": 0,
+    "cover_id": "andc1zd7cjfxrc5",
+    "leading_actor_id": null,
+    "leading_actorX": null,
+    "second_title": "Reconstructing the original world with science!",
+    "clips_ids_country": [
+      "i0031gfnch0",
+      "p0031vs4hku",
+      "g00311vtj75",
+      "i0031aeqlkf"
+    ],
+    "category_map": [
+      10994,
+      "Film/Sinetron",
+      1204,
+      "animasi",
+      3,
+      "animasi"
+    ],
+    "director": null,
+    "pay_status": null,
+    "operation_type_country": "{\"153513\":1518001,\"153548\":1518001,\"153566\":1518001,\"153576\":1518001,\"8227797\":\"\"}",
+    "episode_all": "24",
+    "year_name": [
+      "2019"
+    ],
+    "description": "Semua manusia di bumi berubah menjadi batu setelah sebuah kilatan cahaya misterius. Manga ini mengisahkan tentang beberapa orang dari dunia pra-batu yang berusaha membangun kembali peradaban di zaman batu, Dunia Batu. Salah satu penemuan dari karakter utama yang berhasil menjadikan manusia kembali normal adalah formula batu (stone formula). Kita harus mengejar ketinggalan dunia sejarah sains sejauh 2 juta tahun! Petualangan penemuan yang baru dan menakjubkan, mari kita mulai!",
+    "imgtag_ver": {
+      "1": {
+        "text": "Full",
+        "color": "#FF4A22"
+      }
+    },
+    "is_area_limit": 0,
+    "type": 3,
+    "cover_checkup_grade": 4,
+    "protagonist_name": null,
+    "title": "Ｄｒ．ＳＴＯＮＥ",
+    "tail_time": null
+  },
+  {
+    "clips_ids_country": [],
+    "category_map": [
+      10994,
+      "Film/Sinetron",
+      1204,
+      "animasi",
+      3,
+      "animasi"
+    ],
+    "director": null,
+    "pay_status": null,
+    "operation_type_country": "{\"153513\":1518001,\"153548\":1518001,\"8227797\":\"\"}",
+    "year_name": [
+      "2020"
+    ],
+    "episode_all": "24",
+    "description": "Diangkat dari manga populer karya Gege Akutami. Mengisahkan seorang anak SMA biasa Yuji Itadori yang masuk Klub Penelitian Ilmu Gaib. Yuji ikut klub karena ingin bersantai dan bergaul dengan para senior. Namun, seniornya membuka segel jimat kutukan tingkat tinggi di sekolah dan menarik roh kutukan muncul. Yuji yang tidak mempunyai kekuatan sihir tak mau terlihat pecundang. Ia ingin melindungi teman-temannya. Ia menelan jari makhluk gaib berkekuatan tinggi dan menjadi wadah dari roh Kutukan terkuat, Sukuna. Hebatnya, Yuji masih bisa mengendalikan tubuhnya meski telah dirasuki.",
+    "imgtag_ver": {
+      "1": {
+        "text": "Full",
+        "color": "#FF4A22"
+      }
+    },
+    "type": 3,
+    "is_area_limit": 0,
+    "cover_checkup_grade": 4,
+    "protagonist_name": null,
+    "title": "Jujutsu Kaisen",
+    "new_pic_vt_country_calc": "http://puui.wetvinfo.com/vcover_vt_pic/0/w74fdyncquqifcx1622198675801/0",
+    "new_pic_hz_country_calc": "http://puui.wetvinfo.com/vcover_hz_pic/0/w74fdyncquqifcx1622198687325/0",
+    "new_pic_vt": "http://puui.wetvinfo.com/vcover_vt_pic/0/w74fdyncquqifcx1622198675801/0",
+    "new_pic_hz": "http://puui.wetvinfo.com/vcover_hz_pic/0/w74fdyncquqifcx1622198687325/0",
+    "online_language": [
+      "1491937",
+      "1491963",
+      "1491973",
+      "1491988",
+      "1491994",
+      "8229847"
+    ],
+    "update_desc_country": "{\"153513\":\"\",\"153548\":\"\",\"8227797\":\"\"}",
+    "default_pay_status": null,
+    "areaName": "",
+    "holly_online_time": null,
+    "head_time": null,
+    "episode_updated_country": "24",
+    "main_genres": [
+      "Film Horror"
+    ],
+    "video_ids_country": [
+      "z00369svp9x",
+      "u0036l3252k",
+      "x0036tk6c90",
+      "p0036gnuckm",
+      "r0036i02x8m",
+      "w00366svtxa",
+      "p0036l9wft9",
+      "i0036m87nvz",
+      "e0036c9apu9",
+      "f0036d6fmgv",
+      "u0036jkh4ir",
+      "o00368m57vt",
+      "d0036bnqkx1",
+      "j00367f5lwg",
+      "p0036t6zvqg",
+      "w0036zfp58n",
+      "g00367ecj39",
+      "f0036lqms8l",
+      "v00361pdmcn",
+      "p0036ralhrw",
+      "h0036lh9ptd",
+      "a0036eewo88",
+      "y0036gnchq8",
+      "q0036id84ss"
+    ],
+    "update_desc": null,
+    "is_trailer": 0,
+    "cover_id": "w74fdyncquqifcx",
+    "leading_actor_id": null,
+    "leading_actorX": null,
+    "second_title": null,
+    "tail_time": null
+  },
+  {
+    "category_map": [
+      10994,
+      "Film/Sinetron",
+      1204,
+      "animasi",
+      3,
+      "animasi"
+    ],
+    "director": [
+      ""
+    ],
+    "pay_status": null,
+    "operation_type_country": "{\"153513\":1518001,\"153548\":1518001,\"8227797\":\"\"}",
+    "year_name": [
+      "2014"
+    ],
+    "episode_all": "15",
+    "description": "Penuh keajaiban dan kegembiraan, rombongan sirkus bernama Bahtera Nuh berhasil memikat penonton. Namun yang serba memukau itu ada harganya. Anak-anak di sekitar London hilang secara misterius hilang. Rombongan sirkus tersebut diduga terkait dengan peristiwa ganjil itu. Gelisah dengan penculikan ini, Ratu Victoria mengutus anjing penjaganya yang terkenal, Ciel Phantomhive, dan pelayan iblisnya yang selalu setia, Sebastian Michaelis, dalam misi penyamaran untuk menemukan anak-anak yang hilang.",
+    "imgtag_ver": {
+      "1": {
+        "text": "Full",
+        "color": "#FF4A22"
+      }
+    },
+    "type": 3,
+    "is_area_limit": 0,
+    "cover_checkup_grade": 4,
+    "title": "Black Butler S3",
+    "protagonist_name": null,
+    "new_pic_hz_country_calc": "http://puui.wetvinfo.com/vcover_hz_pic/0/qjx03fcrf9291jd1626177035051/0",
+    "new_pic_vt_country_calc": "http://puui.wetvinfo.com/vcover_vt_pic/0/qjx03fcrf9291jd1626177025060/0",
+    "new_pic_vt": "http://puui.wetvinfo.com/vcover_vt_pic/0/qjx03fcrf9291jd1626177025060/0",
+    "new_pic_hz": "http://puui.wetvinfo.com/vcover_hz_pic/0/qjx03fcrf9291jd1626177035051/0",
+    "online_language": [
+      "1491937",
+      "1491963",
+      "1491973",
+      "1491988",
+      "1491994",
+      "40",
+      "8229847"
+    ],
+    "update_desc_country": "{}",
+    "default_pay_status": null,
+    "holly_online_time": null,
+    "areaName": "",
+    "head_time": null,
+    "episode_updated_country": "15",
+    "main_genres": [
+      "Klasik",
+      "Lucu",
+      "Fantasi"
+    ],
+    "update_desc": null,
+    "video_ids_country": [
+      "o0039l2w6hf",
+      "x00398ptbqi",
+      "q0039ckzcvd",
+      "u003998erye",
+      "r0039di7dld",
+      "j00394x4q34",
+      "y00395fi8zm",
+      "u0039n1xavq",
+      "b0039xt7m0l",
+      "h0039szj4c3",
+      "y00396x7kyk",
+      "m00395q7h12",
+      "l003959ckdr",
+      "e0039gzuwkc",
+      "c0039lpebru"
+    ],
+    "is_trailer": 0,
+    "cover_id": "qjx03fcrf9291jd",
+    "leading_actorX": null,
+    "leading_actor_id": null,
+    "second_title": "Black Butler S3",
+    "clips_ids_country": [],
+    "tail_time": null
+  },
+  {
+    "is_trailer": 0,
+    "cover_id": "45mhx3xzjqnd03u",
+    "leading_actor_id": null,
+    "leading_actorX": null,
+    "second_title": null,
+    "clips_ids_country": [
+      "v0039pm3d05",
+      "a00394ycdei",
+      "b0039rf0zlk",
+      "c00397s3raa",
+      "f00399gmlgt"
+    ],
+    "category_map": [
+      10994,
+      "Film/Sinetron",
+      1204,
+      "animasi",
+      3,
+      "animasi"
+    ],
+    "director": [],
+    "operation_type_country": "{\"153513\":\"\",\"153548\":1518001,\"153566\":1518001,\"153576\":1518001,\"8227797\":\"\"}",
+    "pay_status": 6,
+    "episode_all": "15",
+    "year_name": [
+      "2021"
+    ],
+    "description": "Menceritakan kisah fantasi tentang manusia biasa berwujud seorang gadis tinggal di pulau yang dihuni para dewa. Gadis ini berperangai keras kepala. Ia bermimpi menjadi seorang jago silat dan menghadapi kisah cinta nan rumit.",
+    "imgtag_ver": {
+      "0": {
+        "text": "VIP",
+        "color": "#FF4A22"
+      },
+      "1": {
+        "text": "Full",
+        "color": "#FF4A22"
+      }
+    },
+    "type": 3,
+    "is_area_limit": 0,
+    "cover_checkup_grade": 4,
+    "title": "Pulau Siliang",
+    "protagonist_name": null,
+    "new_pic_vt_country_calc": "http://puui.wetvinfo.com/vcover_vt_pic/0/45mhx3xzjqnd03u1624884974075/0",
+    "new_pic_hz_country_calc": "http://puui.wetvinfo.com/vcover_hz_pic/0/45mhx3xzjqnd03u1624884995158/0",
+    "new_pic_vt": "http://puui.wetvinfo.com/vcover_vt_pic/0/45mhx3xzjqnd03u1632283676566/0",
+    "new_pic_hz": "http://puui.wetvinfo.com/vcover_hz_pic/0/45mhx3xzjqnd03u1632283689887/0",
+    "update_desc_country": "{\"153513\":\"Setiap hari Senin pukul 09:00 WIB VIP update 1EP, Free di minggu berikutnya | Minggu pertama update 4EP | Total 15EP\"}",
+    "online_language": [
+      "1491937",
+      "1491963",
+      "1491973",
+      "1491988",
+      "1491994",
+      "40",
+      "8229847"
+    ],
+    "default_pay_status": 8,
+    "holly_online_time": null,
+    "areaName": "Daratan/Tiongkok",
+    "head_time": null,
+    "episode_updated_country": "15",
+    "main_genres": [
+      "Fantasi Misterius",
+      "Cinta romantis"
+    ],
+    "update_desc": null,
+    "video_ids_country": [
+      "g0039f7wrtx",
+      "h0039p4wmay",
+      "r0039lnduay",
+      "s0039chcle9",
+      "y0039tju2h5",
+      "q00391exwnw",
+      "c0039vta42i",
+      "s003984yatm",
+      "n0040k6n7nh",
+      "q00400w6sou",
+      "o0040usjxg1",
+      "f00409qsww4",
+      "l0040nu9mye",
+      "b0040vmifbe",
+      "p0040x5iwta"
+    ],
+    "tail_time": null
+  },
+  {
+    "title": "1000 Musim Gugur",
+    "protagonist_name": null,
+    "new_pic_vt_country_calc": "http://puui.wetvinfo.com/vcover_vt_pic/0/zj158n8r1kirl741613408045553/0",
+    "new_pic_hz_country_calc": "http://puui.wetvinfo.com/vcover_hz_pic/0/zj158n8r1kirl741613408055705/0",
+    "new_pic_hz": "http://puui.wetvinfo.com/vcover_hz_pic/0/zj158n8r1kirl741612615940589/0",
+    "new_pic_vt": "http://puui.wetvinfo.com/vcover_vt_pic/0/zj158n8r1kirl741612615926117/0",
+    "update_desc_country": "{\"153513\":\"Setiap hari Senin pukul 09:00 WIB (1EP/hari) | VIP 2EP lebih awal | Total 16EP\"}",
+    "online_language": [
+      "12",
+      "14",
+      "1491937",
+      "1491963",
+      "1491973",
+      "1491988",
+      "1491994",
+      "8",
+      "8229847",
+      "9"
+    ],
+    "default_pay_status": 8,
+    "holly_online_time": "Tayang 8 Februari",
+    "areaName": "Daratan/Tiongkok",
+    "head_time": null,
+    "episode_updated_country": "16",
+    "main_genres": [
+      "Bela diri",
+      "Perang",
+      "Memproduksi"
+    ],
+    "video_ids_country": [
+      "p0035d66nlv",
+      "d0035timp9t",
+      "i0035lraj7a",
+      "a00350lspig",
+      "c00367zmpc9",
+      "a00367n13wl",
+      "s00369aoyak",
+      "m0036h72if7",
+      "f0036r2q2bh",
+      "k003637ir7x",
+      "t00365m0pyq",
+      "x0036ykwoz0",
+      "o0036f3gfp1",
+      "i0036rq9x91",
+      "c0036r34v1i",
+      "f0036qy61mv"
+    ],
+    "update_desc": null,
+    "is_trailer": 0,
+    "cover_id": "zj158n8r1kirl74",
+    "leading_actor_id": null,
+    "leading_actorX": null,
+    "second_title": "1000 Musim Gugur",
+    "clips_ids_country": [
+      "s0035bsmo53",
+      "a0035syir59",
+      "w0035kclja7",
+      "d0035ww7nyd",
+      "f0035jxuphn"
+    ],
+    "category_map": [
+      10994,
+      "Film/Sinetron",
+      1204,
+      "animasi",
+      3,
+      "animasi"
+    ],
+    "director": null,
+    "operation_type_country": "{\"153514\":\"\",\"153548\":1518001,\"153566\":1518001,\"153576\":1518001,\"8227797\":\"\"}",
+    "pay_status": null,
+    "year_name": [
+      "2021"
+    ],
+    "episode_all": "16",
+    "description": "Animasi 3D ini diangkat dari novel berjudul sama. Berkisah tentang lingkaran persaingan di dunia persilatan. Sebuah kitab jurus silat rahasia muncul dan memicu kedamaian palsu di dunia persilatan. Apakah pahlawan kita mampu melihat lebih dalam situasi yang terjadi dan akhirnya mengusai semua jurus rahasia?",
+    "imgtag_ver": {
+      "1": {
+        "text": "Full",
+        "color": "#FF4A22"
+      }
+    },
+    "is_area_limit": 0,
+    "type": 3,
+    "cover_checkup_grade": 4,
+    "tail_time": null
+  },
+  {
+    "protagonist_name": null,
+    "title": "Avatar Sang Raja",
+    "new_pic_hz_country_calc": "http://puui.wetvinfo.com/vcover_hz_pic/0/pnumjfjcvuau4sr1567777288/0",
+    "new_pic_vt_country_calc": "http://puui.wetvinfo.com/vcover_vt_pic/0/pnumjfjcvuau4sr1567777249/0",
+    "new_pic_hz": "http://puui.wetvinfo.com/vcover_hz_pic/0/pnumjfjcvuau4sr1554197454/0",
+    "new_pic_vt": "http://puui.wetvinfo.com/vcover_vt_pic/0/pnumjfjcvuau4sr1550454892/0",
+    "update_desc_country": "{\"153513\":\"Sab-Min, 19.00 WIB (2EP/Hari) | VIP nonton full\"}",
+    "online_language": [
+      "12",
+      "14",
+      "1491937",
+      "1491963",
+      "1491973",
+      "1491988",
+      "1491994",
+      "8229847"
+    ],
+    "default_pay_status": null,
+    "areaName": "Daratan/Tiongkok",
+    "holly_online_time": null,
+    "head_time": null,
+    "episode_updated_country": "12",
+    "main_genres": [
+      "Persaingan Keahlian"
+    ],
+    "update_desc": null,
+    "video_ids_country": [
+      "g0029ctql3f",
+      "g0029v8n75x",
+      "e0029wlaatj",
+      "p0029i9t09j",
+      "l0029z0jvz9",
+      "k0029o720ik",
+      "b0029fknjye",
+      "t0029fj5iws",
+      "i0029n2vco0",
+      "j0029u7ugl7",
+      "j0029oc5kbu",
+      "g0029mwvi3a"
+    ],
+    "is_trailer": 0,
+    "cover_id": "pnumjfjcvuau4sr",
+    "leading_actorX": null,
+    "leading_actor_id": null,
+    "second_title": "Ten years of blood writing esports brilliant",
+    "clips_ids_country": [
+      "q0030v4b98l",
+      "i0030e3gta6",
+      "u00305vy281",
+      "g0030scagpc",
+      "q00308319zf"
+    ],
+    "category_map": [
+      10994,
+      "Film/Sinetron",
+      1204,
+      "animasi",
+      3,
+      "animasi"
+    ],
+    "director": [],
+    "operation_type_country": "{\"153512\":1518001,\"153513\":1518001,\"153566\":1518001,\"153569\":1518001,\"153576\":1518001,\"8227797\":\"\"}",
+    "pay_status": null,
+    "episode_all": "12",
+    "year_name": [
+      "2017"
+    ],
+    "description": "The online game glory is known as the top scorer of the textbook level, Ye Xiu, who was expelled by the club for various reasons. He left the professional circle and became a small network administrator. However, he has ten years of experience in gaming. In the glory of the newly opened tenth district, I re-entered the game, with memories of the past, and an unfinished homemade weapon, began to return to the peak.\nAfter the intrigue, who took away my glory, under the storm, hope never shattered. Among the clusters of flowers, there is no loss of direction. Before I was noticed, I am here to return!",
+    "imgtag_ver": {
+      "1": {
+        "text": "Full",
+        "color": "#FF4A22"
+      }
+    },
+    "type": 3,
+    "is_area_limit": 0,
+    "cover_checkup_grade": 4,
+    "tail_time": null
+  },
+  {
+    "description": "Dragon Ball Kai merupakan versi Dragon Ball Z yang diperbaiki secara visual dengan adanya perbaikan gambar yang berkualitas. Ceritanya diringkas, terkesan tidak dipanjang-panjangkan. Di dalamnya terdapat beberapa unsur yang telah diperbarui. Gambar kualitas tinggi, soundtrack yang direkam ulang, serta adegan pilihan yang digarap dengan efek baru dan rekam ulang animasi. Studio Toei juga meningkatkan kualitas visual dan mengubah format anime ini menjadi HD.",
+    "imgtag_ver": {
+      "1": {
+        "text": "Full",
+        "color": "#FF4A22"
+      }
+    },
+    "is_area_limit": 0,
+    "type": 3,
+    "cover_checkup_grade": 4,
+    "title": "Dragon Ball Kai",
+    "protagonist_name": null,
+    "new_pic_vt_country_calc": "http://puui.wetvinfo.com/vcover_vt_pic/0/1oxoocvxiib416w1627273703423/0",
+    "new_pic_hz_country_calc": "http://puui.wetvinfo.com/vcover_hz_pic/0/1oxoocvxiib416w1627273714622/0",
+    "new_pic_hz": "http://puui.qpic.cn/vcover_hz_pic/0/1oxoocvxiib416w1627655358591/0",
+    "new_pic_vt": "http://puui.qpic.cn/vcover_vt_pic/0/1oxoocvxiib416w1627655319111/0",
+    "online_language": [
+      "1491937",
+      "1491963",
+      "1491973",
+      "1491988",
+      "1491994",
+      "40",
+      "8229847"
+    ],
+    "update_desc_country": "{}",
+    "default_pay_status": null,
+    "holly_online_time": null,
+    "areaName": "",
+    "head_time": null,
+    "episode_updated_country": "98",
+    "main_genres": [
+      "Petualangan"
+    ],
+    "update_desc": null,
+    "video_ids_country": [
+      "z00399c8ce9",
+      "w0039oq6tlb",
+      "a0039a17p4r",
+      "j0039g9ksj9",
+      "k0039o055hm",
+      "c0039i7te71",
+      "o0039wgud2b",
+      "c0039embtq8",
+      "v0039o2x0u1",
+      "y00393s1j3a",
+      "r0039f2kl5q",
+      "i0039dqjoxu",
+      "q0039gb4d1d",
+      "a00390zr7p8",
+      "l0039b5lu8k",
+      "a0039zohdxr",
+      "t0039le1pnw",
+      "t00397miqyp",
+      "d00398m7km7",
+      "k0039pt4zsv",
+      "h003942zwcd",
+      "w0039usy6mp",
+      "e0039uxyawd",
+      "x0039xa94sz",
+      "k0039tra7r1",
+      "g00392l1xoe",
+      "m00395puieb",
+      "t00393a8q8x",
+      "a00398eo3hj",
+      "b0039ujb52s",
+      "e0039a5er1m",
+      "r0039cghyhm",
+      "f00399625jc",
+      "e0039fgmh6r",
+      "k0039mwkru9",
+      "x0039684ydv",
+      "s0039enfrx0",
+      "o00394sgu2r",
+      "k0039ri06ab",
+      "m0039625quv",
+      "l0039zd0u5l",
+      "u0039nhaj7v",
+      "v0039gus78f",
+      "n0039245gnd",
+      "t0039j3vsdn",
+      "d0039a4i4gu",
+      "n0039ijcvu4",
+      "x0039w2f929",
+      "s0039ac16jx",
+      "v0039tympt1",
+      "r0039xi8h5c",
+      "k0039pahqjc",
+      "k0039286tlq",
+      "n0039z7kn02",
+      "r0039b7sqyo",
+      "j0039y5h1fi",
+      "f00392lo804",
+      "h0039ob8ny8",
+      "u00392ffbc5",
+      "g0039y623t0",
+      "f0039x5mvdd",
+      "q003920ws2t",
+      "p0039kpewgf",
+      "r003978lwo3",
+      "p0039u2y1z4",
+      "p0039j7jyi7",
+      "t0039vbsfds",
+      "i0039coz3zl",
+      "n0039aunicr",
+      "b0039g1pv81",
+      "w0039vp4tdq",
+      "q0039i0itgo",
+      "s00397hlp7s",
+      "z0039oifgvt",
+      "t0039sw7n4j",
+      "s0039ktry3s",
+      "g0039ykoffo",
+      "u00391j9uuz",
+      "y0039jvrjox",
+      "k0039apoqg9",
+      "j00396zz14v",
+      "x00395a5hhy",
+      "h0039uqtspc",
+      "e0039rjvdh2",
+      "s0039uq5a8t",
+      "i0039nsfelx",
+      "n0039fr4ek2",
+      "p0039jdn1cg",
+      "l00393xy94z",
+      "g00390q7qfu",
+      "u0039a1km17",
+      "f0039xvhpgd",
+      "t00390ku66z",
+      "l0039gbch87",
+      "v0039p56i4u",
+      "z00396osnol",
+      "f0039q4069c",
+      "f0039vrijg8"
+    ],
+    "is_trailer": 0,
+    "cover_id": "1oxoocvxiib416w",
+    "leading_actor_id": null,
+    "leading_actorX": null,
+    "second_title": null,
+    "clips_ids_country": [],
+    "category_map": [
+      10994,
+      "Film/Sinetron",
+      1204,
+      "animasi",
+      3,
+      "animasi"
+    ],
+    "director": [],
+    "pay_status": null,
+    "operation_type_country": "{\"153513\":1518001,\"153548\":1518001,\"8227797\":\"\"}",
+    "episode_all": "98",
+    "year_name": [
+      "2009"
+    ],
+    "tail_time": null
+  },
+  {
+    "category_map": [
+      10994,
+      "Film/Sinetron",
+      1204,
+      "animasi",
+      3,
+      "animasi"
+    ],
+    "director": [
+      ""
+    ],
+    "pay_status": null,
+    "operation_type_country": "{\"153548\":1518001,\"8227797\":\"\"}",
+    "year_name": [
+      "2020"
+    ],
+    "episode_all": "25",
+    "description": "Setelah menang atas Akademi Shiratorizawa, tim bola voli SMA Karasuno melaju ke tingkat nasional. Saat persiapan dimulai, setter jenius Tobio Kageyama diundang ke Kamp Pelatihan Pemuda Seluruh Jepang untuk bermain bersama sesama pemain yang diakui secara nasional. Sementara itu, Kei Tsukishima diundang ke kamp pelatihan pemula khusus untuk tahun pertama di Prefektur Miyagi. Karena tidak menerima undangan apa pun, Shouyou Hinata merasa tertinggal. Namun, Hinata tidak mundur. Ia menyelinap ke kamp pelatihan yang sama dengan Tsukishima. Meskipun Hinata hanya mendapatkan pekerjaan sebagai anak bola, dia melihat ini sebagai peluang emas. Dia mulai tidak hanya berlatih bola voli tetapi juga menganalisis banyak informasi yang tersedia di lapangan dan bagaimana menerapkannya.",
+    "imgtag_ver": {
+      "1": {
+        "text": "Full",
+        "color": "#FF4A22"
+      }
+    },
+    "is_area_limit": 0,
+    "type": 3,
+    "cover_checkup_grade": 4,
+    "title": "Haikyu!!4",
+    "protagonist_name": null,
+    "new_pic_hz_country_calc": "http://puui.wetvinfo.com/vcover_hz_pic/0/uhzy54tc93ilw931619007847781/0",
+    "new_pic_vt_country_calc": "http://puui.wetvinfo.com/vcover_vt_pic/0/uhzy54tc93ilw931619007839713/0",
+    "new_pic_vt": "http://puui.wetvinfo.com/vcover_vt_pic/0/uhzy54tc93ilw931619007839713/0",
+    "new_pic_hz": "http://puui.wetvinfo.com/vcover_hz_pic/0/uhzy54tc93ilw931619007847781/0",
+    "update_desc_country": "{}",
+    "online_language": [
+      "1491937",
+      "1491963",
+      "1491973",
+      "1491988",
+      "1491994",
+      "40",
+      "8229847"
+    ],
+    "default_pay_status": null,
+    "holly_online_time": null,
+    "areaName": "",
+    "head_time": null,
+    "episode_updated_country": "25",
+    "main_genres": [
+      ""
+    ],
+    "update_desc": null,
+    "video_ids_country": [
+      "a0036tex8f9",
+      "g0036gp7dfq",
+      "d0036b5z1if",
+      "a0036pf87el",
+      "l0036n6ta8r",
+      "y0036r95ru0",
+      "r0036hqiq5b",
+      "s0036g8k1vr",
+      "c0036zurimd",
+      "e00361ztf9w",
+      "m0036u5ndw8",
+      "f00368x848i",
+      "v0036tp8fjk",
+      "x0036wopi8b",
+      "g00363rginq",
+      "p003651grps",
+      "f0036154f7m",
+      "h00365d8a5j",
+      "r003661629r",
+      "d00367prvbe",
+      "n0036hygrbw",
+      "u0036dncf04",
+      "n0036eglw0r",
+      "z0036bjn61m",
+      "s00363d4gwm"
+    ],
+    "is_trailer": 0,
+    "cover_id": "uhzy54tc93ilw93",
+    "leading_actorX": null,
+    "leading_actor_id": null,
+    "second_title": null,
+    "clips_ids_country": [],
+    "tail_time": null
+  },
+  {
+    "description": "Musim tayang kedua menampilkan dua tokoh utama baru, Earl Alois Trancy dan pelayannya Claude Faustus. Alois adalah pewaris muda keluarga bangsawan Trancy. Ia diculik dan dipaksa jadi budak, hingga akhirnya diselamatkan dan kembali ke rumah. Hanya untuk mendapati ayahnya meninggal. Meski sah sebagai pewaris takhta, ada sewjumlah orang yang meragukan legitimasi dan kisah penculikannya. Dan kecurigaan itu beralasan karena apa yang terjadi dalam keluarga Trancy tak senormal kelihatannya. Dimulai dari pelayannya yang memiliki kemampuan supernatural. Siapa sebenarnya Claude yang misterius?",
+    "imgtag_ver": {
+      "1": {
+        "text": "Full",
+        "color": "#FF4A22"
+      }
+    },
+    "is_area_limit": 0,
+    "type": 3,
+    "cover_checkup_grade": 4,
+    "protagonist_name": null,
+    "title": "Black Butler S2",
+    "new_pic_vt_country_calc": "http://puui.wetvinfo.com/vcover_vt_pic/0/w16t495srtunxv71626176961863/0",
+    "new_pic_hz_country_calc": "http://puui.wetvinfo.com/vcover_hz_pic/0/w16t495srtunxv71626176969158/0",
+    "new_pic_hz": "http://puui.wetvinfo.com/vcover_hz_pic/0/w16t495srtunxv71626176969158/0",
+    "new_pic_vt": "http://puui.wetvinfo.com/vcover_vt_pic/0/w16t495srtunxv71626176961863/0",
+    "update_desc_country": "{}",
+    "online_language": [
+      "1491937",
+      "1491963",
+      "1491973",
+      "1491988",
+      "1491994",
+      "40",
+      "8229847"
+    ],
+    "default_pay_status": null,
+    "areaName": "",
+    "holly_online_time": null,
+    "head_time": null,
+    "episode_updated_country": "18",
+    "main_genres": [
+      "Klasik",
+      "Lucu",
+      "Fantasi"
+    ],
+    "update_desc": null,
+    "video_ids_country": [
+      "x0039pzgdrr",
+      "a0039adpmh1",
+      "f003973hqys",
+      "o00399yvsrj",
+      "e0039bjgze2",
+      "e0039adwhrc",
+      "q0039qr43b6",
+      "v0039qol55v",
+      "f0039dgg1np",
+      "r0039uapwgo",
+      "g0039b5lu6g",
+      "d00392vuwfu",
+      "a0039spludf",
+      "b0039hqsp34",
+      "o003921osnm",
+      "a0039bdat5e",
+      "j0039oke7oa",
+      "o0039lfi29o"
+    ],
+    "is_trailer": 0,
+    "cover_id": "w16t495srtunxv7",
+    "leading_actor_id": null,
+    "leading_actorX": null,
+    "second_title": "Black Butler S2",
+    "clips_ids_country": [],
+    "category_map": [
+      10994,
+      "Film/Sinetron",
+      1204,
+      "animasi",
+      3,
+      "animasi"
+    ],
+    "director": [
+      ""
+    ],
+    "operation_type_country": "{\"153513\":1518001,\"153548\":1518001,\"8227797\":\"\"}",
+    "pay_status": null,
+    "year_name": [
+      "2010"
+    ],
+    "episode_all": "18",
+    "tail_time": null
+  },
+  {
+    "episode_updated_country": "8",
+    "main_genres": [
+      "Petualangan"
+    ],
+    "video_ids_country": [
+      "q004190v7ki",
+      "x0041f4hrxo",
+      "m0041e19msj",
+      "b0041mbe08x",
+      "x0041cy7uap",
+      "i0041rdgu3o",
+      "y004156mrx9",
+      "c0041h7gdop"
+    ],
+    "update_desc": null,
+    "is_trailer": 0,
+    "cover_id": "bz3il3gwp8b8gyq",
+    "leading_actorX": null,
+    "leading_actor_id": null,
+    "second_title": "Serangan Titan OAD",
+    "clips_ids_country": [],
+    "category_map": [
+      10994,
+      "Film/Sinetron",
+      1204,
+      "animasi",
+      3,
+      "animasi"
+    ],
+    "director": null,
+    "operation_type_country": "{\"153548\":1518001,\"8227797\":\"\"}",
+    "pay_status": null,
+    "episode_all": "8",
+    "year_name": [
+      "2021"
+    ],
+    "description": "Attack on Titan: Wall Sina, Goodbye",
+    "imgtag_ver": {
+      "1": {
+        "text": "Full",
+        "color": "#FF4A22"
+      }
+    },
+    "is_area_limit": 0,
+    "type": 3,
+    "cover_checkup_grade": 4,
+    "protagonist_name": null,
+    "title": "Serangan Titan OAD",
+    "new_pic_hz_country_calc": "http://puui.wetvinfo.com/vcover_hz_pic/0/bz3il3gwp8b8gyq1640243706735/0",
+    "new_pic_vt_country_calc": "http://puui.wetvinfo.com/vcover_vt_pic/0/bz3il3gwp8b8gyq1638975978208/0",
+    "new_pic_vt": "http://puui.wetvinfo.com/vcover_vt_pic/0/bz3il3gwp8b8gyq1636117136754/0",
+    "new_pic_hz": "http://puui.wetvinfo.com/vcover_hz_pic/0/bz3il3gwp8b8gyq1636117157743/0",
+    "online_language": [
+      "1491937",
+      "1491963",
+      "1491973",
+      "1491988",
+      "1491994",
+      "40",
+      "8229847"
+    ],
+    "update_desc_country": "{}",
+    "default_pay_status": null,
+    "holly_online_time": null,
+    "areaName": "",
+    "head_time": null,
+    "tail_time": null
+  },
+  {
+    "episode_all": "12",
+    "year_name": [
+      "2020"
+    ],
+    "description": "Kebanyakan orang ingin jadi sosok baik di sebuah petualangan atau dalam game di dunia lain. Namun sayangnya, tak semua orang beruntung. Termasuk gadis ini. Ia terbangun di dunia game Fortune Lover yang biasa ia mainkan. Bukan sebagai protagonis, melainkan jadi karakter antagonis bernama Katarina Claes yang mati di akhir game. Berbekal pengetahuan dan pengalamannya memainkan game tersebut, ia menghindari nasib buruk yang menantinya. Namun itu tak mudah. Ia perlu berpikir menemukan rute terbaik agar tidak membuka jalan yang menyebabkan dirinya bernasib naas.",
+    "imgtag_ver": {
+      "1": {
+        "text": "Full",
+        "color": "#FF4A22"
+      }
+    },
+    "is_area_limit": 0,
+    "type": 3,
+    "cover_checkup_grade": 4,
+    "protagonist_name": null,
+    "title": "Kehidupanku Sebagai Penjahat S1",
+    "new_pic_hz_country_calc": "http://puui.wetvinfo.com/vcover_hz_pic/0/7z36qdjcelkhuz21625240095049/0",
+    "new_pic_vt_country_calc": "http://puui.wetvinfo.com/vcover_vt_pic/0/7z36qdjcelkhuz21625240083389/0",
+    "new_pic_vt": "http://puui.wetvinfo.com/vcover_vt_pic/0/7z36qdjcelkhuz21625131703488/0",
+    "new_pic_hz": "http://puui.wetvinfo.com/vcover_hz_pic/0/7z36qdjcelkhuz21625131726143/0",
+    "online_language": [
+      "1491937",
+      "1491963",
+      "1491973",
+      "1491988",
+      "1491994",
+      "40",
+      "8229847"
+    ],
+    "update_desc_country": "{}",
+    "default_pay_status": null,
+    "areaName": "",
+    "holly_online_time": null,
+    "head_time": null,
+    "episode_updated_country": "12",
+    "main_genres": [
+      "Fantasi",
+      "Lucu",
+      "Cinta romantis"
+    ],
+    "video_ids_country": [
+      "t0039phqi5h",
+      "s003917z06p",
+      "q0039a46ca2",
+      "z00396w8jad",
+      "s0039znx5b6",
+      "z0039ux1866",
+      "q0039df2b08",
+      "y0039g8fijc",
+      "g003989cbhd",
+      "u0039n1d7gl",
+      "u0039y68qqy",
+      "x0039871sq2"
+    ],
+    "update_desc": null,
+    "is_trailer": 0,
+    "cover_id": "7z36qdjcelkhuz2",
+    "leading_actorX": null,
+    "leading_actor_id": null,
+    "second_title": null,
+    "clips_ids_country": [],
+    "category_map": [
+      10994,
+      "Film/Sinetron",
+      1204,
+      "animasi",
+      3,
+      "animasi"
+    ],
+    "director": [],
+    "operation_type_country": "{\"153513\":1518001,\"153548\":1518001,\"8227797\":\"\"}",
+    "pay_status": null,
+    "tail_time": null
+  },
+  {
+    "episode_updated_country": "25",
+    "main_genres": [
+      ""
+    ],
+    "update_desc": null,
+    "video_ids_country": [
+      "e0036aeiudw",
+      "x0036l6t5qd",
+      "h0036blbted",
+      "c0036hmpbmp",
+      "q0036zz5jti",
+      "p0036kadvt9",
+      "i0036qfp0i7",
+      "b0036egjzw4",
+      "c0036dgy1gg",
+      "c0036sp4lzt",
+      "d00365bl8q6",
+      "u003687g0ms",
+      "b0036zslci7",
+      "v0036cu7fdt",
+      "p003664vb5f",
+      "w00364kb5hl",
+      "d00362tmt9j",
+      "i0036hjvwjd",
+      "m00365smal9",
+      "u0036h4fexh",
+      "c00360qpkzp",
+      "a003686ioy8",
+      "w0036ony6cj",
+      "a0036dtl0z9",
+      "s0036armzbd"
+    ],
+    "is_trailer": 0,
+    "cover_id": "mu5weouv83kaak8",
+    "leading_actor_id": null,
+    "leading_actorX": null,
+    "second_title": null,
+    "clips_ids_country": [],
+    "category_map": [
+      10994,
+      "Film/Sinetron",
+      1204,
+      "animasi",
+      3,
+      "animasi"
+    ],
+    "director": [
+      ""
+    ],
+    "operation_type_country": "{\"153548\":1518001,\"8227797\":\"\"}",
+    "pay_status": null,
+    "year_name": [
+      "2014"
+    ],
+    "episode_all": "25",
+    "description": "Setelah ikut kompetisi antar SMA, tim voli SMA Karasuno bersiap menaklukkan kejuaraan turnamen musim semi. Saat mereka menerima undangan dari tim rival SMA Nekoma, Karasuno bersedia ikut serta ikut kamp pelatihan tim voli di Tokyo, bersama tim-tim hebat lain dan bahkan atlet level nasional. Dengan adu tanding melawan tim-tim tangguh, mereka berharap tidak hanya mampu meningkatkan skill dan teknik, tapi juga menyerang dengan kekuatan yang lebih hebat. Kali ini menjadi kesempatan terakhir sebelum para siswa senior lulus sekolah, tim voli SMA Karasuno harus menyelesaikan berbagai perbedaan mereka serta berlatih lebih keras dari sebelumnya jika mereka ingin mengalahkan lawan tangguh, lama dan baru--termasuk musuh bebuyutan mereka Aoba Jousai dan setter voli kelas dunia Tooru Okinawa.",
+    "imgtag_ver": {
+      "1": {
+        "text": "Full",
+        "color": "#FF4A22"
+      }
+    },
+    "type": 3,
+    "is_area_limit": 0,
+    "cover_checkup_grade": 4,
+    "title": "Haikyu!!2",
+    "protagonist_name": null,
+    "new_pic_vt_country_calc": "http://puui.wetvinfo.com/vcover_vt_pic/0/mu5weouv83kaak81619007574098/0",
+    "new_pic_hz_country_calc": "http://puui.wetvinfo.com/vcover_hz_pic/0/mu5weouv83kaak81619007581585/0",
+    "new_pic_vt": "http://puui.wetvinfo.com/vcover_vt_pic/0/mu5weouv83kaak81619007574098/0",
+    "new_pic_hz": "http://puui.wetvinfo.com/vcover_hz_pic/0/mu5weouv83kaak81619007581585/0",
+    "update_desc_country": "{}",
+    "online_language": [
+      "1491937",
+      "1491963",
+      "1491973",
+      "1491988",
+      "1491994",
+      "40",
+      "8229847"
+    ],
+    "default_pay_status": null,
+    "holly_online_time": null,
+    "areaName": "",
+    "head_time": null,
+    "tail_time": null
+  },
+  {
+    "title": "Penakluk Bintang",
+    "protagonist_name": null,
+    "new_pic_vt_country_calc": "http://puui.wetvinfo.com/vcover_vt_pic/0/0qgqd4kcd9ajxrs1607678008104/0",
+    "new_pic_hz_country_calc": "http://puui.wetvinfo.com/vcover_hz_pic/0/0qgqd4kcd9ajxrs1607678023229/0",
+    "new_pic_hz": "http://puui.wetvinfo.com/vcover_hz_pic/0/0qgqd4kcd9ajxrs1606899697480/0",
+    "new_pic_vt": "http://puui.wetvinfo.com/vcover_vt_pic/0/0qgqd4kcd9ajxrs1606899664143/0",
+    "update_desc_country": "{\"153513\":\"Season 2 dimulai dari EP27! | Setiap hari Rabu pukul 09.00 WIB (1EP/hari) | VIP tonton lebih awal | Total 78EP\",\"153548\":\"\",\"153566\":\"\",\"153576\":\"\",\"8227797\":\"\"}",
+    "online_language": [
+      "14",
+      "1491937",
+      "1491963",
+      "1491973",
+      "1491988",
+      "1491994",
+      "40",
+      "8",
+      "8229847",
+      "9"
+    ],
+    "default_pay_status": 6,
+    "holly_online_time": null,
+    "areaName": "Daratan/Tiongkok",
+    "head_time": null,
+    "episode_updated_country": "45",
+    "main_genres": [
+      "Sci-Fi",
+      "Perang",
+      "Petualangan",
+      "Memproduksi"
+    ],
+    "video_ids_country": [
+      "k0035tgusyc",
+      "i0035ns3aym",
+      "j003504pfyy",
+      "g0035yym5oz",
+      "z0035dfmb4a",
+      "l00353dxesm",
+      "z0035nvyi0v",
+      "f0035e891c0",
+      "l00352mgnlt",
+      "j00359cxym8",
+      "o0035gfd8m5",
+      "i0035kiuirs",
+      "h0035iee3z1",
+      "q0036eymdlq",
+      "j0036uy6u7r",
+      "k0036fxvy26",
+      "s00365ozvb9",
+      "y0036ak2ddd",
+      "h0036vbig8o",
+      "j0036i8im9m",
+      "d0036escmo8",
+      "a0036rnjgy9",
+      "s0036yyydik",
+      "f0036m21n0u",
+      "h0036ognywq",
+      "s0036ardtmt",
+      "i00415gllch",
+      "p004132n257",
+      "p0041a1sae0",
+      "e0041g8xpzg",
+      "c0041vqyvu0",
+      "l0041bhhjzd",
+      "p0041e28528",
+      "w0042ocn8i0",
+      "j00429p9ftc",
+      "f00425b13h5",
+      "i0042nqzp2n",
+      "q0042bl6is2",
+      "o00436lknoe",
+      "s004300ywqa",
+      "m0043c65eo9",
+      "h0043lnyuk1",
+      "p0043wimqmm",
+      "y0043qrsdc9",
+      "g00433nt37p"
+    ],
+    "update_desc": null,
+    "is_trailer": 0,
+    "cover_id": "0qgqd4kcd9ajxrs",
+    "leading_actor_id": null,
+    "leading_actorX": null,
+    "second_title": "Penakluk Bintang",
+    "clips_ids_country": [
+      "w00357x0z4k",
+      "w00351efo4c",
+      "p0035eeps30"
+    ],
+    "category_map": [
+      10994,
+      "Film/Sinetron",
+      1204,
+      "animasi",
+      3,
+      "animasi"
+    ],
+    "director": null,
+    "operation_type_country": "{\"153513\":\"\",\"153548\":\"\",\"153566\":\"\",\"153576\":\"\",\"8227797\":\"\"}",
+    "pay_status": 6,
+    "year_name": [
+      "2020"
+    ],
+    "episode_all": "78",
+    "description": "Di Bumi, sebuah bencana memicu perubahan pada berbagai spesies. Yang kuat selamat dan yang lemah punah. Di tengah situasi itu, Luo Feng mewarisi kekuatan pemilik bintang Yunmo dan menjadi satu dari tiga orang yang paling perkasa di Bumi. Dalam sebuah duel dengan monster pelahap, ia kehilangan dagingnya. Namun ia kemudian berhasil mengambil daging sang monster. Dari situ ia mengembangkan tubuhnya jadi laksana manusia. Kemudian, Bumi bukan lagi sasarannya. Ia melanglang buana ke alam semesta.",
+    "imgtag_ver": {
+      "0": {
+        "text": "VIP",
+        "color": "#FF4A22"
+      },
+      "1": {
+        "text": "updated to 45",
+        "color": "#FF4A22"
+      }
+    },
+    "is_area_limit": 0,
+    "type": 3,
+    "cover_checkup_grade": 4,
+    "tail_time": null
+  },
+  {
+    "type": 3,
+    "is_area_limit": 0,
+    "cover_checkup_grade": 4,
+    "title": "Mushoku Tensei: Jobless Reincarnation S1 Bagian 2",
+    "protagonist_name": null,
+    "new_pic_vt_country_calc": "http://puui.wetvinfo.com/vcover_vt_pic/0/ecmp615ib5kswl31632969294053/0",
+    "new_pic_hz_country_calc": "http://puui.wetvinfo.com/vcover_hz_pic/0/ecmp615ib5kswl31632969330097/0",
+    "new_pic_vt": "http://puui.wetvinfo.com/vcover_vt_pic/0/ecmp615ib5kswl31633503901784/0",
+    "new_pic_hz": "http://puui.wetvinfo.com/vcover_hz_pic/0/ecmp615ib5kswl31633503916914/0",
+    "update_desc_country": "{\"153513\":\"Setiap hari Minggu pukul 23:00 WIB (1EP/hari) | Total 23+1EP\"}",
+    "online_language": [
+      "1491937",
+      "1491963",
+      "1491973",
+      "1491988",
+      "1491994",
+      "40",
+      "8229847"
+    ],
+    "default_pay_status": null,
+    "holly_online_time": null,
+    "areaName": "",
+    "head_time": null,
+    "episode_updated_country": "24",
+    "main_genres": [
+      "Petualangan"
+    ],
+    "update_desc": null,
+    "video_ids_country": [
+      "d00392whw7o",
+      "l0039gvdj27",
+      "b00398q1ssd",
+      "p0039f42jg8",
+      "g0039hkuysj",
+      "r0039a1mj74",
+      "k0039e7coco",
+      "z0039qrgs3x",
+      "n0039ljphd1",
+      "y0039oc2pw4",
+      "r0039qqcxxq",
+      "x0040mwfgbe",
+      "w0040gplhig",
+      "j00404seukq",
+      "i00401uzlkk",
+      "e0040wgj4ry",
+      "e0041vmipbu",
+      "j0041rfep46",
+      "b0041admvut",
+      "h0041hsrvi8",
+      "c0041ymy6tp",
+      "u0041gwt3bi",
+      "m0041zn6fbz",
+      "l0042oww1ol"
+    ],
+    "is_trailer": 0,
+    "cover_id": "ecmp615ib5kswl3",
+    "leading_actor_id": null,
+    "leading_actorX": null,
+    "second_title": "Mushoku Tensei: Jobless Reincarnation S1 Bagian 2",
+    "clips_ids_country": [
+      "g0040x2ek8p"
+    ],
+    "category_map": [
+      10994,
+      "Film/Sinetron",
+      1204,
+      "animasi",
+      3,
+      "animasi"
+    ],
+    "director": null,
+    "operation_type_country": "{\"8227797\":\"\"}",
+    "pay_status": null,
+    "episode_all": "24",
+    "year_name": [
+      "2021"
+    ],
+    "description": "Mushoku Tensei Jobless Reincarnation musim tayang pertama bagian kedua dimulai saat bagian pertamanya berakhir. Musim tayang baru ini akan menampilkan pertemuan yang dinantikan Rudeus dan ratu Benua Iblis. Karena Rudeus akhirnya menjadi bagian Universitas Magis Ronoa, dia kembali bertemu Sylphiette. Ada banyak petualangan baru menanti Rudeus. Duduk dan nikmati berbagai kekacauan yang terjadi di Ronoa Magic University.",
+    "imgtag_ver": {
+      "1": {
+        "text": "Full",
+        "color": "#FF4A22"
+      }
+    },
+    "tail_time": null
+  }
+];
+
+/**
+ * Retrieved from URL : 
+ * https://www.iflix.com/_next/data/tuvqPK5nDW3xVsPlEE7AG/play/r6yht13srzu48mc-FULLMETAL-ALCHEMIST-2003.json?ids=r6yht13srzu48mc-FULLMETAL-ALCHEMIST-2003
+ * 
+ * Where we get from : 
  * pageProps -> "hot" attribute
  * 
  * title should be from "title"
