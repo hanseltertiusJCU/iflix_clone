@@ -5,12 +5,6 @@
     width="460"
     persistent
   >
-    <template v-slot:activator="{ on, attrs }">
-      <div class="profile-picture-container" v-bind="attrs" v-on="on">
-        <v-icon color="#ff4a22" size="36">mdi-account-circle</v-icon>
-      </div>
-    </template>
-
     <v-card>
       <v-card-title>
         <v-spacer></v-spacer>
@@ -242,14 +236,12 @@ export default {
       this.onResetSignInValue();
       this.showSignUpForm = true;
     },
-    // on reset sign in value
     onResetSignInValue() {
       this.signInUsernameInput = "";
       this.signInPasswordInput = "";
       this.signInFormValid = false;
       this.showingSignInPassword = false;
     },
-    // on reset sign up value
     onResetSignUpValue() {
       this.signUpUsernameInput = "";
       this.signUpPasswordInput = "";
@@ -260,19 +252,6 @@ export default {
       this.showingSignUpPassword = false;
     },
     onSignInButtonClicked() {
-      console.log("sign in button clicked");
-      /**
-       * TODO :
-       * this one should use the calling function into the axios,
-       * we will use the JSON
-       *
-       * Method : POST
-       * Endpoint : https://movie-api-sample.herokuapp.com/api/v1/user/login
-       *
-       * input will be an object with the attribute of :
-       * "username"
-       * "password"
-       */
       const input = {
         username: this.signInUsernameInput,
         password: this.signInPasswordInput,
@@ -284,22 +263,6 @@ export default {
       this.$emit("input", false);
     },
     onSignUpButtonClicked() {
-      console.log("sign up button clicked");
-      /**
-       * TODO :
-       * this one should use the calling function into the axios,
-       * we will use the JSON
-       *
-       * Method : POST
-       * Endpoint : https://movie-api-sample.herokuapp.com/api/v1/user/register
-       *
-       * input will be an object with the attribute of :
-       * "username"
-       * "password"
-       * "first_name"
-       * "last_name"
-       * "email"
-       */
       const input = {
         username: this.signUpUsernameInput,
         password: this.signUpPasswordInput,
@@ -364,8 +327,7 @@ export default {
 }
 
 .back-button-icon:hover,
-.close-dialog-button-icon:hover,
-.profile-picture-container:hover {
+.close-dialog-button-icon:hover {
   cursor: pointer;
 }
 </style>

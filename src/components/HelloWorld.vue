@@ -98,9 +98,18 @@
                     class="video-player-login-prompt-input"
                     v-if="!config.isLoggedIn"
                   >
-                    <span class="video-player-login-button">Log in</span>
+                    <span
+                      @click.stop="showLoginDialog = true"
+                      class="video-player-login-button"
+                      >Log in</span
+                    >
                     &nbsp;to join the comments
                   </div>
+                  <LoginDialog
+                    v-model="showLoginDialog"
+                    @sign-up-clicked="onSignUpClicked"
+                    @sign-in-clicked="onSignInClicked"
+                  />
                 </div>
 
                 <div class="tw-flex-none">
@@ -450,6 +459,7 @@ export default {
       codeToCopy:
         '<iframe frameborder="0" src="https://www.iflix.com/en/play/r6yht13srzu48mc-FULLMETAL-ALCHEMIST-2003/c0040l97su8-EP1-FULLMETAL-ALCHEMIST-2003" allowFullScreen="true"></iframe>',
       isDescriptionExpanded: false,
+      showLoginDialog: false,
       /**
        * scrollYPosition, isScrollYInScrolledState used for all components
        */

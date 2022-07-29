@@ -451,6 +451,12 @@
             </v-menu>
           </div>
           <div v-else>
+            <div
+              class="profile-picture-container"
+              @click.stop="showProfileDialog = true"
+            >
+              <v-icon color="#ff4a22" size="36">mdi-account-circle</v-icon>
+            </div>
             <LoginDialog
               v-model="showProfileDialog"
               @sign-up-clicked="onSignUpClicked"
