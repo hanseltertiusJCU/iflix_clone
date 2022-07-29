@@ -285,7 +285,7 @@
               <v-list>
                 <v-list-item
                   v-for="(item, index) in channelsList"
-                  :key="item.channel.id"
+                  :key="`${item.channel.id}-in-channel-index-item-${index}`"
                 >
                   <router-link
                     :to="getChannelUrl(item, index)"

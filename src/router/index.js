@@ -8,26 +8,25 @@ import MovieDetail from '@/components/common/routes/MovieDetail'
 Vue.use(Router)
 
 export default new Router({
-  routes: [
-    // {
-    //   path: '/',
-    //   name: 'HomeComponent',
-    //   component: HomeComponent
-    // },
-    // {
-    //   path: '/channel/:channelId',
-    //   name: 'MovieList',
-    //   component: MovieList,
-    // },
+  routes: [{
+      path: '/',
+      name: 'HomeComponent',
+      component: HomeComponent
+    },
+    {
+      path: '/channel/:channelId',
+      name: 'MovieList',
+      component: MovieList,
+    },
     // {
     //   path: '/play/:videoId/:videoName/:episodeId/:episodeName',
     //   name: 'MovieDetail',
     //   component: MovieDetail,
     // },
-    {
-      path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
-    }
+    // {
+    //   path: '/',
+    //   name: 'HelloWorld',
+    //   component: HelloWorld
+    // }
   ]
 })

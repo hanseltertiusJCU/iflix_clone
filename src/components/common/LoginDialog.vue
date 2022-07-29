@@ -59,7 +59,6 @@
               background-color="#f6f6f6"
             />
 
-            <!-- todo : first name, last name, email -->
             <v-text-field
               v-model="signUpFirstNameInput"
               label=""

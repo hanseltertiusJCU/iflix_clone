@@ -42,7 +42,10 @@
     </div>
 
     <div class="album-item-list-container" :style="gridStyle">
-      <div v-for="item in displayedItems" :key="item.id">
+      <div
+        v-for="(item, index) in displayedItems"
+        :key="`id-${item.id}-in-displayed-items-${index}`"
+      >
         <AlbumItem
           :albumImageUrl="getAlbumImageUrl(item)"
           :albumLabels="getAlbumLabel(item)"
