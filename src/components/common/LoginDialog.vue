@@ -340,6 +340,22 @@ export default {
   color: #fff !important;
 }
 
+.sign-up-menu-container {
+  @apply tw-flex;
+  @apply tw-flex-row;
+  @apply tw-items-center;
+  @apply tw-mb-6;
+}
+
+.back-button-sign-up-menu-container {
+  @apply tw-flex-none;
+}
+
+.title-sign-up-menu-container {
+  @apply tw-flex-1;
+  text-align: center;
+}
+
 .sign-up-button {
   color: #ff4a22;
 }

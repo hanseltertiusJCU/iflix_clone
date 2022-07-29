@@ -5,7 +5,10 @@
         {{ albumTitleText }}
       </div>
 
-      <div class="album-navigation-bar-navigation-page-container">
+      <div
+        class="album-navigation-bar-navigation-page-container"
+        v-if="isAbleToPaginate"
+      >
         <div
           class="change-page-navigation-button-container"
           @click="goToPreviousPage"
@@ -164,8 +167,8 @@ export default {
       this.getDisplayedItems(this.currentPage);
     },
     onOpenAlbumItem(item) {
-      this.$emit('on-open-album-item', item);
-    }
+      this.$emit("on-open-album-item", item);
+    },
   },
 };
 </script>
