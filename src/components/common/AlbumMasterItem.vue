@@ -44,6 +44,8 @@
     <div class="album-item-list-container" :style="gridStyle">
       <div v-for="item in displayedItems" :key="item.id">
         <AlbumItem
+          :albumImageUrl="getAlbumImageUrl(item)"
+          :albumLabels="getAlbumLabel(item)"
           :albumDataItem="item"
           :albumTitle="item.title"
           :albumSubtitle="getSubtitleText(item)"
@@ -150,6 +152,13 @@ export default {
     getSubtitleText(item) {
       return this.isRecommendedItem ? item.second_title : item.subtitle;
     },
+    getAlbumImageUrl(item) {
+      return this.isRecommendedItem ? item.new_pic_hz : item.pic;
+    },
+    getAlbumLabel(item) {
+      console.log("item in getAlbumLabel : ", item);
+      return this.isRecommendedItem ? item.imgtag_ver : item.labels;
+    },
     goToPreviousPage() {
       if (this.currentPage === FIRST_PAGE) {
         return;
@@ -167,7 +176,11 @@ export default {
       this.getDisplayedItems(this.currentPage);
     },
     onOpenAlbumItem(item) {
-      this.$emit("on-open-album-item", item);
+      const selectedItem = {
+        ...item,
+        isRecommendedItem: this.isRecommendedItem,
+      };
+      this.$emit("on-open-album-item", selectedItem);
     },
   },
 };

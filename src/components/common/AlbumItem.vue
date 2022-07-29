@@ -5,19 +5,15 @@
       @click="onOpenAlbumItem(albumDataItem)"
     >
       <div class="image-on-album-item-container">
-        <img class="image-album-item" :src="albumDataItem.pic" />
+        <img class="image-album-item" :src="albumImageUrl" />
         <div class="album-item-image-info-container">
           <ImageTag
-            :text="albumDataItem.labels[0] ? albumDataItem.labels[0].text : ''"
-            :color="
-              albumDataItem.labels[0]
-                ? albumDataItem.labels[0].color
-                : 'transparent'
-            "
+            :text="albumLabels[0] ? albumLabels[0].text : ''"
+            :color="albumLabels[0] ? albumLabels[0].color : 'transparent'"
           />
 
-          <span class="tw-text-right" v-if="albumDataItem.labels[1]">{{
-            albumDataItem.labels[1].text
+          <span class="tw-text-right" v-if="albumLabels[1]">{{
+            albumLabels[1].text
           }}</span>
         </div>
       </div>
@@ -51,6 +47,13 @@ export default {
     albumSubtitle: {
       type: String,
       default: "",
+    },
+    albumImageUrl: {
+      type: String,
+      default: "",
+    },
+    albumLabels: {
+      required: true,
     },
   },
   name: "AlbumItem",

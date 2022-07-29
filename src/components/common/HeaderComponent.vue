@@ -289,7 +289,11 @@
                 >
                   <router-link
                     :to="getChannelUrl(item, index)"
-                    class="navigation-menu-link-item-light"
+                    :class="
+                      selectedChannelId === item.channel.id
+                        ? 'navigation-menu-link-item-selected'
+                        : 'navigation-menu-link-item-light'
+                    "
                   >
                     {{ item.channel.name }}
                   </router-link>
