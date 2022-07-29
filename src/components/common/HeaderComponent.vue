@@ -413,11 +413,18 @@
         </div>
         <div class="tw-flex-none">
           <!-- TODO : check if logged in or not -->
-          <LoginDialog
-            v-model="showProfileDialog"
-            @sign-up-clicked="onSignUpClicked"
-            @sign-in-clicked="onSignInClicked"
-          />
+          <div v-if="isLoggedIn">
+            <div class="profile-picture-container" @click="onLogout">
+              <v-icon color="#ff4a22" size="36">mdi-account-circle</v-icon>
+            </div>
+          </div>
+          <div v-else>
+            <LoginDialog
+              v-model="showProfileDialog"
+              @sign-up-clicked="onSignUpClicked"
+              @sign-in-clicked="onSignInClicked"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -452,6 +459,9 @@ export default {
     },
     onSelectLanguage(item) {
       this.$emit("on-select-language", item);
+    },
+    onLogout() {
+      this.$emit("on-log-out");
     },
     getChannelUrl(item, index) {
       if (index === 0) {

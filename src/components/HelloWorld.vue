@@ -6,10 +6,11 @@
       :languagesList="languageConfigList"
       :selectedChannelId="selectedChannelId"
       :selectedLanguageId="config.langId"
-      :isLoggedIn="isLoggedIn"
+      :isLoggedIn="config.isLoggedIn"
       @sign-up-clicked="onSignUpClicked"
       @sign-in-clicked="onSignInClicked"
       @on-select-language="onSelectLanguage"
+      @on-log-out="onLogout"
     />
 
     <div class="content-container">
@@ -81,7 +82,7 @@
 
                 <div class="video-player-input-field-container">
                   <v-text-field
-                    :disabled="!isLoggedIn"
+                    :disabled="!config.isLoggedIn"
                     v-model="commentInput"
                     class="video-player-input-field"
                     label=""
@@ -96,7 +97,7 @@
                   ></v-text-field>
                   <div
                     class="video-player-login-prompt-input"
-                    v-if="!isLoggedIn"
+                    v-if="!config.isLoggedIn"
                   >
                     <span class="video-player-login-button">Log in</span>
                     &nbsp;to join the comments
@@ -434,7 +435,6 @@ export default {
       carouselItems: [],
       detailedVideoItemInfo: {},
       episodesList: [],
-      isLoggedIn: false,
       /**
        * Dynamic value of url and code, will set it based on route
        */
@@ -557,11 +557,19 @@ export default {
       await this.onLoadVideoFromChannelItem();
     },
     onResetCommentInput() {
-      if (!this.isLoggedIn) {
+      if (!this.config.isLoggedIn) {
         return;
       }
 
       this.commentInput = "";
+    },
+    onLogout() {
+      const configToUpdate = {
+        token: null,
+        username: null,
+        isLoggedIn: false,
+      };
+      this.$store.commit("updateConfig", configToUpdate);
     },
     isSelectedEpisodeItem(item) {
       return item.vid === this.selectedVideoId;
