@@ -8,6 +8,9 @@
       :selectedChannelId="selectedChannelId"
       :selectedLanguageId="selectedLanguageId"
       :isLoggedIn="false"
+      @sign-up-clicked="onSignUpClicked"
+      @sign-in-clicked="onSignInClicked"
+      @on-select-language="onSelectLanguage"
     />
 
     <!-- todo : content container, the page implementation should be change, where the content should be the content as well as the footer -->
@@ -625,6 +628,19 @@ export default {
        * We try to store the input into the VueX Store
        */
       console.log("sign in clicked with item : ", item);
+    },
+    onSelectLanguage(item) {
+      /**
+       * TODO :
+       * - we have to extract some attributes :
+       * a) langId
+       * b) langName
+       * c) langCode
+       *
+       * then those attributes in the newly created object should commit
+       * the state in VueX
+       */
+      console.log("on select language : ", item);
     },
     onOpenCarouselItem(item) {
       console.log("open carousel item : ", item);
