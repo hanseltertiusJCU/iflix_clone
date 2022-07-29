@@ -7,13 +7,12 @@
       :languagesList="languageConfigList"
       :selectedChannelId="selectedChannelId"
       :selectedLanguageId="selectedLanguageId"
-      :isLoggedIn="false"
+      :isLoggedIn="isLoggedIn"
       @sign-up-clicked="onSignUpClicked"
       @sign-in-clicked="onSignInClicked"
       @on-select-language="onSelectLanguage"
     />
 
-    <!-- todo : content container, the page implementation should be change, where the content should be the content as well as the footer -->
     <div class="content-container">
       <div class="swiper-component-container">
         <swiper
@@ -51,16 +50,21 @@
             v-for="(item, index) in carouselItems.items"
             :key="index"
           >
-            <!-- todo : container -->
             <div class="swiper-gallery-thumbs-text-container">
               <span class="swiper-gallery-thumbs-text">{{ item.title }}</span>
             </div>
-            <!-- todo : text-container -->
           </swiper-slide>
         </swiper>
       </div>
 
-      <!-- TODO : we will do the layout for the video upload data -->
+      <AlbumMasterItem
+        :gridColumnsPerItem="6"
+        :gridRowsPerItem="2"
+        :isRecommendedItem="false"
+        :albumTitleText="albumItem.name"
+        :albumDataItems="albumItem.items"
+        @on-open-album-item="onOpenAlbumItem"
+      />
 
       <!-- Video Player Component -->
       <div class="video-player-component-container">
@@ -76,10 +80,10 @@
                   ></v-switch>
                 </div>
 
-                <!-- todo : after the switch, we need to provide a text input field, disabled when logged out, enabled when logged in -->
                 <div class="video-player-input-field-container">
                   <v-text-field
-                    :disabled="isNotLoggedIn"
+                    :disabled="!isLoggedIn"
+                    v-model="commentInput"
                     class="video-player-input-field"
                     label=""
                     placeholder=""
@@ -91,7 +95,10 @@
                     hide-details
                     background-color="#000"
                   ></v-text-field>
-                  <div class="video-player-login-prompt-input">
+                  <div
+                    class="video-player-login-prompt-input"
+                    v-if="!isLoggedIn"
+                  >
                     <span class="video-player-login-button">Log in</span>
                     &nbsp;to join the comments
                   </div>
@@ -99,6 +106,7 @@
 
                 <div class="tw-flex-none">
                   <v-btn
+                    @click="onResetCommentInput"
                     class="video-player-button"
                     color="rgba(41,42,60,0.6)"
                     tile
@@ -110,15 +118,15 @@
           </div>
           <div class="video-player-list-container">
             <div class="video-player-title-text">
-              {{ detailedVideoItemInfo.title }}
+              {{ detailedVideoItemInfoTitleText }}
             </div>
 
             <div class="video-player-tags-list">
               <div
-                v-if="Object.keys(detailedVideoItemInfo.imgtag_ver).length > 0"
+                v-if="Object.keys(detailedVideoItemInfoImgTagVer).length > 0"
               >
                 <div
-                  v-for="(item, index) in detailedVideoItemInfo.imgtag_ver"
+                  v-for="(item, index) in detailedVideoItemInfoImgTagVer"
                   :key="index"
                 >
                   <ImageTag :text="item.text" :color="item.color" />
@@ -127,7 +135,7 @@
             </div>
 
             <div class="video-player-episodes-list">
-              <div v-for="(item, index) in videosList" :key="index">
+              <div v-for="(item, index) in episodesList" :key="index">
                 <EpisodeItem
                   :episodeItem="item"
                   :episodeText="item.episode"
@@ -139,15 +147,6 @@
           </div>
         </div>
       </div>
-
-      <AlbumMasterItem
-        :gridColumnsPerItem="6"
-        :gridRowsPerItem="2"
-        :isRecommendedItem="false"
-        :albumTitleText="albumItem.name"
-        :albumDataItems="albumItem.items"
-        @on-open-album-item="onOpenAlbumItem"
-      />
 
       <!-- temporary code -->
       <div class="tw-mb-16"></div>
@@ -166,32 +165,34 @@
         </div>
       </div>
 
-      <AlbumMasterItem
-        :gridColumnsPerItem="4"
-        :gridRowsPerItem="2"
-        :isRecommendedItem="true"
-        albumTitleText="Recommended for you"
-        :albumDataItems="recommendationList"
-        @on-open-album-item="onOpenAlbumItem"
-      />
-
-      <!-- todo : need to have a video player component -->
-
-      <!-- todo : need to have a navigation for album list -->
+      <div v-if="recommendationList.length > 0">
+        <AlbumMasterItem
+          :gridColumnsPerItem="4"
+          :gridRowsPerItem="2"
+          :isRecommendedItem="true"
+          albumTitleText="Recommended for you"
+          :albumDataItems="recommendationList"
+          @on-open-album-item="onOpenAlbumItem"
+        />
+      </div>
 
       <div class="video-detail-info-container">
-        <!-- TODO : title should be used from attribute "title" -->
-        <div class="video-detail-info-title">Video Detail Item Title Test</div>
+        <div class="video-detail-info-title">
+          {{ detailedVideoItemInfoTitleText }}
+        </div>
 
         <div class="video-detail-info-tags-container">
-          <!-- TODO : the first item should be -> the horizontal thing should be from the attribute "imgtag_ver", will use for loop for that -->
-          <div class="video-detail-info-tag-item">
-            <div class="video-detail-info-tag-item-decoration"></div>
-            <!-- todo : we will use the attribute "text" for that -->
-            <span>Tag Item Test</span>
+          <div
+            class="video-detail-info-tag-item"
+            v-for="(item, index) in detailedVideoItemInfoImgTagVer"
+            :key="index"
+          >
+            <div class="video-detail-info-tag-item">
+              <div class="video-detail-info-tag-item-decoration"></div>
+              <span>{{ item.text }}</span>
+            </div>
           </div>
 
-          <!-- TODO : the second item should be share, basically we want to use the v-menu thing -->
           <v-menu open-on-hover bottom offset-y :close-on-content-click="false">
             <template v-slot:activator="{ on, attrs }">
               <div
@@ -258,7 +259,7 @@
                           hide-details
                         ></v-text-field>
                         <v-btn
-                          class="tw-rounded-none"
+                          class="share-link-button"
                           width="112px"
                           height="56px"
                           outlined
@@ -281,7 +282,7 @@
                           hide-details
                         ></v-text-field>
                         <v-btn
-                          class="tw-rounded-none"
+                          class="share-link-button"
                           width="112px"
                           height="56px"
                           outlined
@@ -309,109 +310,13 @@
 
         <div class="video-detail-description-container">
           <div v-if="isDescriptionExpanded">
-            <!-- todo : must use from attribute "description" -->
             <div class="video-detail-description-content-expanded">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Recusandae nemo alias consequuntur laborum rem, itaque ullam natus
-              quasi et velit incidunt, unde cupiditate veritatis quaerat neque
-              dolore aut! Et quo molestias ratione omnis corrupti cum non iure
-              cupiditate ipsum maxime deleniti commodi minus, veniam, quibusdam
-              temporibus? Possimus et esse eveniet maxime nemo. Alias sint ipsam
-              cupiditate fugiat iure quo vero quasi ipsum totam sunt enim fugit
-              tempora, dolorum harum nihil ad nostrum veniam quam dolores
-              architecto expedita similique quaerat distinctio. Non quisquam
-              fuga ut in aperiam consectetur inventore possimus vel, odit dicta
-              amet deserunt molestias dignissimos natus? Blanditiis eius
-              reprehenderit sequi et, voluptatum ducimus, cum aspernatur
-              consequatur nostrum consequuntur quidem accusamus corrupti.
-              Tenetur a doloremque nam reprehenderit magni molestiae aliquid.
-              Explicabo esse deserunt eum sint! Aut dignissimos, nemo eaque
-              fugiat animi nam hic dolores omnis deleniti dolor in laborum nisi
-              veniam consectetur harum nihil. Non corrupti quia porro placeat
-              eligendi, sint consequatur esse fuga hic? Ducimus veritatis
-              reprehenderit fuga ut atque ipsum unde? Id quas esse mollitia
-              eligendi deserunt ea dolore maxime error soluta facilis recusandae
-              tenetur asperiores debitis quo modi illo, vero, excepturi
-              molestiae dolores aliquid? Ad qui ratione laboriosam dignissimos
-              ducimus? Ad enim voluptas id officiis? Numquam odio saepe
-              voluptate ipsam sed, unde ratione magni et, harum officiis
-              asperiores impedit consequuntur, laudantium voluptatibus nisi nam
-              pariatur obcaecati nulla maxime quisquam eaque. Fugit, odit
-              voluptate incidunt eveniet magnam in neque vel minus delectus
-              harum dicta, temporibus reiciendis impedit laborum mollitia velit
-              dolore architecto quidem, nobis beatae laudantium. Odit, earum?
-              Autem vel facilis dolorum veritatis, culpa ratione, et voluptate
-              voluptatum eius non molestias tempora error laudantium facere
-              officia accusantium expedita. Reiciendis, aliquid. Porro veritatis
-              itaque voluptate hic possimus voluptatum saepe incidunt similique,
-              expedita error velit fugit nisi repudiandae sunt dicta fugiat et
-              magnam? Maiores, ratione quia. Iure doloremque ratione quisquam
-              obcaecati quos saepe provident tempore veniam quibusdam, nesciunt
-              exercitationem dolorem quia adipisci ipsum fuga consequuntur fugit
-              nam, ex deserunt quam numquam! Tempore blanditiis dolorem dolore
-              illum minus ad soluta incidunt omnis repudiandae mollitia deserunt
-              magni assumenda rem ratione amet sint dolores nulla, voluptatem
-              impedit unde velit adipisci qui consequuntur molestiae. Odio
-              similique laboriosam repudiandae quasi deserunt nulla optio veniam
-              consequatur ea voluptas corporis modi provident commodi enim,
-              sequi consectetur rerum, rem, ducimus perferendis. Expedita,
-              suscipit sunt minus dicta, atque dolorem accusantium, architecto
-              dignissimos reprehenderit unde labore necessitatibus placeat
-              accusamus vitae. Perferendis voluptatem cupiditate hic
-              accusantium. Et nobis molestiae inventore a?
+              {{ detailedVideoItemInfoDescriptionText }}
             </div>
           </div>
           <div v-else>
-            <!-- todo : must use from attribute "description" -->
             <div class="video-detail-description-content">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Recusandae nemo alias consequuntur laborum rem, itaque ullam natus
-              quasi et velit incidunt, unde cupiditate veritatis quaerat neque
-              dolore aut! Et quo molestias ratione omnis corrupti cum non iure
-              cupiditate ipsum maxime deleniti commodi minus, veniam, quibusdam
-              temporibus? Possimus et esse eveniet maxime nemo. Alias sint ipsam
-              cupiditate fugiat iure quo vero quasi ipsum totam sunt enim fugit
-              tempora, dolorum harum nihil ad nostrum veniam quam dolores
-              architecto expedita similique quaerat distinctio. Non quisquam
-              fuga ut in aperiam consectetur inventore possimus vel, odit dicta
-              amet deserunt molestias dignissimos natus? Blanditiis eius
-              reprehenderit sequi et, voluptatum ducimus, cum aspernatur
-              consequatur nostrum consequuntur quidem accusamus corrupti.
-              Tenetur a doloremque nam reprehenderit magni molestiae aliquid.
-              Explicabo esse deserunt eum sint! Aut dignissimos, nemo eaque
-              fugiat animi nam hic dolores omnis deleniti dolor in laborum nisi
-              veniam consectetur harum nihil. Non corrupti quia porro placeat
-              eligendi, sint consequatur esse fuga hic? Ducimus veritatis
-              reprehenderit fuga ut atque ipsum unde? Id quas esse mollitia
-              eligendi deserunt ea dolore maxime error soluta facilis recusandae
-              tenetur asperiores debitis quo modi illo, vero, excepturi
-              molestiae dolores aliquid? Ad qui ratione laboriosam dignissimos
-              ducimus? Ad enim voluptas id officiis? Numquam odio saepe
-              voluptate ipsam sed, unde ratione magni et, harum officiis
-              asperiores impedit consequuntur, laudantium voluptatibus nisi nam
-              pariatur obcaecati nulla maxime quisquam eaque. Fugit, odit
-              voluptate incidunt eveniet magnam in neque vel minus delectus
-              harum dicta, temporibus reiciendis impedit laborum mollitia velit
-              dolore architecto quidem, nobis beatae laudantium. Odit, earum?
-              Autem vel facilis dolorum veritatis, culpa ratione, et voluptate
-              voluptatum eius non molestias tempora error laudantium facere
-              officia accusantium expedita. Reiciendis, aliquid. Porro veritatis
-              itaque voluptate hic possimus voluptatum saepe incidunt similique,
-              expedita error velit fugit nisi repudiandae sunt dicta fugiat et
-              magnam? Maiores, ratione quia. Iure doloremque ratione quisquam
-              obcaecati quos saepe provident tempore veniam quibusdam, nesciunt
-              exercitationem dolorem quia adipisci ipsum fuga consequuntur fugit
-              nam, ex deserunt quam numquam! Tempore blanditiis dolorem dolore
-              illum minus ad soluta incidunt omnis repudiandae mollitia deserunt
-              magni assumenda rem ratione amet sint dolores nulla, voluptatem
-              impedit unde velit adipisci qui consequuntur molestiae. Odio
-              similique laboriosam repudiandae quasi deserunt nulla optio veniam
-              consequatur ea voluptas corporis modi provident commodi enim,
-              sequi consectetur rerum, rem, ducimus perferendis. Expedita,
-              suscipit sunt minus dicta, atque dolorem accusantium, architecto
-              dignissimos reprehenderit unde labore necessitatibus placeat
-              accusamus vitae. Perferendis voluptatem cupiditate hic
-              accusantium. Et nobis molestiae inventore a?
+              {{ detailedVideoItemInfoDescriptionText }}
             </div>
             <div class="video-detail-description-content-shadow"></div>
           </div>
@@ -434,7 +339,7 @@
 import {
   HEADER_HEIGHT,
   DETAILED_VIDEO_ITEM_INFO,
-  VIDEOS_LIST,
+  EPISODES_LIST,
   CAROUSEL_ITEMS,
   HOT_ITEMS,
   ALBUM_ITEM,
@@ -494,32 +399,69 @@ export default {
         touchRatio: 0.2,
         slideToClickedSlide: true,
       },
+      /**
+       * The variable to be stored in VueX Store is like some kind of configuration :
+       * - langName
+       * - langCode
+       * - langId
+       * - username
+       * - token
+       * - isLoggedIn
+       */
+      /**
+       * While the :
+       * - selectedVideoId is to be used as route in video detail page
+       * - selectedChannelId is used as route in video list page
+       */
       selectedVideoId: "c0040l97su8",
       selectedChannelId: "1001",
       selectedLanguageId: 1491988,
       enableBubbleComments: false,
+      commentInput: "",
+      /**
+       * List item :
+       * - channelsList
+       * - languageConfigList
+       * - albumItems (cus there are more than 1 album category)
+       * - carouselItems
+       *
+       * Detailed Item :
+       * - channelsList
+       * - languageConfigList
+       * - detailedVideoItemInfo
+       * - episodesList
+       * - recommendationList
+       * - hotItems
+       */
       // we will use the data
-      channelsList: CHANNELS_LIST,
-      languageConfigList: LANGUAGES_CONFIG_LIST,
+      channelsList: [],
+      languageConfigList: [],
       albumItem: ALBUM_ITEM,
-      recommendationList: RECOMMENDATION_LIST,
-      hotItems: HOT_ITEMS,
-      carouselItems: CAROUSEL_ITEMS,
+      recommendationList: [],
+      hotItems: [],
+      carouselItems: [],
       detailedVideoItemInfo: DETAILED_VIDEO_ITEM_INFO,
-      videosList: VIDEOS_LIST,
-      isNotLoggedIn: true,
+      episodesList: [],
+      isLoggedIn: false,
+      /**
+       * Dynamic value of url and code, will set it based on route
+       */
       urlToCopy:
         "https://www.iflix.com/en/play/r6yht13srzu48mc-FULLMETAL-ALCHEMIST-2003/c0040l97su8-EP1-FULLMETAL-ALCHEMIST-2003",
       codeToCopy:
         '<iframe frameborder="0" src="https://www.iflix.com/en/play/r6yht13srzu48mc-FULLMETAL-ALCHEMIST-2003/c0040l97su8-EP1-FULLMETAL-ALCHEMIST-2003" allowFullScreen="true"></iframe>',
       isDescriptionExpanded: false,
+      /**
+       * scrollYPosition, isScrollYInScrolledState used for all components
+       */
       scrollYPosition: 0,
       isScrollYInScrolledState: false,
-      showProfileDialog: false,
     };
   },
   mounted() {
     window.addEventListener("scroll", this.updateScroll);
+
+    this.setItemValues();
 
     // change the looped slides into the length of the carousel if there are any data
     this.$nextTick(() => {
@@ -531,7 +473,43 @@ export default {
       swiperThumbs.controller.control = swiperTop;
     });
   },
+  computed: {
+    detailedVideoItemInfoTitleText() {
+      return Object.keys(this.detailedVideoItemInfo).length > 0
+        ? this.detailedVideoItemInfo.title
+        : "";
+    },
+    detailedVideoItemInfoImgTagVer() {
+      return Object.keys(this.detailedVideoItemInfo).length > 0
+        ? this.detailedVideoItemInfo.imgtag_ver
+        : {};
+    },
+    detailedVideoItemInfoDescriptionText() {
+      return Object.keys(this.detailedVideoItemInfo).length > 0
+        ? this.detailedVideoItemInfo.description
+        : "";
+    },
+  },
   methods: {
+    // todo : set values, so that it simulates like the final product
+    setItemValues() {
+      this.channelsList = CHANNELS_LIST;
+      this.languageConfigList = LANGUAGES_CONFIG_LIST;
+      this.albumItem = ALBUM_ITEM;
+      this.recommendationList = RECOMMENDATION_LIST;
+      this.hotItems = HOT_ITEMS;
+      this.carouselItems = CAROUSEL_ITEMS;
+      this.detailedVideoItemInfo = DETAILED_VIDEO_ITEM_INFO;
+      console.log("episodes list : ", EPISODES_LIST);
+      this.episodesList = EPISODES_LIST;
+    },
+    onResetCommentInput() {
+      if (!this.isLoggedIn) {
+        return;
+      }
+
+      this.commentInput = "";
+    },
     isSelectedEpisodeItem(item) {
       return item.vid === this.selectedVideoId;
     },
@@ -785,6 +763,14 @@ export default {
 
 .video-player-login-button:hover {
   cursor: pointer;
+}
+
+.share-link-button {
+  @apply tw-rounded-none;
+}
+
+.share-link-button .v-btn__content {
+  @apply tw-text-black;
 }
 
 button.video-player-button {

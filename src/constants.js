@@ -8994,7 +8994,7 @@ export const DETAILED_VIDEO_ITEM_INFO = {
  * - "title" -> to load the URL
  * - "imgtag_ver" -> to display the image at the right most part, only if the value is not empty
  */
-export const VIDEOS_LIST = [{
+export const EPISODES_LIST = [{
     "online_language": [
       "1491937",
       "8",

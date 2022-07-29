@@ -461,9 +461,9 @@ export default {
       return `/${item.channel.id}`;
     },
     findSelectedLanguageItem(selectedLanguageId) {
-      return this.languagesList.find(
-        (item) => item.langId === selectedLanguageId
-      );
+      return this.languagesList.length > 0
+        ? this.languagesList.find((item) => item.langId === selectedLanguageId)
+        : "";
     },
   },
   data() {
@@ -578,15 +578,6 @@ a.navigation-menu-link-item-selected {
 .v-btn {
   text-transform: none;
   letter-spacing: 0;
-}
-
-.dialog-account-btn {
-  opacity: 1;
-  color: white;
-}
-
-.dialog-account-btn-disabled {
-  opacity: 0.2;
 }
 
 .checkbox-text-item:hover,
