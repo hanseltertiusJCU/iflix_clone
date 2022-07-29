@@ -1,5 +1,4 @@
 <template>
-  <!-- todo : header component -->
   <div>
     <HeaderComponent
       :isHeaderScrolled="isScrollYInScrolledState"
@@ -20,10 +19,7 @@
           :options="swiperOptionTop"
           ref="swiperTop"
         >
-          <swiper-slide
-            v-for="(item, index) in carouselItems.items"
-            :key="index"
-          >
+          <swiper-slide v-for="(item, index) in carouselItems" :key="index">
             <div
               class="swiper-gallery-top-image-container"
               @click="onOpenCarouselItem(item)"
@@ -46,10 +42,7 @@
           :options="swiperOptionThumbs"
           ref="swiperThumbs"
         >
-          <swiper-slide
-            v-for="(item, index) in carouselItems.items"
-            :key="index"
-          >
+          <swiper-slide v-for="(item, index) in carouselItems" :key="index">
             <div class="swiper-gallery-thumbs-text-container">
               <span class="swiper-gallery-thumbs-text">{{ item.title }}</span>
             </div>
@@ -58,15 +51,18 @@
       </div>
 
       <div class="video-list-album-category-content-container">
-        <!-- TODO :v-for -->
-        <AlbumMasterItem
-          :gridColumnsPerItem="6"
-          :gridRowsPerItem="2"
-          :isRecommendedItem="false"
-          :albumTitleText="albumItem.name"
-          :albumDataItems="albumItem.items"
-          @on-open-album-item="onOpenAlbumItem"
-        />
+        <div v-if="albumItems.length > 0">
+          <div v-for="(item, index) in albumItems" :key="index">
+            <AlbumMasterItem
+              :gridColumnsPerItem="6"
+              :gridRowsPerItem="2"
+              :isRecommendedItem="false"
+              :albumTitleText="item.name"
+              :albumDataItems="item.items"
+              @on-open-album-item="onOpenAlbumItem"
+            />
+          </div>
+        </div>
       </div>
 
       <!-- Video Player Component -->
@@ -346,12 +342,11 @@ import {
   HEADER_HEIGHT,
   DETAILED_VIDEO_ITEM_INFO,
   EPISODES_LIST,
-  CAROUSEL_ITEMS,
   HOT_ITEMS,
-  ALBUM_ITEM,
   RECOMMENDATION_LIST,
-  CHANNELS_LIST,
-  LANGUAGES_CONFIG_LIST,
+  SUCCESS_RESPONSE,
+  MODULE_TYPE_MODULE_ITEMS,
+  MODULE_TYPE_CAROUSEL,
 } from "@/constants";
 import ImageTag from "@/components/common/ImageTag.vue";
 import VideoTag from "@/components/common/VideoTag.vue";
@@ -365,6 +360,8 @@ import FooterComponent from "@/components/common/FooterComponent.vue";
 
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import "swiper/css/swiper.css";
+
+import axios from "axios";
 
 export default {
   name: "HelloWorld",
@@ -442,7 +439,7 @@ export default {
       // we will use the data
       channelsList: [],
       languageConfigList: [],
-      albumItem: ALBUM_ITEM,
+      albumItems: [],
       recommendationList: [],
       hotItems: [],
       carouselItems: [],
@@ -467,17 +464,19 @@ export default {
   mounted() {
     window.addEventListener("scroll", this.updateScroll);
 
+    this.onLoadEveryDataInVideoList();
+
     this.setItemValues();
 
     // change the looped slides into the length of the carousel if there are any data
-    this.$nextTick(() => {
-      this.swiperOptionTop.loopedSlides = this.carouselItems.items.length;
-      this.swiperOptionThumbs.loopedSlides = this.carouselItems.items.length;
-      const swiperTop = this.$refs.swiperTop.$swiper;
-      const swiperThumbs = this.$refs.swiperThumbs.$swiper;
-      swiperTop.controller.control = swiperThumbs;
-      swiperThumbs.controller.control = swiperTop;
-    });
+    // this.$nextTick(() => {
+    //   this.swiperOptionTop.loopedSlides = this.carouselItems.items.length;
+    //   this.swiperOptionThumbs.loopedSlides = this.carouselItems.items.length;
+    //   const swiperTop = this.$refs.swiperTop.$swiper;
+    //   const swiperThumbs = this.$refs.swiperThumbs.$swiper;
+    //   swiperTop.controller.control = swiperThumbs;
+    //   swiperThumbs.controller.control = swiperTop;
+    // });
   },
   computed: {
     detailedVideoItemInfoTitleText() {
@@ -497,14 +496,81 @@ export default {
     },
   },
   methods: {
+    async onLoadChannelSetupItem() {
+      const response = await axios.get(
+        "https://www.iflix.com/_next/data/tuvqPK5nDW3xVsPlEE7AG/channel/1001.json?id=1001&channelId=1001",
+        {
+          useCredentials: true,
+        }
+      );
+
+      console.log("response from onLoadChannelSetupItem : ", response);
+
+      if (response.status === SUCCESS_RESPONSE) {
+        const data = response.data;
+        const pageProps = data.pageProps;
+
+        this.channelsList = pageProps.channels;
+        this.languageConfigList = pageProps.langConfig;
+      }
+    },
+    async onLoadVideoFromChannelItem() {
+      const response = await axios.get(
+        "https://www.iflix.com/api/channel?id=1001",
+        {
+          useCredentials: true,
+        }
+      );
+
+      if (response.status === SUCCESS_RESPONSE) {
+        console.log(
+          "response from onLoadVideoChannelitem success : ",
+          response
+        );
+
+        const modules = response.data.response.modules;
+
+        const albumItems = modules.filter(
+          (item) => item.type === MODULE_TYPE_MODULE_ITEMS
+        );
+        this.albumItems = albumItems;
+        console.log("album items : ", this.albumItems);
+
+        const carouselItems = modules.filter(
+          (item) => item.type === MODULE_TYPE_CAROUSEL
+        );
+
+        if (carouselItems.length > 0) {
+          const carouselItem = carouselItems[0];
+          const carouselLists = carouselItem.items;
+
+          this.carouselItems = carouselLists;
+          console.log("carousel items : ", this.carouselItems);
+
+          this.$nextTick(() => {
+            console.log("next tick called");
+            this.swiperOptionTop.loopedSlides = this.carouselItems.length;
+            this.swiperOptionThumbs.loopedSlides = this.carouselItems.length;
+            const swiperTop = this.$refs.swiperTop.$swiper;
+            const swiperThumbs = this.$refs.swiperThumbs.$swiper;
+            swiperTop.controller.control = swiperThumbs;
+            swiperThumbs.controller.control = swiperTop;
+          });
+        }
+      }
+    },
+    async onLoadEveryDataInVideoList() {
+      await this.onLoadChannelSetupItem();
+      await this.onLoadVideoFromChannelItem();
+    },
     // todo : set values, so that it simulates like the final product
     setItemValues() {
-      this.channelsList = CHANNELS_LIST;
-      this.languageConfigList = LANGUAGES_CONFIG_LIST;
-      this.albumItem = ALBUM_ITEM;
+      // this.channelsList = CHANNELS_LIST;
+      // this.languageConfigList = LANGUAGES_CONFIG_LIST;
+      // this.albumItem = ALBUM_ITEM;
       this.recommendationList = RECOMMENDATION_LIST;
       this.hotItems = HOT_ITEMS;
-      this.carouselItems = CAROUSEL_ITEMS;
+      // this.carouselItems = CAROUSEL_ITEMS;
       this.detailedVideoItemInfo = DETAILED_VIDEO_ITEM_INFO;
       console.log("episodes list : ", EPISODES_LIST);
       this.episodesList = EPISODES_LIST;
