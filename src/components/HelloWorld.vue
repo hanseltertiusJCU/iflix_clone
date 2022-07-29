@@ -5,7 +5,7 @@
       :channelsList="channelsList"
       :languagesList="languageConfigList"
       :selectedChannelId="selectedChannelId"
-      :selectedLanguageId="selectedLanguageId"
+      :selectedLanguageId="config.langId"
       :isLoggedIn="isLoggedIn"
       @sign-up-clicked="onSignUpClicked"
       @sign-in-clicked="onSignInClicked"
@@ -340,11 +340,8 @@
 <script>
 import {
   HEADER_HEIGHT,
-  DETAILED_VIDEO_ITEM_INFO,
-  EPISODES_LIST,
-  HOT_ITEMS,
-  RECOMMENDATION_LIST,
   SUCCESS_RESPONSE,
+  CREATED_RESPONSE,
   MODULE_TYPE_MODULE_ITEMS,
   MODULE_TYPE_CAROUSEL,
 } from "@/constants";
@@ -362,6 +359,7 @@ import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import "swiper/css/swiper.css";
 
 import axios from "axios";
+import { mapGetters } from "vuex";
 
 export default {
   name: "HelloWorld",
@@ -402,15 +400,6 @@ export default {
         touchRatio: 0.2,
         slideToClickedSlide: true,
       },
-      /**
-       * The variable to be stored in VueX Store is like some kind of configuration :
-       * - langName
-       * - langCode
-       * - langId
-       * - username
-       * - token
-       * - isLoggedIn
-       */
       /**
        * While the :
        * - selectedVideoId is to be used as route in video detail page
@@ -468,6 +457,9 @@ export default {
     this.onLoadVideoDetailData();
   },
   computed: {
+    ...mapGetters({
+      config: "getConfig",
+    }),
     detailedVideoItemInfoTitleText() {
       return Object.keys(this.detailedVideoItemInfo).length > 0
         ? this.detailedVideoItemInfo.title
@@ -574,44 +566,32 @@ export default {
     isSelectedEpisodeItem(item) {
       return item.vid === this.selectedVideoId;
     },
-    onSignUpClicked(item) {
-      /**
-       * TODO :
-       * this one should use the calling function into the axios,
-       * we will use the JSON
-       *
-       * Method : POST
-       * Endpoint : https://movie-api-sample.herokuapp.com/api/v1/user/register
-       *
-       * input will be an object with the attribute of :
-       * "username"
-       * "password"
-       * "first_name"
-       * "last_name"
-       * "email"
-       *
-       * We will enter the activation link
-       *
-       * After that, we try to store the input into the VueX Store
-       */
-      console.log("sign up clicked with item : ", item);
+    async onSignUpClicked(item) {
+      const response = await axios.post(
+        "https://movie-api-sample.herokuapp.com/api/v1/user/register",
+        item
+      );
+
+      if (response.status === CREATED_RESPONSE) {
+        const data = response.data;
+        await axios.get(data.activation_info.url);
+      }
     },
-    onSignInClicked(item) {
-      /**
-       * TODO :
-       * this one should use the calling function into the axios,
-       * we will use the JSON
-       *
-       * Method : POST
-       * Endpoint : https://movie-api-sample.herokuapp.com/api/v1/user/login
-       *
-       * input will be an object with the attribute of :
-       * "username"
-       * "password"
-       *
-       * We try to store the input into the VueX Store
-       */
-      console.log("sign in clicked with item : ", item);
+    async onSignInClicked(item) {
+      const response = await axios.post(
+        "https://movie-api-sample.herokuapp.com/api/v1/user/login",
+        item
+      );
+
+      if (response.status === SUCCESS_RESPONSE) {
+        const data = response.data;
+        const configToUpdate = {
+          token: data.token,
+          username: item.username,
+          isLoggedIn: true,
+        };
+        this.$store.commit("updateConfig", configToUpdate);
+      }
     },
     onSelectLanguage(item) {
       /**
@@ -651,6 +631,7 @@ export default {
     updateScroll() {
       this.scrollYPosition = window.scrollY;
       this.isScrollYInScrolledState = this.scrollYPosition > HEADER_HEIGHT;
+      console.log("this.component config : ", this.$store.getters.getConfig);
     },
     copyLink() {
       navigator.clipboard.writeText(this.urlToCopy);

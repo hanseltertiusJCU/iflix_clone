@@ -1,6 +1,7 @@
 export const FIRST_PAGE = 1;
 export const HEADER_HEIGHT = 80;
 export const SUCCESS_RESPONSE = 200;
+export const CREATED_RESPONSE = 201;
 export const MODULE_TYPE_CAROUSEL = 'MODULE_TYPE_CAROUSEL';
 export const MODULE_TYPE_MODULE_ITEMS = 'MODULE_TYPE_MODULE_ITEMS';
 
