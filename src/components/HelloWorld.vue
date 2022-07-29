@@ -947,7 +947,6 @@
 
 <script>
 import {
-  FIRST_PAGE,
   HEADER_HEIGHT,
   DETAILED_VIDEO_ITEM_INFO,
   VIDEOS_LIST,
@@ -1014,8 +1013,6 @@ export default {
       detailedVideoItemInfo: DETAILED_VIDEO_ITEM_INFO,
       videosList: VIDEOS_LIST,
       isNotLoggedIn: true,
-      currentPage: 1,
-      lastPage: 2,
       urlToCopy:
         "https://www.iflix.com/en/play/r6yht13srzu48mc-FULLMETAL-ALCHEMIST-2003/c0040l97su8-EP1-FULLMETAL-ALCHEMIST-2003",
       codeToCopy:
@@ -1025,14 +1022,6 @@ export default {
       isScrollYInScrolledState: false,
       showProfileDialog: false,
     };
-  },
-  computed: {
-    isPreviousPageNavigationDisabled() {
-      return this.currentPage === FIRST_PAGE;
-    },
-    isNextPageNavigationDisabled() {
-      return this.currentPage === this.lastPage;
-    },
   },
   mounted() {
     window.addEventListener("scroll", this.updateScroll);
@@ -1101,62 +1090,6 @@ export default {
     },
     onOpenHotItem(item) {
       console.log("open hot item : ", item);
-    },
-    goToPreviousPage() {
-      if (this.currentPage === FIRST_PAGE) {
-        return;
-      }
-
-      this.currentPage--;
-
-      /**
-       * initial page = this.currentPage
-       *
-       * After subtracting the current page by 1, we will use the calculation
-       *
-       * maximum item per page : number of rows in a grid * 2
-       *
-       * start item number based on page : maximum item per page * current page
-       *
-       * end item number based on page : maximum item per page * initial page
-       *
-       * end item number based on array : array.length()
-       *
-       * end item number to be displayed : Math.min(end item number based on page, end item number based on array)
-       *
-       * end item number to be displayed index : end item number to be displayed - 1
-       *
-       * we will do the start and end item number to slice the array of albums by using slice() -> start item number based on page, end item number to be displayed index
-       *
-       */
-    },
-    goToNextPage() {
-      if (this.currentPage === this.lastPage) {
-        return;
-      }
-
-      this.currentPage++;
-
-      /**
-       * initial page = this.currentPage
-       *
-       * After adding the current page by 1, we will use the calculation
-       *
-       * maximum item per page : number of rows in a grid * 2
-       *
-       * start item number based on page : maximum item per page * initial page
-       *
-       * end item number based on page : maximum item per page * current page
-       *
-       * end item number based on array : array.length()
-       *
-       * end item number to be displayed : Math.min(end item number based on page, end item number based on array)
-       *
-       * end item number to be displayed index : end item number to be displayed - 1
-       *
-       * we will do the start and end item number to slice the array of albums by using slice() -> start item number based on page, end item number to be displayed index
-       *
-       */
     },
     updateScroll() {
       this.scrollYPosition = window.scrollY;
