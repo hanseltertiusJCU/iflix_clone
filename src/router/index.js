@@ -18,11 +18,11 @@ export default new Router({
       name: 'MovieList',
       component: MovieList,
     },
-    // {
-    //   path: '/play/:videoId/:videoName/:episodeId/:episodeName',
-    //   name: 'MovieDetail',
-    //   component: MovieDetail,
-    // },
+    {
+      path: '/play/:videoId/:videoName/:episodeId/:episodeName',
+      name: 'MovieDetail',
+      component: MovieDetail,
+    },
     // {
     //   path: '/',
     //   name: 'HelloWorld',

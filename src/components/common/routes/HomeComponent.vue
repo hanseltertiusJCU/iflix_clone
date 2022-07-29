@@ -273,7 +273,8 @@ export default {
     },
     async onOpenCarouselItem(item) {
       const videoId = item.id;
-      const titleString = item.title.replaceAll(" ", "-");
+      let titleString = item.title.replaceAll(" ", "-");
+      titleString = titleString.replaceAll(":", "");
 
       const response = await axios.get(
         `https://www.iflix.com/_next/data/tuvqPK5nDW3xVsPlEE7AG/play/${videoId}-${titleString}.json?ids=${videoId}-${titleString}`
@@ -292,10 +293,12 @@ export default {
         if (videoList) {
           const firstVideoItem = videoList[0];
           episodeTitle = firstVideoItem.title.replaceAll(" ", "-");
+          episodeTitle = episodeTitle.replaceAll(":", "");
           episodeId = firstVideoItem.vid;
         } else {
           const videoInfo = pageProps.data.videoInfo;
           episodeTitle = videoInfo.title.replaceAll(" ", "-");
+          episodeTitle = episodeTitle.replaceAll(":", "");
           episodeId = videoInfo.vid;
         }
 
@@ -314,7 +317,8 @@ export default {
       const videoId = item.isRecommendedItem
         ? item.video_ids_country[0]
         : item.id;
-      const titleString = item.title.replaceAll(" ", "-");
+      let titleString = item.title.replaceAll(" ", "-");
+      titleString = titleString.replaceAll(":", "");
 
       const response = await axios.get(
         `https://www.iflix.com/_next/data/tuvqPK5nDW3xVsPlEE7AG/play/${videoId}-${titleString}.json?ids=${videoId}-${titleString}`
@@ -333,10 +337,12 @@ export default {
         if (videoList) {
           const firstVideoItem = videoList[0];
           episodeTitle = firstVideoItem.title.replaceAll(" ", "-");
+          episodeTitle = episodeTitle.replaceAll(":", "");
           episodeId = firstVideoItem.vid;
         } else {
           const videoInfo = pageProps.data.videoInfo;
           episodeTitle = videoInfo.title.replaceAll(" ", "-");
+          episodeTitle = episodeTitle.replaceAll(":", "");
           episodeId = videoInfo.vid;
         }
 
