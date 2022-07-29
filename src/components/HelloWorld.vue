@@ -57,14 +57,17 @@
         </swiper>
       </div>
 
-      <AlbumMasterItem
-        :gridColumnsPerItem="6"
-        :gridRowsPerItem="2"
-        :isRecommendedItem="false"
-        :albumTitleText="albumItem.name"
-        :albumDataItems="albumItem.items"
-        @on-open-album-item="onOpenAlbumItem"
-      />
+      <div class="video-list-album-category-content-container">
+        <!-- TODO :v-for -->
+        <AlbumMasterItem
+          :gridColumnsPerItem="6"
+          :gridRowsPerItem="2"
+          :isRecommendedItem="false"
+          :albumTitleText="albumItem.name"
+          :albumDataItems="albumItem.items"
+          @on-open-album-item="onOpenAlbumItem"
+        />
+      </div>
 
       <!-- Video Player Component -->
       <div class="video-player-component-container">
@@ -147,9 +150,6 @@
           </div>
         </div>
       </div>
-
-      <!-- temporary code -->
-      <div class="tw-mb-16"></div>
 
       <div class="video-detail-information-content-container">
         <div class="video-detail-info-container">
@@ -322,7 +322,6 @@
           </div>
         </div>
 
-        <!-- TODO : implement based on hot item list -->
         <div class="hot-item-master-container">
           <div class="hot-item-title-text-container">
             <div class="hot-item-title-text">Today's Hot Videos</div>
@@ -811,6 +810,14 @@ button.video-player-button {
   @apply tw-grid;
   @apply tw-grid-cols-5;
   @apply tw-gap-4;
+}
+
+.video-list-album-category-content-container {
+  @apply tw-flex;
+  @apply tw-flex-col;
+  @apply tw-px-[2.5%];
+  @apply tw-my-[5%];
+  @apply tw-space-y-4;
 }
 
 .video-detail-information-content-container {
