@@ -95,7 +95,7 @@ export default {
     gridStyle() {
       return {
         gridTemplateColumns: `repeat(${this.gridColumnsPerItem}, minmax(0, 1fr))`,
-        gridTemplateRows: `repeat(${this.gridRowsPerItem}, minmax(0, 1fr))`,
+        gridTemplateRows: `repeat(${this.gridRowsPerItem}, minmax(300px, 1fr))`,
       };
     },
   },
@@ -221,7 +221,5 @@ export default {
 .album-item-list-container {
   @apply tw-grid;
   @apply tw-gap-4;
-  @apply tw-grid-cols-6;
-  @apply tw-grid-rows-2;
 }
 </style>

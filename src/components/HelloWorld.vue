@@ -151,181 +151,188 @@
       <!-- temporary code -->
       <div class="tw-mb-16"></div>
 
-      <!-- TODO : implement based on hot item list -->
-      <div class="hot-item-master-container">
-        <div class="hot-item-title-text-container">
-          <div class="hot-item-title-text">Today's Hot Videos</div>
-        </div>
-        <div v-for="(item, index) in hotItems" :key="index">
-          <HotItem
-            :hotItemData="item"
-            :rankItemIndex="index"
-            @on-hot-item-open="onOpenHotItem"
-          />
-        </div>
-      </div>
-
-      <div v-if="recommendationList.length > 0">
-        <AlbumMasterItem
-          :gridColumnsPerItem="4"
-          :gridRowsPerItem="2"
-          :isRecommendedItem="true"
-          albumTitleText="Recommended for you"
-          :albumDataItems="recommendationList"
-          @on-open-album-item="onOpenAlbumItem"
-        />
-      </div>
-
-      <div class="video-detail-info-container">
-        <div class="video-detail-info-title">
-          {{ detailedVideoItemInfoTitleText }}
-        </div>
-
-        <div class="video-detail-info-tags-container">
-          <div
-            class="video-detail-info-tag-item"
-            v-for="(item, index) in detailedVideoItemInfoImgTagVer"
-            :key="index"
-          >
-            <div class="video-detail-info-tag-item">
-              <div class="video-detail-info-tag-item-decoration"></div>
-              <span>{{ item.text }}</span>
-            </div>
+      <div class="video-detail-information-content-container">
+        <div class="video-detail-info-container">
+          <div class="video-detail-info-title">
+            {{ detailedVideoItemInfoTitleText }}
           </div>
 
-          <v-menu open-on-hover bottom offset-y :close-on-content-click="false">
-            <template v-slot:activator="{ on, attrs }">
-              <div
-                class="video-detail-share-container"
-                v-bind="attrs"
-                v-on="on"
-              >
-                <v-icon class="video-detail-share-icon"
-                  >mdi-export-variant</v-icon
-                >
-                <span>Share</span>
+          <div class="video-detail-info-tags-container">
+            <div
+              class="video-detail-info-tag-item"
+              v-for="(item, index) in detailedVideoItemInfoImgTagVer"
+              :key="index"
+            >
+              <div class="video-detail-info-tag-item">
+                <div class="video-detail-info-tag-item-decoration"></div>
+                <span>{{ item.text }}</span>
               </div>
-            </template>
+            </div>
 
-            <v-card min-width="420">
-              <v-card-text>
-                <div class="share-url-container">
-                  <div class="share-main-section-container">
-                    <div class="share-social-media-container">
-                      <div class="share-social-media-item">
-                        <a href="https://www.facebook.com/" target="_blank">
-                          <img
-                            class="share-social-media-item-image"
-                            src="@/assets/img/facebook-icon.png"
-                            alt=""
-                          />
-                        </a>
-                      </div>
-
-                      <div class="share-social-media-item">
-                        <a href="https://twitter.com/" target="_blank">
-                          <img
-                            class="share-social-media-item-image"
-                            src="@/assets/img/twitter-icon.png"
-                            alt=""
-                          />
-                        </a>
-                      </div>
-
-                      <div class="share-social-media-item">
-                        <a href="https://line.me/" target="_blank">
-                          <img
-                            class="share-social-media-item-image"
-                            src="@/assets/img/line-icon.png"
-                            alt=""
-                          />
-                        </a>
-                      </div>
-                    </div>
-
-                    <div class="share-by-copy-text-container">
-                      <div class="share-by-copy-text-item">
-                        <v-text-field
-                          class="tw-rounded-none"
-                          background-color="#ddd"
-                          v-model="urlToCopy"
-                          height="48px"
-                          label=""
-                          placeholder=""
-                          flat
-                          solo
-                          filled
-                          readonly
-                          hide-details
-                        ></v-text-field>
-                        <v-btn
-                          class="share-link-button"
-                          width="112px"
-                          height="56px"
-                          outlined
-                          @click="copyLink"
-                          >Copy the link</v-btn
-                        >
-                      </div>
-                      <div class="share-by-copy-text-item">
-                        <v-text-field
-                          class="tw-rounded-none"
-                          background-color="#ddd"
-                          v-model="codeToCopy"
-                          height="48px"
-                          label=""
-                          placeholder=""
-                          flat
-                          solo
-                          filled
-                          readonly
-                          hide-details
-                        ></v-text-field>
-                        <v-btn
-                          class="share-link-button"
-                          width="112px"
-                          height="56px"
-                          outlined
-                          @click="copyCode"
-                          >Copy the code</v-btn
-                        >
-                      </div>
-                    </div>
-                  </div>
-
-                  <v-divider vertical></v-divider>
-
-                  <div class="share-qr-code-container">
-                    <img
-                      src="@/assets/img/qr-code-in-video-detail.png"
-                      alt=""
-                    />
-                    <div>Scan the QR code to download the mobile app!</div>
-                  </div>
+            <v-menu
+              open-on-hover
+              bottom
+              offset-y
+              :close-on-content-click="false"
+            >
+              <template v-slot:activator="{ on, attrs }">
+                <div
+                  class="video-detail-share-container"
+                  v-bind="attrs"
+                  v-on="on"
+                >
+                  <v-icon class="video-detail-share-icon"
+                    >mdi-export-variant</v-icon
+                  >
+                  <span>Share</span>
                 </div>
-              </v-card-text>
-            </v-card>
-          </v-menu>
+              </template>
+
+              <v-card min-width="420">
+                <v-card-text>
+                  <div class="share-url-container">
+                    <div class="share-main-section-container">
+                      <div class="share-social-media-container">
+                        <div class="share-social-media-item">
+                          <a href="https://www.facebook.com/" target="_blank">
+                            <img
+                              class="share-social-media-item-image"
+                              src="@/assets/img/facebook-icon.png"
+                              alt=""
+                            />
+                          </a>
+                        </div>
+
+                        <div class="share-social-media-item">
+                          <a href="https://twitter.com/" target="_blank">
+                            <img
+                              class="share-social-media-item-image"
+                              src="@/assets/img/twitter-icon.png"
+                              alt=""
+                            />
+                          </a>
+                        </div>
+
+                        <div class="share-social-media-item">
+                          <a href="https://line.me/" target="_blank">
+                            <img
+                              class="share-social-media-item-image"
+                              src="@/assets/img/line-icon.png"
+                              alt=""
+                            />
+                          </a>
+                        </div>
+                      </div>
+
+                      <div class="share-by-copy-text-container">
+                        <div class="share-by-copy-text-item">
+                          <v-text-field
+                            class="tw-rounded-none"
+                            background-color="#ddd"
+                            v-model="urlToCopy"
+                            height="48px"
+                            label=""
+                            placeholder=""
+                            flat
+                            solo
+                            filled
+                            readonly
+                            hide-details
+                          ></v-text-field>
+                          <v-btn
+                            class="share-link-button"
+                            width="112px"
+                            height="56px"
+                            outlined
+                            @click="copyLink"
+                            >Copy the link</v-btn
+                          >
+                        </div>
+                        <div class="share-by-copy-text-item">
+                          <v-text-field
+                            class="tw-rounded-none"
+                            background-color="#ddd"
+                            v-model="codeToCopy"
+                            height="48px"
+                            label=""
+                            placeholder=""
+                            flat
+                            solo
+                            filled
+                            readonly
+                            hide-details
+                          ></v-text-field>
+                          <v-btn
+                            class="share-link-button"
+                            width="112px"
+                            height="56px"
+                            outlined
+                            @click="copyCode"
+                            >Copy the code</v-btn
+                          >
+                        </div>
+                      </div>
+                    </div>
+
+                    <v-divider vertical></v-divider>
+
+                    <div class="share-qr-code-container">
+                      <img
+                        src="@/assets/img/qr-code-in-video-detail.png"
+                        alt=""
+                      />
+                      <div>Scan the QR code to download the mobile app!</div>
+                    </div>
+                  </div>
+                </v-card-text>
+              </v-card>
+            </v-menu>
+          </div>
+
+          <div class="video-detail-description-container">
+            <div v-if="isDescriptionExpanded">
+              <div class="video-detail-description-content-expanded">
+                {{ detailedVideoItemInfoDescriptionText }}
+              </div>
+            </div>
+            <div v-else>
+              <div class="video-detail-description-content">
+                {{ detailedVideoItemInfoDescriptionText }}
+              </div>
+              <div class="video-detail-description-content-shadow"></div>
+            </div>
+
+            <div
+              class="video-detail-description-toggle-text"
+              @click="onToggleDescription"
+            >
+              {{ isDescriptionExpanded ? "Collapse" : "Expand" }}
+            </div>
+          </div>
+
+          <div v-if="recommendationList.length > 0">
+            <AlbumMasterItem
+              :gridColumnsPerItem="4"
+              :gridRowsPerItem="2"
+              :isRecommendedItem="true"
+              albumTitleText="Recommended for you"
+              :albumDataItems="recommendationList"
+              @on-open-album-item="onOpenAlbumItem"
+            />
+          </div>
         </div>
 
-        <div class="video-detail-description-container">
-          <div v-if="isDescriptionExpanded">
-            <div class="video-detail-description-content-expanded">
-              {{ detailedVideoItemInfoDescriptionText }}
-            </div>
+        <!-- TODO : implement based on hot item list -->
+        <div class="hot-item-master-container">
+          <div class="hot-item-title-text-container">
+            <div class="hot-item-title-text">Today's Hot Videos</div>
           </div>
-          <div v-else>
-            <div class="video-detail-description-content">
-              {{ detailedVideoItemInfoDescriptionText }}
-            </div>
-            <div class="video-detail-description-content-shadow"></div>
-          </div>
-
-          <div
-            class="video-detail-description-toggle-text"
-            @click="onToggleDescription"
-          >
-            {{ isDescriptionExpanded ? "Collapse" : "Expand" }}
+          <div v-for="(item, index) in hotItems" :key="index">
+            <HotItem
+              :hotItemData="item"
+              :rankItemIndex="index"
+              @on-hot-item-open="onOpenHotItem"
+            />
           </div>
         </div>
       </div>
@@ -806,9 +813,25 @@ button.video-player-button {
   @apply tw-gap-4;
 }
 
+.video-detail-information-content-container {
+  @apply tw-flex;
+  @apply tw-flex-row;
+  @apply tw-px-[2.5%];
+  @apply tw-my-[5%];
+}
+
+.video-detail-info-container {
+  @apply tw-w-3/5;
+  @apply tw-h-full;
+  @apply tw-mr-6;
+}
+
 .hot-item-master-container {
   @apply tw-flex;
   @apply tw-flex-col;
+  @apply tw-space-y-4;
+  @apply tw-w-2/5;
+  @apply tw-h-full;
 }
 
 .hot-item-title-text-container {
