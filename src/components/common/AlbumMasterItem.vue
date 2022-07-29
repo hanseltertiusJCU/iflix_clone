@@ -156,7 +156,6 @@ export default {
       return this.isRecommendedItem ? item.new_pic_hz : item.pic;
     },
     getAlbumLabel(item) {
-      console.log("item in getAlbumLabel : ", item);
       return this.isRecommendedItem ? item.imgtag_ver : item.labels;
     },
     goToPreviousPage() {

@@ -443,7 +443,7 @@ export default {
       recommendationList: [],
       hotItems: [],
       carouselItems: [],
-      detailedVideoItemInfo: DETAILED_VIDEO_ITEM_INFO,
+      detailedVideoItemInfo: {},
       episodesList: [],
       isLoggedIn: false,
       /**
@@ -465,18 +465,7 @@ export default {
     window.addEventListener("scroll", this.updateScroll);
 
     this.onLoadEveryDataInVideoList();
-
-    this.setItemValues();
-
-    // change the looped slides into the length of the carousel if there are any data
-    // this.$nextTick(() => {
-    //   this.swiperOptionTop.loopedSlides = this.carouselItems.items.length;
-    //   this.swiperOptionThumbs.loopedSlides = this.carouselItems.items.length;
-    //   const swiperTop = this.$refs.swiperTop.$swiper;
-    //   const swiperThumbs = this.$refs.swiperThumbs.$swiper;
-    //   swiperTop.controller.control = swiperThumbs;
-    //   swiperThumbs.controller.control = swiperTop;
-    // });
+    this.onLoadVideoDetailData();
   },
   computed: {
     detailedVideoItemInfoTitleText() {
@@ -496,6 +485,28 @@ export default {
     },
   },
   methods: {
+    async onLoadVideoDetailData() {
+      const response = await axios.get(
+        "https://www.iflix.com/_next/data/tuvqPK5nDW3xVsPlEE7AG/play/r6yht13srzu48mc-FULLMETAL-ALCHEMIST-2003.json?ids=r6yht13srzu48mc-FULLMETAL-ALCHEMIST-2003",
+        {
+          useCredentials: true,
+        }
+      );
+
+      if (response.status === SUCCESS_RESPONSE) {
+        const pageProps = response.data.pageProps;
+
+        response.data.pageProps.data = JSON.parse(pageProps.data);
+
+        this.channelsList = pageProps.channels;
+        this.languageConfigList = pageProps.langConfig;
+        this.hotItems = pageProps.hot;
+        this.recommendationList = pageProps.rec;
+
+        this.detailedVideoItemInfo = pageProps.data.coverInfo;
+        this.episodesList = pageProps.data.videoList;
+      }
+    },
     async onLoadChannelSetupItem() {
       const response = await axios.get(
         "https://www.iflix.com/_next/data/tuvqPK5nDW3xVsPlEE7AG/channel/1001.json?id=1001&channelId=1001",
@@ -503,8 +514,6 @@ export default {
           useCredentials: true,
         }
       );
-
-      console.log("response from onLoadChannelSetupItem : ", response);
 
       if (response.status === SUCCESS_RESPONSE) {
         const data = response.data;
@@ -523,18 +532,12 @@ export default {
       );
 
       if (response.status === SUCCESS_RESPONSE) {
-        console.log(
-          "response from onLoadVideoChannelitem success : ",
-          response
-        );
-
         const modules = response.data.response.modules;
 
         const albumItems = modules.filter(
           (item) => item.type === MODULE_TYPE_MODULE_ITEMS
         );
         this.albumItems = albumItems;
-        console.log("album items : ", this.albumItems);
 
         const carouselItems = modules.filter(
           (item) => item.type === MODULE_TYPE_CAROUSEL
@@ -545,10 +548,8 @@ export default {
           const carouselLists = carouselItem.items;
 
           this.carouselItems = carouselLists;
-          console.log("carousel items : ", this.carouselItems);
 
           this.$nextTick(() => {
-            console.log("next tick called");
             this.swiperOptionTop.loopedSlides = this.carouselItems.length;
             this.swiperOptionThumbs.loopedSlides = this.carouselItems.length;
             const swiperTop = this.$refs.swiperTop.$swiper;
@@ -562,18 +563,6 @@ export default {
     async onLoadEveryDataInVideoList() {
       await this.onLoadChannelSetupItem();
       await this.onLoadVideoFromChannelItem();
-    },
-    // todo : set values, so that it simulates like the final product
-    setItemValues() {
-      // this.channelsList = CHANNELS_LIST;
-      // this.languageConfigList = LANGUAGES_CONFIG_LIST;
-      // this.albumItem = ALBUM_ITEM;
-      this.recommendationList = RECOMMENDATION_LIST;
-      this.hotItems = HOT_ITEMS;
-      // this.carouselItems = CAROUSEL_ITEMS;
-      this.detailedVideoItemInfo = DETAILED_VIDEO_ITEM_INFO;
-      console.log("episodes list : ", EPISODES_LIST);
-      this.episodesList = EPISODES_LIST;
     },
     onResetCommentInput() {
       if (!this.isLoggedIn) {
