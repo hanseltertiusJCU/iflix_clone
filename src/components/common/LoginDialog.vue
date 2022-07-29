@@ -323,14 +323,14 @@ export default {
   letter-spacing: 0;
 }
 
-.dialog-account-btn .v-btn__content {
+.dialog-account-btn {
   opacity: 1;
-  color: white;
+  color: white !important;
 }
 
-.dialog-account-btn-disabled .v-btn__content {
+.dialog-account-btn-disabled {
   opacity: 0.2;
-  color: white;
+  color: white !important;
 }
 
 .theme--light.v-btn.v-btn--disabled.v-btn--has-bg {

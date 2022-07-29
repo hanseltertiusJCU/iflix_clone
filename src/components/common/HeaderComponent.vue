@@ -390,7 +390,7 @@
                       : 'selected-language-text'
                   "
                   >{{
-                    findSelectedLanguageItem(selectedLanguageId).langName
+                    findSelectedLanguageItem(userConfig.langId).langName
                   }}</span
                 >
                 <v-icon :color="isHeaderScrolled ? '#FFF' : '#000'"
@@ -404,7 +404,11 @@
                 v-for="item in languagesList"
                 :key="item.langId"
                 @click="onSelectLanguage(item)"
-                class="navigation-menu-link-item-light"
+                :class="
+                  item.langId === userConfig.langId
+                    ? 'navigation-menu-link-item-selected'
+                    : 'navigation-menu-link-item-light'
+                "
               >
                 {{ item.langName }}
               </v-list-item>
@@ -412,11 +416,39 @@
           </v-menu>
         </div>
         <div class="tw-flex-none">
-          <!-- TODO : check if logged in or not -->
-          <div v-if="isLoggedIn">
-            <div class="profile-picture-container" @click="onLogout">
-              <v-icon color="#ff4a22" size="36">mdi-account-circle</v-icon>
-            </div>
+          <div v-if="userConfig.isLoggedIn">
+            <v-menu
+              open-on-hover
+              bottom
+              offset-y
+              :close-on-content-click="false"
+            >
+              <template v-slot:activator="{ on, attrs }">
+                <div class="profile-picture-container" v-bind="attrs" v-on="on">
+                  <v-icon color="#ff4a22" size="36">mdi-account-circle</v-icon>
+                </div>
+              </template>
+
+              <v-card min-width="200">
+                <v-card-text>
+                  <div class="logout-confirmation-layout-container">
+                    <div>Logged in as :</div>
+                    <div class="logout-confirmation-selected-username-text">
+                      {{ userConfig.username }}
+                    </div>
+                  </div>
+                </v-card-text>
+                <v-card-actions>
+                  <v-btn
+                    @click="onLogout"
+                    class="log-out-button"
+                    block
+                    color="#FF4A22"
+                    >Log Out</v-btn
+                  >
+                </v-card-actions>
+              </v-card>
+            </v-menu>
           </div>
           <div v-else>
             <LoginDialog
@@ -437,14 +469,28 @@ import LoginDialog from "@/components/common/LoginDialog";
 export default {
   name: "HeaderComponent",
   components: { LoginDialog },
-  props: [
-    "isHeaderScrolled",
-    "languagesList",
-    "channelsList",
-    "selectedChannelId",
-    "isLoggedIn",
-    "selectedLanguageId",
-  ],
+  props: {
+    isHeaderScrolled: {
+      type: Boolean,
+      default: false,
+    },
+    languagesList: {
+      type: Array,
+      required: true,
+    },
+    channelsList: {
+      type: Array,
+      required: true,
+    },
+    selectedChannelId: {
+      type: String,
+      default: "",
+    },
+    userConfig: {
+      type: Object,
+      required: true,
+    },
+  },
   computed: {
     displayedChannelList() {
       return this.channelsList.slice(0, 4);
@@ -468,7 +514,7 @@ export default {
         return "/";
       }
 
-      return `/${item.channel.id}`;
+      return `/channel/${item.channel.id}`;
     },
     findSelectedLanguageItem(selectedLanguageId) {
       return this.languagesList.length > 0
@@ -579,7 +625,7 @@ a.navigation-menu-link-item-dark {
 
 .navigation-menu-link-item-selected,
 a.navigation-menu-link-item-selected {
-  @apply tw-text-[#ff4a22];
+  @apply tw-text-[#ff4a22] !important;
   @apply tw-font-bold;
   @apply tw-no-underline;
   @apply tw-px-4;
@@ -588,6 +634,15 @@ a.navigation-menu-link-item-selected {
 .v-btn {
   text-transform: none;
   letter-spacing: 0;
+}
+
+.logout-confirmation-selected-username-text {
+  @apply tw-font-bold;
+  @apply tw-text-black;
+}
+
+.log-out-button {
+  @apply tw-text-white !important;
 }
 
 .checkbox-text-item:hover,

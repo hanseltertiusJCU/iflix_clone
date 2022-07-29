@@ -5,8 +5,7 @@
       :channelsList="channelsList"
       :languagesList="languageConfigList"
       :selectedChannelId="selectedChannelId"
-      :selectedLanguageId="config.langId"
-      :isLoggedIn="config.isLoggedIn"
+      :userConfig="config"
       @sign-up-clicked="onSignUpClicked"
       @sign-in-clicked="onSignInClicked"
       @on-select-language="onSelectLanguage"
@@ -415,7 +414,7 @@ export default {
        * List item :
        * - channelsList
        * - languageConfigList
-       * - albumItems (cus there are more than 1 album category)
+       * - albumItems
        * - carouselItems
        *
        * Detailed Item :
@@ -602,44 +601,142 @@ export default {
       }
     },
     onSelectLanguage(item) {
-      /**
-       * TODO :
-       * - we have to extract some attributes :
-       * a) langId
-       * b) langName
-       * c) langCode
-       *
-       * then those attributes in the newly created object should commit
-       * the state in VueX
-       */
-      console.log("on select language : ", item);
+      const configToUpdate = {
+        langId: item.langId,
+        langName: item.langName,
+        langCode: item.langCode,
+      };
+
+      this.$store.commit("updateConfig", configToUpdate);
     },
-    onOpenCarouselItem(item) {
-      console.log("open carousel item : ", item);
+    async onOpenCarouselItem(item) {
+      const videoId = item.id;
+      const titleString = item.title.replaceAll(" ", "-");
+
+      const response = await axios.get(
+        `https://www.iflix.com/_next/data/tuvqPK5nDW3xVsPlEE7AG/play/${videoId}-${titleString}.json?ids=${videoId}-${titleString}`
+      );
+
+      if (response.status === SUCCESS_RESPONSE) {
+        const pageProps = response.data.pageProps;
+
+        response.data.pageProps.data = JSON.parse(pageProps.data);
+
+        const videoList = pageProps.data.videoList;
+
+        let episodeTitle;
+        let episodeId;
+
+        if (videoList) {
+          const firstVideoItem = videoList[0];
+          episodeTitle = firstVideoItem.title.replaceAll(" ", "-");
+          episodeId = firstVideoItem.vid;
+        } else {
+          const videoInfo = pageProps.data.videoInfo;
+          episodeTitle = videoInfo.title.replaceAll(" ", "-");
+          episodeId = videoInfo.vid;
+        }
+
+        this.$router.push({
+          name: "MovieDetail",
+          params: {
+            videoId: videoId,
+            videoName: titleString,
+            episodeId: episodeId,
+            episodeTitle: episodeTitle,
+          },
+        });
+      }
     },
-    onOpenAlbumItem(item) {
-      /**
-       * TODO :
-       * for opening up the detail page, will use different approach
-       * based on isRecommendedItem
-       *
-       * isRecommendedItem = true -> use the first array item
-       * from item.video_ids_country variable
-       *
-       * isRecommendedItem = false -> use the id attribute
-       */
-      console.log("open album item : ", item);
+    async onOpenAlbumItem(item) {
+      const videoId = item.isRecommendedItem
+        ? item.video_ids_country[0]
+        : item.id;
+      const titleString = item.title.replaceAll(" ", "-");
+
+      const response = await axios.get(
+        `https://www.iflix.com/_next/data/tuvqPK5nDW3xVsPlEE7AG/play/${videoId}-${titleString}.json?ids=${videoId}-${titleString}`
+      );
+
+      if (response.status === SUCCESS_RESPONSE) {
+        const pageProps = response.data.pageProps;
+
+        response.data.pageProps.data = JSON.parse(pageProps.data);
+
+        const videoList = pageProps.data.videoList;
+
+        let episodeTitle;
+        let episodeId;
+
+        if (videoList) {
+          const firstVideoItem = videoList[0];
+          episodeTitle = firstVideoItem.title.replaceAll(" ", "-");
+          episodeId = firstVideoItem.vid;
+        } else {
+          const videoInfo = pageProps.data.videoInfo;
+          episodeTitle = videoInfo.title.replaceAll(" ", "-");
+          episodeId = videoInfo.vid;
+        }
+
+        this.$router.push({
+          name: "MovieDetail",
+          params: {
+            videoId: videoId,
+            videoName: titleString,
+            episodeId: episodeId,
+            episodeTitle: episodeTitle,
+          },
+        });
+      }
     },
-    onSelectEpisodeItem(item) {
+    async onSelectEpisodeItem(item) {
+      // On Select Episode Item must have the route.params for the video name and video id
+      // todo : select episode and hot item
+      const videoIdItem = item;
       console.log("select episode item : ", item);
     },
-    onOpenHotItem(item) {
-      console.log("open hot item : ", item);
+    async onOpenHotItem(item) {
+      const videoIdItem = item.video_ids_country[0];
+      const titleItem = item.title.replaceAll(" ", "-");
+
+      const response = await axios.get(
+        `https://www.iflix.com/_next/data/tuvqPK5nDW3xVsPlEE7AG/play/${videoIdItem}-${titleItem}.json?ids=${videoIdItem}-${titleItem}`
+      );
+
+      if (response.status === SUCCESS_RESPONSE) {
+        const pageProps = response.data.pageProps;
+
+        response.data.pageProps.data = JSON.parse(pageProps.data);
+
+        const videoList = pageProps.data.videoList;
+
+        let episodeTitle;
+        let episodeId;
+
+        if (videoList) {
+          const firstVideoItem = videoList[0];
+          episodeTitle = firstVideoItem.title.replaceAll(" ", "-");
+          episodeId = firstVideoItem.vid;
+        } else {
+          const videoInfo = pageProps.data.videoInfo;
+          episodeTitle = videoInfo.title.replaceAll(" ", "-");
+          episodeId = videoInfo.vid;
+        }
+
+        this.$router.push({
+          name: "MovieDetail",
+          params: {
+            videoId: videoIdItem,
+            videoName: titleItem,
+            episodeId: episodeId,
+            episodeTitle: episodeTitle,
+          },
+        });
+      }
     },
     updateScroll() {
       this.scrollYPosition = window.scrollY;
       this.isScrollYInScrolledState = this.scrollYPosition > HEADER_HEIGHT;
-      console.log("this.component config : ", this.$store.getters.getConfig);
     },
     copyLink() {
       navigator.clipboard.writeText(this.urlToCopy);
@@ -817,11 +914,12 @@ export default {
 
 .share-link-button {
   @apply tw-rounded-none;
+  @apply tw-text-black !important;
 }
 
-.share-link-button .v-btn__content {
+/* .share-link-button .v-btn__content {
   @apply tw-text-black;
-}
+} */
 
 button.video-player-button {
   @apply tw-text-white;
