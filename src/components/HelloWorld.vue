@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="master-container">
     <HeaderComponent
       :isHeaderScrolled="isScrollYInScrolledState"
       :channelsList="channelsList"
@@ -333,6 +333,11 @@
       </div>
     </div>
 
+    <SidebarComponent
+      @scroll-to-top="scrollToTop"
+      @open-browser-url="openBrowserUrl"
+    />
+
     <FooterComponent />
   </div>
 </template>
@@ -345,6 +350,7 @@ import {
   MODULE_TYPE_MODULE_ITEMS,
   MODULE_TYPE_CAROUSEL,
 } from "@/constants";
+
 import ImageTag from "@/components/common/ImageTag.vue";
 import VideoTag from "@/components/common/VideoTag.vue";
 import EpisodeItem from "@/components/common/EpisodeItem.vue";
@@ -352,6 +358,7 @@ import HotItem from "@/components/common/HotItem.vue";
 import AlbumItem from "@/components/common/AlbumItem.vue";
 import AlbumMasterItem from "@/components/common/AlbumMasterItem.vue";
 import LoginDialog from "@/components/common/LoginDialog.vue";
+import SidebarComponent from "@/components/common/SidebarComponent.vue";
 import HeaderComponent from "@/components/common/HeaderComponent.vue";
 import FooterComponent from "@/components/common/FooterComponent.vue";
 
@@ -373,6 +380,7 @@ export default {
     LoginDialog,
     Swiper,
     SwiperSlide,
+    SidebarComponent,
     HeaderComponent,
     FooterComponent,
   },
@@ -554,6 +562,13 @@ export default {
     async onLoadEveryDataInVideoList() {
       await this.onLoadChannelSetupItem();
       await this.onLoadVideoFromChannelItem();
+    },
+    openBrowserUrl(url) {
+      window.open(url, "_blank").focus();
+    },
+    scrollToTop() {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
     },
     onResetCommentInput() {
       if (!this.config.isLoggedIn) {
@@ -752,6 +767,10 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
+.master-container {
+  @apply tw-relative;
+}
+
 .content-container {
   @apply tw-min-h-screen;
   @apply tw-z-0;
@@ -916,10 +935,6 @@ export default {
   @apply tw-rounded-none;
   @apply tw-text-black !important;
 }
-
-/* .share-link-button .v-btn__content {
-  @apply tw-text-black;
-} */
 
 button.video-player-button {
   @apply tw-text-white;
