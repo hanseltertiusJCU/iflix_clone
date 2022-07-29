@@ -417,7 +417,9 @@
       </div>
     </div>
 
-    <footer class="footer-container">
+    <FooterComponent />
+
+    <!-- <footer class="footer-container">
       <div class="copyright-footer-section">
         <div>
           <div>
@@ -483,7 +485,7 @@
           </div>
         </div>
       </div>
-    </footer>
+    </footer> -->
   </div>
 </template>
 
@@ -507,6 +509,7 @@ import AlbumItem from "@/components/common/AlbumItem.vue";
 import AlbumMasterItem from "@/components/common/AlbumMasterItem.vue";
 import LoginDialog from "@/components/common/LoginDialog.vue";
 import HeaderComponent from "@/components/common/HeaderComponent.vue";
+import FooterComponent from "@/components/common/FooterComponent.vue";
 
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import "swiper/css/swiper.css";
@@ -524,6 +527,7 @@ export default {
     Swiper,
     SwiperSlide,
     HeaderComponent,
+    FooterComponent,
   },
   data() {
     return {
@@ -1000,7 +1004,7 @@ button.video-player-button {
   @apply tw-text-center;
 }
 
-.footer-container {
+/* .footer-container {
   @apply tw-bg-[#f6f6f6];
   @apply tw-text-[#999];
   @apply tw-font-bold;
@@ -1059,5 +1063,5 @@ button.video-player-button {
   width: 1rem;
   height: 1rem;
   @apply tw-self-center;
-}
+} */
 </style>
