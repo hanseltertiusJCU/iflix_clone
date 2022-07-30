@@ -277,7 +277,7 @@ export default {
     },
     async onOpenCarouselItem(item) {
       const videoId = item.id;
-      let videoName = item.title.replaceAll(" ", "-");
+      let videoName = item.title.replaceAll(" ", "-").replaceAll(":", "");
 
       const response = await axios.get(
         `https://www.iflix.com/_next/data/tuvqPK5nDW3xVsPlEE7AG/play/${videoId}-${videoName}.json?ids=${videoId}-${videoName}`
@@ -293,19 +293,11 @@ export default {
         let episodeName;
         let episodeId;
 
-        if (videoList) {
-          const firstVideoItem = videoList[0];
-          episodeName = firstVideoItem.title
-            .replaceAll(" ", "-")
-            .replaceAll(":", "");
-          episodeId = firstVideoItem.vid;
-        } else {
-          const videoInfo = pageProps.data.videoInfo;
-          episodeName = videoInfo.title
-            .replaceAll(" ", "-")
-            .replaceAll(":", "");
-          episodeId = videoInfo.vid;
-        }
+        const firstVideoItem = videoList[0];
+        episodeName = firstVideoItem.title
+          .replaceAll(" ", "-")
+          .replaceAll(":", "");
+        episodeId = firstVideoItem.vid;
 
         this.$router.push({
           name: "MovieDetail",
@@ -319,10 +311,8 @@ export default {
       }
     },
     async onOpenAlbumItem(item) {
-      const videoId = item.isRecommendedItem
-        ? item.video_ids_country[0]
-        : item.id;
-      let videoName = item.title.replaceAll(" ", "-");
+      const videoId = item.isRecommendedItem ? item.cover_id : item.id;
+      let videoName = item.title.replaceAll(" ", "-").replaceAll(":", "");
 
       const response = await axios.get(
         `https://www.iflix.com/_next/data/tuvqPK5nDW3xVsPlEE7AG/play/${videoId}-${videoName}.json?ids=${videoId}-${videoName}`
@@ -338,19 +328,11 @@ export default {
         let episodeName;
         let episodeId;
 
-        if (videoList) {
-          const firstVideoItem = videoList[0];
-          episodeName = firstVideoItem.title
-            .replaceAll(" ", "-")
-            .replaceAll(":", "");
-          episodeId = firstVideoItem.vid;
-        } else {
-          const videoInfo = pageProps.data.videoInfo;
-          episodeName = videoInfo.title
-            .replaceAll(" ", "-")
-            .replaceAll(":", "");
-          episodeId = videoInfo.vid;
-        }
+        const firstVideoItem = videoList[0];
+        episodeName = firstVideoItem.title
+          .replaceAll(" ", "-")
+          .replaceAll(":", "");
+        episodeId = firstVideoItem.vid;
 
         this.$router.push({
           name: "MovieDetail",

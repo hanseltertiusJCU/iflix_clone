@@ -13,7 +13,6 @@
     />
 
     <div class="content-container">
-      <!-- Video Player Component -->
       <div class="video-player-component-container">
         <div class="video-player-content-container">
           <div class="video-player-main-container">
@@ -262,7 +261,7 @@
             </div>
           </div>
 
-          <div v-if="recommendationList.length > 0">
+          <div v-if="recommendationList && recommendationList.length > 0">
             <AlbumMasterItem
               :gridColumnsPerItem="4"
               :gridRowsPerItem="2"
@@ -299,13 +298,7 @@
 </template>
 
 <script>
-import {
-  HEADER_HEIGHT,
-  SUCCESS_RESPONSE,
-  CREATED_RESPONSE,
-  MODULE_TYPE_MODULE_ITEMS,
-  MODULE_TYPE_CAROUSEL,
-} from "@/constants";
+import { HEADER_HEIGHT, SUCCESS_RESPONSE, CREATED_RESPONSE } from "@/constants";
 
 import ImageTag from "@/components/common/ImageTag.vue";
 import VideoTag from "@/components/common/VideoTag.vue";
@@ -354,20 +347,7 @@ export default {
       hotItems: [],
       detailedVideoItemInfo: {},
       episodesList: [],
-      /**
-       * Dynamic value of url and code, will set it based on route
-       *
-       * placeholder :
-       * "https://www.iflix.com/en/play/r6yht13srzu48mc-FULLMETAL-ALCHEMIST-2003/c0040l97su8-EP1-FULLMETAL-ALCHEMIST-2003"
-       */
       urlToCopy: "",
-      /**
-       * Placeholder :
-       * <iframe frameborder="0" src="https://www.iflix.com/en/play/r6yht13srzu48mc-FULLMETAL-ALCHEMIST-2003/c0040l97su8-EP1-FULLMETAL-ALCHEMIST-2003" allowFullScreen="true"></iframe>
-       *
-       * We will use the urlToCopy
-       *
-       */
       codeToCopy: "",
       isDescriptionExpanded: false,
       showLoginDialog: false,
@@ -389,17 +369,20 @@ export default {
       config: "getConfig",
     }),
     detailedVideoItemInfoTitleText() {
-      return Object.keys(this.detailedVideoItemInfo).length > 0
+      return this.detailedVideoItemInfo &&
+        Object.keys(this.detailedVideoItemInfo).length > 0
         ? this.detailedVideoItemInfo.title
         : "";
     },
     detailedVideoItemInfoImgTagVer() {
-      return Object.keys(this.detailedVideoItemInfo).length > 0
+      return this.detailedVideoItemInfo &&
+        Object.keys(this.detailedVideoItemInfo).length > 0
         ? this.detailedVideoItemInfo.imgtag_ver
         : {};
     },
     detailedVideoItemInfoDescriptionText() {
-      return Object.keys(this.detailedVideoItemInfo).length > 0
+      return this.detailedVideoItemInfo &&
+        Object.keys(this.detailedVideoItemInfo).length > 0
         ? this.detailedVideoItemInfo.description
         : "";
     },
@@ -502,57 +485,12 @@ export default {
 
       this.$store.commit("updateConfig", configToUpdate);
     },
-    async onOpenCarouselItem(item) {
-      const videoId = item.id;
-      let titleString = item.title.replaceAll(" ", "-");
-      titleString = titleString.replaceAll(":", "");
-
-      const response = await axios.get(
-        `https://www.iflix.com/_next/data/tuvqPK5nDW3xVsPlEE7AG/play/${videoId}-${titleString}.json?ids=${videoId}-${titleString}`
-      );
-
-      if (response.status === SUCCESS_RESPONSE) {
-        const pageProps = response.data.pageProps;
-
-        response.data.pageProps.data = JSON.parse(pageProps.data);
-
-        const videoList = pageProps.data.videoList;
-
-        let episodeTitle;
-        let episodeId;
-
-        if (videoList) {
-          const firstVideoItem = videoList[0];
-          episodeTitle = firstVideoItem.title.replaceAll(" ", "-");
-          episodeTitle = episodeTitle.replaceAll(":", "");
-          episodeId = firstVideoItem.vid;
-        } else {
-          const videoInfo = pageProps.data.videoInfo;
-          episodeTitle = videoInfo.title.replaceAll(" ", "-");
-          episodeTitle = episodeTitle.replaceAll(":", "");
-          episodeId = videoInfo.vid;
-        }
-
-        this.$router.push({
-          name: "MovieDetail",
-          params: {
-            videoId: videoId,
-            videoName: titleString,
-            episodeId: episodeId,
-            episodeTitle: episodeTitle,
-          },
-        });
-      }
-    },
     async onOpenAlbumItem(item) {
-      const videoId = item.isRecommendedItem
-        ? item.video_ids_country[0]
-        : item.id;
-      let titleString = item.title.replaceAll(" ", "-");
-      titleString = titleString.replaceAll(":", "");
+      const videoId = item.isRecommendedItem ? item.cover_id : item.id;
+      let videoName = item.title.replaceAll(" ", "-").replaceAll(":", "");
 
       const response = await axios.get(
-        `https://www.iflix.com/_next/data/tuvqPK5nDW3xVsPlEE7AG/play/${videoId}-${titleString}.json?ids=${videoId}-${titleString}`
+        `https://www.iflix.com/_next/data/tuvqPK5nDW3xVsPlEE7AG/play/${videoId}-${videoName}.json?ids=${videoId}-${videoName}`
       );
 
       if (response.status === SUCCESS_RESPONSE) {
@@ -562,39 +500,32 @@ export default {
 
         const videoList = pageProps.data.videoList;
 
-        let episodeTitle;
+        let episodeName;
         let episodeId;
 
-        if (videoList) {
-          const firstVideoItem = videoList[0];
-          episodeTitle = firstVideoItem.title.replaceAll(" ", "-");
-          episodeTitle = episodeTitle.replaceAll(":", "");
-          episodeId = firstVideoItem.vid;
-        } else {
-          const videoInfo = pageProps.data.videoInfo;
-          episodeTitle = videoInfo.title.replaceAll(" ", "-");
-          episodeTitle = episodeTitle.replaceAll(":", "");
-          episodeId = videoInfo.vid;
-        }
+        const firstVideoItem = videoList[0];
+        episodeName = firstVideoItem.title
+          .replaceAll(" ", "-")
+          .replaceAll(":", "");
+        episodeId = firstVideoItem.vid;
 
         this.$router.push({
           name: "MovieDetail",
           params: {
-            videoId: videoId,
-            videoName: titleString,
-            episodeId: episodeId,
-            episodeTitle: episodeTitle,
+            videoId,
+            videoName,
+            episodeId,
+            episodeName,
           },
         });
       }
     },
     async onSelectEpisodeItem(item) {
-      const videoIdItem = item.vid;
-      let videoTitleItem = item.title.replaceAll(" ", "-");
-      videoTitleItem = videoTitleItem.replaceAll(":", "");
+      const videoId = this.selectedVideoId;
+      let videoName = this.selectedVideoTitle;
 
       const response = await axios.get(
-        `https://www.iflix.com/_next/data/tuvqPK5nDW3xVsPlEE7AG/play/${videoIdItem}-${videoTitleItem}.json?ids=${videoIdItem}-${videoTitleItem}`
+        `https://www.iflix.com/_next/data/tuvqPK5nDW3xVsPlEE7AG/play/${videoId}-${videoName}.json?ids=${videoId}-${videoName}`
       );
 
       if (response.status === SUCCESS_RESPONSE) {
@@ -604,39 +535,36 @@ export default {
 
         const videoList = pageProps.data.videoList;
 
-        let episodeTitle;
+        const selectedVideoItem = videoList.find(
+          (video) => video.vid === item.vid
+        );
+
+        let episodeName;
         let episodeId;
 
-        if (videoList) {
-          const firstVideoItem = videoList[0];
-          episodeTitle = firstVideoItem.title.replaceAll(" ", "-");
-          episodeTitle = episodeTitle.replaceAll(":", "");
-          episodeId = firstVideoItem.vid;
-        } else {
-          const videoInfo = pageProps.data.videoInfo;
-          episodeTitle = videoInfo.title.replaceAll(" ", "-");
-          episodeTitle = episodeTitle.replaceAll(":", "");
-          episodeId = videoInfo.vid;
-        }
+        episodeName = selectedVideoItem.title
+          .replaceAll(" ", "-")
+          .replaceAll(":", "");
+
+        episodeId = selectedVideoItem.vid;
 
         this.$router.push({
           name: "MovieDetail",
           params: {
-            videoId: videoIdItem,
-            videoName: videoTitleItem,
-            episodeId: episodeId,
-            episodeTitle: episodeTitle,
+            videoId,
+            videoName,
+            episodeId,
+            episodeName,
           },
         });
       }
     },
     async onOpenHotItem(item) {
-      const videoIdItem = item.video_ids_country[0];
-      let titleItem = item.title.replaceAll(" ", "-");
-      titleItem = titleItem.replaceAll(":", "");
+      const videoId = item.cover_id;
+      let videoName = item.title.replaceAll(" ", "-").replaceAll(":", "");
 
       const response = await axios.get(
-        `https://www.iflix.com/_next/data/tuvqPK5nDW3xVsPlEE7AG/play/${videoIdItem}-${titleItem}.json?ids=${videoIdItem}-${titleItem}`
+        `https://www.iflix.com/_next/data/tuvqPK5nDW3xVsPlEE7AG/play/${videoId}-${videoName}.json?ids=${videoId}-${videoName}`
       );
 
       if (response.status === SUCCESS_RESPONSE) {
@@ -646,28 +574,22 @@ export default {
 
         const videoList = pageProps.data.videoList;
 
-        let episodeTitle;
+        let episodeName;
         let episodeId;
 
-        if (videoList) {
-          const firstVideoItem = videoList[0];
-          episodeTitle = firstVideoItem.title.replaceAll(" ", "-");
-          episodeTitle = episodeTitle.replaceAll(":", "");
-          episodeId = firstVideoItem.vid;
-        } else {
-          const videoInfo = pageProps.data.videoInfo;
-          episodeTitle = videoInfo.title.replaceAll(" ", "-");
-          episodeTitle = episodeTitle.replaceAll(":", "");
-          episodeId = videoInfo.vid;
-        }
+        const firstVideoItem = videoList[0];
+        episodeName = firstVideoItem.title
+          .replaceAll(" ", "-")
+          .replaceAll(":", "");
+        episodeId = firstVideoItem.vid;
 
         this.$router.push({
           name: "MovieDetail",
           params: {
-            videoId: videoIdItem,
-            videoName: titleItem,
-            episodeId: episodeId,
-            episodeTitle: episodeTitle,
+            videoId,
+            videoName,
+            episodeId,
+            episodeName,
           },
         });
       }
