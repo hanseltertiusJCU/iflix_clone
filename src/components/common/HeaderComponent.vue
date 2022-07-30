@@ -609,7 +609,7 @@ export default {
 
 .navigation-menu-link-item-light,
 a.navigation-menu-link-item-light {
-  @apply tw-text-black;
+  @apply tw-text-black !important;
   @apply tw-no-underline;
   @apply tw-px-4;
 }
@@ -624,7 +624,7 @@ a.navigation-menu-link-item-light {
 
 .navigation-menu-link-item-dark,
 a.navigation-menu-link-item-dark {
-  @apply tw-text-white;
+  @apply tw-text-white !important;
   @apply tw-no-underline;
   @apply tw-px-4;
 }

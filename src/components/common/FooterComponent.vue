@@ -82,7 +82,7 @@ export default {
 }
 
 a.footer-menu-link-item {
-  @apply tw-text-[#999];
+  @apply tw-text-[#999] !important;
   @apply tw-no-underline;
 }
 
