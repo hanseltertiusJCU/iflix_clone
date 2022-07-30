@@ -12,6 +12,6 @@ export default {
 
 <style>
 .v-application {
-  font-family: Verdana, Geneva, sans-serif;
+  font-family: Verdana, Geneva, sans-serif !important;
 }
 </style>
