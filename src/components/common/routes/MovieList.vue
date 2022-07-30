@@ -187,6 +187,14 @@ export default {
   @apply tw-relative;
 }
 
+.video-list-album-category-content-container {
+  @apply tw-flex;
+  @apply tw-flex-col;
+  @apply tw-px-[2.5%];
+  @apply tw-my-[5%];
+  @apply tw-space-y-4;
+}
+
 .content-container {
   @apply tw-min-h-screen;
   @apply tw-z-0;
