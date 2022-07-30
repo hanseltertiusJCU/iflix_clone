@@ -298,7 +298,7 @@
 </template>
 
 <script>
-import { HEADER_HEIGHT, SUCCESS_RESPONSE, CREATED_RESPONSE } from "@/constants";
+import { HEADER_HEIGHT } from "@/constants";
 
 import ImageTag from "@/components/common/ImageTag.vue";
 import VideoTag from "@/components/common/VideoTag.vue";
@@ -311,14 +311,16 @@ import SidebarComponent from "@/components/common/SidebarComponent.vue";
 import HeaderComponent from "@/components/common/HeaderComponent.vue";
 import FooterComponent from "@/components/common/FooterComponent.vue";
 
+import DataManagementMixin from "@/mixins/DataManagementMixin.vue";
+
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import "swiper/css/swiper.css";
 
-import axios from "axios";
 import { mapGetters } from "vuex";
 
 export default {
   name: "HelloWorld",
+  mixins: [DataManagementMixin],
   components: {
     ImageTag,
     VideoTag,
@@ -402,28 +404,6 @@ export default {
       const codeToBeCopied = `<iframe frameborder="0" src="${this.urlToCopy}" allowFullScreen="true"></iframe>`;
       this.codeToCopy = codeToBeCopied;
     },
-    async onLoadVideoDetailData() {
-      const response = await axios.get(
-        `https://www.iflix.com/_next/data/tuvqPK5nDW3xVsPlEE7AG/play/${this.selectedVideoId}-${this.selectedVideoTitle}.json?ids=${this.selectedVideoId}-${this.selectedVideoTitle}`,
-        {
-          useCredentials: true,
-        }
-      );
-
-      if (response.status === SUCCESS_RESPONSE) {
-        const pageProps = response.data.pageProps;
-
-        response.data.pageProps.data = JSON.parse(pageProps.data);
-
-        this.channelsList = pageProps.channels;
-        this.languageConfigList = pageProps.langConfig;
-        this.hotItems = pageProps.hot;
-        this.recommendationList = pageProps.rec;
-
-        this.detailedVideoItemInfo = pageProps.data.coverInfo;
-        this.episodesList = pageProps.data.videoList;
-      }
-    },
     openBrowserUrl(url) {
       window.open(url, "_blank").focus();
     },
@@ -438,161 +418,8 @@ export default {
 
       this.commentInput = "";
     },
-    onLogout() {
-      const configToUpdate = {
-        token: null,
-        username: null,
-        isLoggedIn: false,
-      };
-      this.$store.commit("updateConfig", configToUpdate);
-    },
     isSelectedEpisodeItem(item) {
       return item.vid === this.selectedEpisodeId;
-    },
-    async onSignUpClicked(item) {
-      const response = await axios.post(
-        "https://movie-api-sample.herokuapp.com/api/v1/user/register",
-        item
-      );
-
-      if (response.status === CREATED_RESPONSE) {
-        const data = response.data;
-        await axios.get(data.activation_info.url);
-      }
-    },
-    async onSignInClicked(item) {
-      const response = await axios.post(
-        "https://movie-api-sample.herokuapp.com/api/v1/user/login",
-        item
-      );
-
-      if (response.status === SUCCESS_RESPONSE) {
-        const data = response.data;
-        const configToUpdate = {
-          token: data.token,
-          username: item.username,
-          isLoggedIn: true,
-        };
-        this.$store.commit("updateConfig", configToUpdate);
-      }
-    },
-    onSelectLanguage(item) {
-      const configToUpdate = {
-        langId: item.langId,
-        langName: item.langName,
-        langCode: item.langCode,
-      };
-
-      this.$store.commit("updateConfig", configToUpdate);
-    },
-    async onOpenAlbumItem(item) {
-      const videoId = item.isRecommendedItem ? item.cover_id : item.id;
-      let videoName = item.title.replaceAll(" ", "-").replaceAll(":", "");
-
-      const response = await axios.get(
-        `https://www.iflix.com/_next/data/tuvqPK5nDW3xVsPlEE7AG/play/${videoId}-${videoName}.json?ids=${videoId}-${videoName}`
-      );
-
-      if (response.status === SUCCESS_RESPONSE) {
-        const pageProps = response.data.pageProps;
-
-        response.data.pageProps.data = JSON.parse(pageProps.data);
-
-        const videoList = pageProps.data.videoList;
-
-        let episodeName;
-        let episodeId;
-
-        const firstVideoItem = videoList[0];
-        episodeName = firstVideoItem.title
-          .replaceAll(" ", "-")
-          .replaceAll(":", "");
-        episodeId = firstVideoItem.vid;
-
-        this.$router.push({
-          name: "MovieDetail",
-          params: {
-            videoId,
-            videoName,
-            episodeId,
-            episodeName,
-          },
-        });
-      }
-    },
-    async onSelectEpisodeItem(item) {
-      const videoId = this.selectedVideoId;
-      let videoName = this.selectedVideoTitle;
-
-      const response = await axios.get(
-        `https://www.iflix.com/_next/data/tuvqPK5nDW3xVsPlEE7AG/play/${videoId}-${videoName}.json?ids=${videoId}-${videoName}`
-      );
-
-      if (response.status === SUCCESS_RESPONSE) {
-        const pageProps = response.data.pageProps;
-
-        response.data.pageProps.data = JSON.parse(pageProps.data);
-
-        const videoList = pageProps.data.videoList;
-
-        const selectedVideoItem = videoList.find(
-          (video) => video.vid === item.vid
-        );
-
-        let episodeName;
-        let episodeId;
-
-        episodeName = selectedVideoItem.title
-          .replaceAll(" ", "-")
-          .replaceAll(":", "");
-
-        episodeId = selectedVideoItem.vid;
-
-        this.$router.push({
-          name: "MovieDetail",
-          params: {
-            videoId,
-            videoName,
-            episodeId,
-            episodeName,
-          },
-        });
-      }
-    },
-    async onOpenHotItem(item) {
-      const videoId = item.cover_id;
-      let videoName = item.title.replaceAll(" ", "-").replaceAll(":", "");
-
-      const response = await axios.get(
-        `https://www.iflix.com/_next/data/tuvqPK5nDW3xVsPlEE7AG/play/${videoId}-${videoName}.json?ids=${videoId}-${videoName}`
-      );
-
-      if (response.status === SUCCESS_RESPONSE) {
-        const pageProps = response.data.pageProps;
-
-        response.data.pageProps.data = JSON.parse(pageProps.data);
-
-        const videoList = pageProps.data.videoList;
-
-        let episodeName;
-        let episodeId;
-
-        const firstVideoItem = videoList[0];
-        episodeName = firstVideoItem.title
-          .replaceAll(" ", "-")
-          .replaceAll(":", "");
-        episodeId = firstVideoItem.vid;
-
-        this.$router.push({
-          name: "MovieDetail",
-          params: {
-            videoId,
-            videoName,
-            episodeId,
-            episodeName,
-          },
-        });
-      }
     },
     updateScroll() {
       this.scrollYPosition = window.scrollY;
