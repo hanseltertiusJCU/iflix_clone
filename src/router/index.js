@@ -23,6 +23,7 @@ export default new Router({
       path: '/play/:videoId/:videoName/:episodeId/:episodeName',
       name: 'MovieDetail',
       component: MovieDetail,
+      props: true
     },
     // {
     //   path: '/',
