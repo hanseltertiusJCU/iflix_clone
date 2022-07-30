@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
 import HomeComponent from '@/components/common/routes/HomeComponent'
 import MovieList from '@/components/common/routes/MovieList'
 import MovieDetail from '@/components/common/routes/MovieDetail'
@@ -25,10 +24,5 @@ export default new Router({
       component: MovieDetail,
       props: true
     },
-    // {
-    //   path: '/',
-    //   name: 'HelloWorld',
-    //   component: HelloWorld
-    // }
   ]
 })
