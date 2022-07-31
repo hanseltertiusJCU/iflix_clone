@@ -99,7 +99,6 @@ import DataManagementMixin from "@/mixins/DataManagementMixin.vue";
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import "swiper/css/swiper.css";
 
-import axios from "axios";
 import { mapGetters } from "vuex";
 
 export default {
